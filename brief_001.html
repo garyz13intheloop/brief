@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第001期 · 2026-05-05~07</title>
+<link rel="stylesheet" href="brief_002.html">
+<style>
+:root{--bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;--bd:#242424;--bd2:#2e2e2e;--t1:#ebebeb;--t2:#aaa;--t3:#666;--t4:#444;--gold:#C9A84C;--gold2:#9B7A2F;--gold3:rgba(201,168,76,.1);--red:#E05252;--green:#52C47A;--blue:#5B8FE8;--purple:#9B7FE8;--orange:#E08C52;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:28px 24px}
+.back{font-size:12px;color:var(--t3);margin-bottom:16px;display:block}.back:hover{color:var(--gold)}
+.hdr{border-bottom:1px solid var(--bd);padding-bottom:20px;margin-bottom:28px}
+.itag{display:inline-block;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:10px;letter-spacing:.05em}
+h1{font-size:22px;font-weight:700;margin-bottom:4px}.meta{font-size:12px;color:var(--t3)}
+.sec{margin-bottom:36px}.st{font-size:17px;font-weight:700;margin-bottom:14px}.sr{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:15px;position:relative}
+.tc.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--s1))}
+.tbg{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:7px}
+.bh{background:rgba(224,82,82,.12);color:var(--red)}.bt{background:rgba(201,168,76,.12);color:var(--gold)}.bm{background:rgba(82,132,224,.12);color:var(--blue)}
+.tct{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.tcb{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:8px}
+.tci{font-size:11.5px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}
+.tci::before{content:"→ ";font-weight:700}.stars{position:absolute;top:12px;right:12px;font-size:10px;color:var(--gold)}
+.li{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.lih{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.lin{font-size:13.5px;font-weight:700;flex:1}.lim{font-size:11px;color:var(--t3);margin-top:1px}
+.litag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;flex-shrink:0}
+.ta{background:rgba(82,196,122,.1);color:var(--green)}.ts{background:rgba(224,82,82,.1);color:#e07575}.tm{background:rgba(155,127,232,.1);color:var(--purple)}.ti{background:rgba(91,143,232,.1);color:var(--blue)}
+.lid{font-size:12px;color:var(--t2);line-height:1.6}
+.exp{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10px;padding:3px 9px;border-radius:4px;cursor:pointer;margin:6px 0;transition:all .12s}.exp:hover{border-color:var(--gold);color:var(--gold)}
+.det{background:var(--s2);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.65;display:none;border-left:2px solid var(--bd2);margin-top:4px}.det.open{display:block}
+.det h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.det h5:first-child{margin-top:0}
+.det blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic;color:var(--t2)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:13px}
+.kh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.kav{width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kn{font-size:12.5px;font-weight:600}.kha{font-size:11px;color:var(--t3)}.kl{font-size:12.5px;font-weight:700;color:var(--red);margin-left:auto}.kd{font-size:10px;color:var(--t4)}
+.kp{font-size:12px;color:var(--t1);background:var(--s2);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.ka{font-size:11.5px;color:var(--t2);line-height:1.6}
+.fc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.fh{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid var(--bd)}
+.fn{font-size:13.5px;font-weight:700}.fs{font-size:11px;color:var(--t3);margin-top:2px}.fa{font-size:19px;font-weight:800;color:var(--gold)}
+.ftg{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:rgba(201,168,76,.1);color:var(--gold)}
+.fb{padding:11px 15px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fl{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}.fv{font-size:12px;color:var(--t1)}
+.fw{grid-column:1/-1;background:var(--s2);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.rc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.rh{padding:12px 15px;border-bottom:1px solid var(--bd)}
+.rs{font-size:10px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}.rs.inst{color:var(--blue)}.rs.media{color:var(--green)}
+.rt{font-size:13px;font-weight:700;line-height:1.4}
+.rb{padding:11px 15px}.rsh{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.rpts{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+.rpt{font-size:12px;color:var(--t2);display:flex;gap:7px;line-height:1.6}.rbl{color:var(--gold);font-weight:700;flex-shrink:0}
+.rdl{background:var(--s2);border-radius:7px;padding:10px 12px;display:none;font-size:12px;color:var(--t2);line-height:1.65;border-left:2px solid var(--bd2)}.rdl.open{display:block}
+.rdl h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.rdl h5:first-child{margin-top:0}
+.rdl blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic}
+.t2c{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.tcat{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;background:rgba(155,127,232,.1);color:var(--purple);display:inline-block;margin-bottom:7px}
+.t2t{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.t2b{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:7px}
+.t2i{font-size:11.5px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}
+.sg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;background:var(--s2);border-radius:10px;padding:14px;border:1px solid var(--bd2);margin-top:10px}
+.stl{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t4);margin-bottom:10px;grid-column:1/-1}
+.sc h5{font-size:11.5px;font-weight:600;margin-bottom:5px}.sc p{font-size:11.5px;color:var(--t2);line-height:1.65}
+.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
+@media(max-width:700px){.tgrid,.kgrid,.fb,.sg{grid-template-columns:1fr}}
+
+  .layout{display:flex;min-height:100vh}
+  .sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+  .main{margin-left:220px;flex:1;min-width:0}
+  .sb-logo{padding:16px 16px 12px;border-bottom:1px solid var(--bd)}
+  .sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+  .sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
+  .sb-nav{padding:6px 0}
+  .sb-section{padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+  .sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;text-decoration:none;cursor:pointer}
+  .sb-item:hover{color:var(--t1);background:var(--s2)}
+  .sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08)}
+  .sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
+  @media(max-width:800px){.sidebar{display:none}.main{margin-left:0}}
+
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo">
+    <a href="index.html" style="text-decoration:none">
+      <div class="sb-brand">CREEKSTONE</div>
+      <div class="sb-sub">Intelligence · 5月刊</div>
+    </a>
+  </div>
+  <div class="sb-nav">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <div class="sb-section">本月期刊</div>
+    <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#E05252"></span>第003期 · 05-11~13</a>
+        <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#52C47A"></span>第002期 · 05-08~10</a>
+        <a class="sb-item active" href="brief_001.html"><span class="sb-dot" style="background:#5B8FE8"></span>第001期 · 05-05~07</a>
+        <a class="sb-item" href="brief_000.html"><span class="sb-dot" style="background:#9B7FE8"></span>第000期 · 05-01~04</a>
+    <hr class="sb-divider">
+    <div class="sb-section">历史归档</div>
+    <a class="sb-item" href="brief_hist1.html"><span class="sb-dot" style="background:#666"></span>04-24~27</a>
+        <a class="sb-item" href="brief_hist2.html"><span class="sb-dot" style="background:#666"></span>04-18~22</a>
+  </div>
+</nav>
+<div class="main"><div class="wrap">
+
+<div class="hdr">
+  <div class="itag">第 001 期 · 本周一</div>
+  <h1>Creekstone Intelligence Brief</h1>
+  <div class="meta">2026-05-05 ~ 05-07 · X KOL · 播客 · Google Cloud Next 26 大会 · 融资 · 技术前沿</div>
+</div>
+
+<div class="sec">
+  <div class="st">🔥 投资热点趋势</div><hr class="sr">
+  <div class="tgrid">
+
+    <div class="tc hot">
+      <div class="stars">★★★</div>
+      <span class="tbg bh">本期最强</span>
+      <div class="tct">Google Cloud Next '26 全面押注「Agentic Enterprise」：260 项发布，$750M Agent 生态基金，Gemini Enterprise Agent Platform 重构企业 AI 栈</div>
+      <div class="tcb">Google Cloud Next '26（拉斯维加斯，Mandalay Bay，32,000+ 参会者）是本期最大信号。核心发布：① Gemini Enterprise Agent Platform（统一 Agent 构建、扩展、治理、优化）；② Agentic Data Cloud（跨云 Lakehouse + Knowledge Catalog）；③ Agentic Defense（Google Security Operations + Wiz 整合）；④ $750M 基金扶持 Agent 生态创业公司。<br><br>Bain & Company 分析：「Google assembled an agentic enterprise control plane」——Google 在用一套完整的 Agent 操控平台试图超越 OpenAI 和 Anthropic 在企业端的 harness 布局。</div>
+      <div class="tci">Google 终于有了「compelling harness」（Stratechery 此前说 Google 有好模型但没好 harness 是最大弱点）。这直接回应了 Stratechery 「Agents Over Bubbles」文章中的判断。Anthropic + OpenAI 的 harness 先发优势正在被 Google 的企业销售网络和 Cloud 生态快速压缩。</div>
+    </div>
+
+    <div class="tc hot">
+      <div class="stars">★★★</div>
+      <span class="tbg bt">融资信号</span>
+      <div class="tct">Anthropic Code with Claude 大会（05-06）+ Dreaming 发布 + Harvey 6x 数据：Anthropic 的企业端攻势全面展开</div>
+      <div class="tcb">就在 Google Cloud Next 前夕，Anthropic 在旧金山举办了 Code with Claude 首场大会。CPO Ami Vora 宣布三个 Managed Agents 功能：Dreaming（跨会话记忆学习，Harvey 测试 6x 完成率提升）、Outcomes（自评分循环）、Multiagent Orchestration（并行子 Agent）。时机选择精准：Google Cloud Next 是 05-07，Anthropic 05-06 先发，掌控了媒体叙事的第一个节点。<br><br>Anthropic $30B ARR 确认，4 个月内从 $9B 涨 3.3x——是有史以来增速最快的企业软件公司之一。</div>
+      <div class="tci">Anthropic 在企业端已经建立了先发优势（Claude Code + Managed Agents），Google 的攻势会让竞争更激烈但不会立刻翻盘。早期 AI Agent 公司要做的选择越来越清晰：是建在 Anthropic 生态上（先发，更稳定），还是 Google 生态上（更大的企业分发能力）？</div>
+    </div>
+
+    <div class="tc">
+      <div class="stars">★★</div>
+      <span class="tbg bm">VC 信号</span>
+      <div class="tct">Big Tech 研究者出走潮：Ineffable Intelligence $1.1B seed（David Silver，AlphaGo 之父），超出欧洲有史最大种子轮</div>
+      <div class="tcb">CNBC 报道（04-28）：David Silver（前 DeepMind，AlphaGo/AlphaZero 架构师）创立 Ineffable Intelligence，以 $5.1B 估值完成 $1.1B 种子轮——欧洲有史以来最大种子轮。Sequoia + Lightspeed + NVIDIA + Google 投资，英国政府参投。目标：构建「不依赖人类数据学习」的体验式 AI（experience-based AI）。</div>
+      <div class="tci">顶级研究者出走大厂创业潮正在加速（Meta→TML、DeepMind→Ineffable、OpenAI→多家）。「体验式 AI」（强化学习 + 无监督学习为主，减少 human data 依赖）是与 LLM 平行的技术路线，Sequoia 和 Lightspeed 同时押注说明这条路线的可信度在资本层面已经成立。</div>
+    </div>
+
+    <div class="tc">
+      <div class="stars">★★</div>
+      <span class="tbg bt">产业信号</span>
+      <div class="tct">Broadridge 宣布 Agent 系统上生产：金融行业首批「监管合规 + Agentic AI」同时满足的案例</div>
+      <div class="tcb">Broadridge（纽约证券交易所上市，全球最大金融服务基础设施之一）宣布其 Agentic AI 平台已在生产环境运行，覆盖：交易后处理、账户开户、估值异常处理、客户查询处理，声称为新客户实现 Day-1 运营成本降低 30%。架构：人工监督 + Agent 执行的混合模式，满足金融监管要求。</div>
+      <div class="tci">这是金融监管环境下 Agent 上生产的最重要案例之一。核心信号：「30% Day-1 cost reduction」这个数字如果可验证，足以驱动整个行业跟进。金融基础设施公司（托管、结算、合规）是 Agent 最难突破但一旦突破护城河最深的垂直。</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="sec">
+  <div class="st">🚀 重大产品发布</div><hr class="sr">
+
+  <div class="li">
+    <div class="lih">
+      <div>
+        <div class="lin"><a href="https://cloud.google.com/blog/topics/google-cloud-next/welcome-to-google-cloud-next26" target="_blank">Google Cloud Next '26 · Gemini Enterprise Agent Platform</a></div>
+        <div class="lim">Google · 2026-05-07 · 32,000+ 参会者 · 260 项发布</div>
+      </div>
+      <span class="litag ta">Agent 平台</span>
+    </div>
+    <div class="lid">统一的 Agent 构建 + 扩展 + 治理 + 优化平台。新功能：Agent Designer（图形化 Agent 构建）、Inbox（Agent 活动管理中心）、Long-running agents、Skills（可复用 Agent 能力模块）、Projects。同期发布 $750M 生态基金支持在 Google Cloud 上构建 Agent 的创业公司，可通过 Gemini Enterprise 和 Google Cloud Marketplace 直接分发产品给企业客户。</div>
+    <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开详细版 ↓'">展开详细版 ↓</button>
+    <div class="det">
+      <h5>三大架构支柱</h5>
+      <p><strong>Gemini Enterprise Agent Platform</strong>：从零开始构建的 Agent 管理平台，不是把现有工具打包——有原生的 Agent 调试、版本管理、A/B 测试能力。与 Anthropic Managed Agents 的核心差异：Anthropic 提供的是 Agent runtime（Dreaming + Outcomes），Google 提供的是完整的 Agent 操控界面（Dashboard + SDK + Marketplace）。</p>
+      <p><strong>Agentic Data Cloud</strong>：解决 a16z 文章中提到的「数据 Agent 需要 Context」问题。Cross-cloud Lakehouse 让 Agent 可以跨 AWS/Azure/Google Cloud 访问数据；Knowledge Catalog 提供语义层（类似 a16z 定义的 Context Layer）。</p>
+      <p><strong>Agentic Defense</strong>：结合 Google Security Operations + Wiz（Google 2025 年以 $32B 收购）。AI 驱动的威胁狩猎 Agent + 检测工程 Agent + 第三方上下文整合。这是 Microsoft MDASH 的 Google 版本，但更偏向 SecOps 工作流而非漏洞发现。</p>
+      <h5>Bain & Company 的战略分析</h5>
+      <blockquote>「Around it, Google assembled a broader enterprise stack with some existing tools and new tools folded in: the Gemini Enterprise app for business users, Agentic Data Cloud for grounded context, Agentic Defense through Google Security Operations and Wiz, and new FinOps controls to manage AI-era costs. Google positioned Agentic Defense as a central part of the enterprise AI stack.」</blockquote>
+    </div>
+    <a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/google-cloud-next-26-recap/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ Google 官方 7 大亮点回顾</a>
+  </div>
+
+  <div class="li">
+    <div class="lih">
+      <div>
+        <div class="lin"><a href="https://letsdatascience.com/blog/anthropic-dreaming-claude-managed-agents-self-improving-may-6" target="_blank">Anthropic Claude Dreaming + Managed Agents</a></div>
+        <div class="lim">Anthropic · Code with Claude SF · 2026-05-06</div>
+      </div>
+      <span class="litag ti">Agent 记忆</span>
+    </div>
+    <div class="lid">跨会话记忆学习（Dreaming）+ 自评分循环（Outcomes）+ 并行子 Agent（Multiagent Orchestration）三合一发布。Harvey 内测：开启 Dreaming 后法律 Agent 任务完成率从基线提升 6x，原因是「Agent 不再每次重新踩同样的格式坑」。CPO Ami Vora：「当前 Agent 最大的瓶颈不是智能，是记忆。」</div>
+  </div>
+
+  <div class="li">
+    <div class="lih">
+      <div>
+        <div class="lin"><a href="https://poolside.ai/blog/introducing-laguna-xs2-m1" target="_blank">Poolside Laguna M.1 + XS.2</a></div>
+        <div class="lim">Poolside（$626M 融资）· 2026-04-28 · 首批公开模型</div>
+      </div>
+      <span class="litag tm">模型</span>
+    </div>
+    <div class="lid">M.1（225B/23B active MoE，SWE-Bench 72.5%）+ XS.2（33B/3B active 开源，SWE-Bench 68.2%）。两者都在 30 万亿 token 上从头训练，专为 long-horizon agentic coding 设计。同期发布 Agent harness「pool」和移动端 Agent IDE「shimmer」。</div>
+  </div>
+
+</div>
+
+<div class="sec">
+  <div class="st">💬 KOL 核心观点</div><hr class="sr">
+  <div class="kgrid">
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">EG</div>
+        <div><div class="kn">Elad Gil</div><div class="kha">@eladgil · 天使投资人 · No Priors 主持</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">♥ 估算 400+</div><div class="kd">05 初</div></div>
+      </div>
+      <div class="kp">「Long Lake did the world's first (to my knowledge) AI-driven take private of a publicly traded company.」</div>
+      <div class="ka">Elad Gil 命名了一个新的并购模式：「AI-driven take private」。$1.3T 商务旅行市场 + 传统人工流程 + AI Agent 改造 = 价值释放的完整公式。这个模式将复制到所有「有大量行业数据、严重依赖人工、但软件层老旧」的传统上市公司。Gil 同时在 No Priors 播客（最新期）讨论了「12 个月窗口」——AI 公司价值达到峰值后如果不退出，窗口会快速关闭。</div>
+      <a href="https://x.com/eladgil" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 主页</a>
+    </div>
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">EM</div>
+        <div><div class="kn">Ethan Mollick</div><div class="kha">@emollick · 沃顿商学院教授</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">♥ 估算 600+</div><div class="kd">05 初</div></div>
+      </div>
+      <div class="kp">「You will know that the AI labs believe in ASI when they disband their newly formed consulting (sorry 'forward deployed engineering') groups. As long as people are required to figure out how AI is useful, we are not there yet.」</div>
+      <div class="ka">Mollick 的「ASI 路标测试」：FDE（Forward Deployed Engineers）还在招，说明 AI 还不够好用。这与 Allie Miller 本期（第 003 期 5/11~13）的观点呼应：「treating FDEs as your whole transformation plan is the most expensive mistake in enterprise AI」。两个观察的共同含义：AI SaaS 公司正在偷偷变成 AI 咨询公司，这是一个值得投资人警惕的模式漂移。</div>
+      <a href="https://x.com/emollick" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 主页</a>
+    </div>
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">DG</div>
+        <div><div class="kn">David George</div><div class="kha">a16z Growth 合伙人</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">新发文章</div><div class="kd">05 初</div></div>
+      </div>
+      <div class="kp">「The 'AI Job Apocalypse' Is a Complete Fantasy」（a16z 官网文章）</div>
+      <div class="ka">a16z 在 Andrew Ng 和 LeCun 反击 Dario 的论战背景下，发表了立场鲜明的文章。a16z 的利益非常清楚——他们投资了大量 AI 公司，「AI 毁灭就业」的叙事对估值有负面影响。但文章的核心论据是真实的：AI 历史上创造的工作类型比消灭的更多，且创造的工作薪资更高。这篇文章实际上是一篇「机构化的 Andrew Ng 论点」。</div>
+      <a href="https://a16z.com/the-ai-job-apocalypse-is-a-complete-fantasy/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ a16z 原文</a>
+    </div>
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">SG</div>
+        <div><div class="kn">Sarah Guo</div><div class="kha">@saranormous · Conviction 创始人</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">本期新推文</div><div class="kd">05 初</div></div>
+      </div>
+      <div class="kp">「2026 prediction: the inference hunger of long-horizon agents will drive a large number of domain-focused AI companies to post-train. coding was just first.」</div>
+      <div class="ka">Sarah Guo 的预测在本期被多个事件验证：Poolside 从零训练 Agent 专用模型（coding 垂直）；Harvey 开启 Dreaming（法律垂直的「post-training 替代品」）；Aidoc Goldman Sachs 领投（医疗垂直有数据护城河）。这是 Conviction 的核心投资逻辑：投那些有行业专属数据、且会做 post-training 的垂直 AI 公司。</div>
+      <a href="https://x.com/saranormous" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 主页</a>
+    </div>
+
+  </div>
+
+  <div class="sg">
+    <div class="stl">补充信号</div>
+    <div class="sc">
+      <h5 style="color:var(--gold)">Google Cloud Next 的战略意图</h5>
+      <p>Everest Group 分析：「Google Cloud Next 2026 was not just another cloud conference with a long list of product announcements. The dominant message was clear: the enterprise AI conversation is moving from experimentation to execution, and from standalone copilots to agent-led operating models.」Google 在用「Agentic Enterprise」这个概念定义整个企业 AI 的下一个阶段，而不只是发产品。</p>
+    </div>
+    <div class="sc">
+      <h5 style="color:var(--blue)">顶级研究者出走浪潮</h5>
+      <p>CNBC 报道（04-28）同期还梳理了这一趋势：OpenAI、DeepMind、Meta 近 12 个月共有超过 20 位顶级研究者出走创业。Thinking Machines Lab（Mira Murati），Ineffable Intelligence（David Silver），Character AI 并入 Google 后的人才流动。大厂正在成为「AI 人才孵化器」而非「AI 人才终点站」。</p>
+    </div>
+    <div class="sc">
+      <h5 style="color:var(--green)">FDE 商业模式的隐患</h5>
+      <p>本期多个信号汇聚（Mollick 的 ASI 测试，Allie Miller 的警告，Gartner 发布「Accelerate Agentic AI Adoption With Forward-Deployed Engineers」研究）：FDE 是 2026 年最热的 AI 职位，但也是最危险的商业模式——你在销售人工服务，不是可扩展软件。Gartner 专门发了报告说明「怎么用 FDE 而不让 FDE 成为你的全部」。</p>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="st">💰 融资动态</div><hr class="sr">
+
+  <div class="fc">
+    <div class="fh">
+      <div><div class="fn"><a href="https://www.cnbc.com/2026/04/27/deepmind-ineffable-intelligence-record-seed-funding-nvidia-google.html" target="_blank">Ineffable Intelligence · 体验式 AI lab</a></div><div class="fs">David Silver（AlphaGo/AlphaZero 架构师）创立 · 伦敦 · 月龄公司</div></div>
+      <div style="text-align:right"><div class="fa">$1.1B</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Seed</span><span class="ftg" style="background:rgba(224,82,82,.1);color:var(--red)">★★★</span></div></div>
+    </div>
+    <div class="fb">
+      <div><div class="fl">估值</div><div class="fv">$5.1B（欧洲最大 seed round）</div></div>
+      <div><div class="fl">领投</div><div class="fv">Sequoia + Lightspeed + NVIDIA + Google + 英国政府</div></div>
+      <div><div class="fl">核心方向</div><div class="fv">体验式 AI（Experience-based AI）——不依赖人类数据，通过强化学习自主获取经验</div></div>
+      <div><div class="fl">技术路线</div><div class="fv">强化学习 + 无监督学习为主，对标 AlphaGo 的思路应用于通用 AI</div></div>
+      <div class="fw">David Silver 是 AlphaGo 和 AlphaZero 的架构师——两个项目都证明了「不依赖人类数据、通过自我对弈学习」的可行性。Ineffable Intelligence 试图把这个方法推广到通用 AI。这是对「LLM scaling 路线之外」的最高规格资本背书——Sequoia + Lightspeed 同时参投，说明他们认为这条技术路线有真实机会。</div>
+    </div>
+  </div>
+
+  <div class="fc">
+    <div class="fh">
+      <div><div class="fn"><a href="https://pymnts.com/artificial-intelligence-2/2026/wonderful-raises-150-million-to-help-enterprises-deploy-ai-agents/" target="_blank">Wonderful · 企业 AI Agent 部署平台</a></div><div class="fs">全球 Agent 服务平台 · 电信、金融、制造、医疗垂直</div></div>
+      <div style="text-align:right"><div class="fa">$150M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Series B</span><span class="ftg" style="background:rgba(201,168,76,.1);color:var(--gold)">★★</span></div></div>
+    </div>
+    <div class="fb">
+      <div><div class="fl">核心定位</div><div class="fv">平台 + 本地化实施团队 = FDE as a service</div></div>
+      <div><div class="fl">用途</div><div class="fv">全球扩张、平台研发、团队扩大</div></div>
+      <div class="fw">Wonderful 的模式：卖 AI Agent 平台，同时提供本地化的实施团队帮助企业部署。这正是「FDE as a service」的商业化——把本来是大 AI 公司才有的 FDE 能力，包装成中小型企业也能买到的产品。但 Allie Miller 的警告适用于 Wonderful 自身：如果实施服务占收入 60%+，你是咨询公司，不是软件公司。</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="sec">
+  <div class="st">🔬 技术前沿</div><hr class="sr">
+
+  <div class="t2c">
+    <span class="tcat">重磅模型发布</span>
+    <div class="t2t">Poolside Laguna：从零训练 30 万亿 token，为 Agentic Coding 专门设计的 MoE 架构</div>
+    <div class="t2b">Laguna M.1（225B/23B active MoE）= 目前 agentic coding 方向参数效率最高的专用模型之一。SWE-Bench Verified 72.5%（与 Claude Opus 4.7 相近）。关键设计选择：① MoE 架构——低激活参数（23B）意味着推理成本接近 23B 模型而能力接近 225B 模型；② 从头训练而非 fine-tune——30T token 都是 coding 相关内容，vs 通用 LLM 用大量非 coding 数据训练后再 fine-tune；③ 长周期任务专项——训练数据包含大量多步骤任务而非单步 Q&A。</div>
+    <div class="t2i">Poolside 的路线印证了 Sarah Guo 的预测：coding 是第一个专门训练 Agent 模型的垂直。Laguna 的成功（如果能在用户场景中验证）将加速法律/医疗/金融方向的「专用 Agent 模型」出现。</div>
+  </div>
+
+  <div class="t2c">
+    <span class="tcat">大会 · 学术信号</span>
+    <div class="t2t">ICLR 2026（里约热内卢，4月22日~26日）：AgentFlow + Flow-GRPO 是当前最重要的 Agent 训练突破</div>
+    <div class="t2b">Lambda AI 的关键发现：7B 参数 Agent 通过 Flow-GRPO 超越 GPT-4o。Flow-GRPO 把长轨迹分解成单步更新，解决了「哪一步导致最终结果好/坏」的信用分配难题。另一篇重磅：UCF「Seeing, Listening, Remembering, and Reasoning」——多模态 Agent 的跨会话长时记忆架构。<br><br>→ <a href="https://lambda.ai/blog/iclr-2026-12-papers" target="_blank">Lambda AI ICLR 2026 报告</a></div>
+    <div class="t2i">如果 AgentFlow 可产业化，7B 模型超越 GPT-4o 意味着垂直 Agent 的训练成本将大幅降低——不需要调用 frontier 模型，可以自己训练专用小模型，护城河更深。</div>
+  </div>
+
+</div>
+
+<div class="sec">
+  <div class="st">📚 深度阅读</div><hr class="sr">
+
+  <div class="rc">
+    <div class="rh">
+      <div class="rs inst">机构文章 · Google Blog</div>
+      <div class="rt"><a href="https://cloud.google.com/blog/topics/google-cloud-next/welcome-to-google-cloud-next26" target="_blank">Google Cloud Next '26 Keynote：The Agentic Enterprise Control Plane</a></div>
+    </div>
+    <div class="rb">
+      <div class="rsh">Sundar Pichai + Thomas Kurian（Google Cloud CEO）的主题演讲核心内容。Google 的官方框架：我们正在进入「Agentic Era」，企业 AI 从「实验阶段」转向「执行阶段」，从「standalone copilots」转向「agent-led operating models」。这不只是产品发布，是 Google 对企业 AI 下一个 5 年的叙事定义。</div>
+      <div class="rpts">
+        <div class="rpt"><span class="rbl">▸</span><span>Gemini Enterprise 定位：「an AI-native architecture connecting data, people, applications, and agents」——不是 AI 功能的集合，而是一套为 Agent 时代重新设计的企业操作系统</span></div>
+        <div class="rpt"><span class="rbl">▸</span><span>Agentic Data Cloud 的核心价值：「allows organizations to use their data at the speed and scale required by agentic AI」——解决了 a16z 文章中定义的 Context Layer 问题</span></div>
+        <div class="rpt"><span class="rbl">▸</span><span>$750M 生态基金：不只是钱，是市场准入——被选入项目的 Agent 创业公司可以通过 Google 的企业销售网络直接接触 Fortune 500 客户</span></div>
+      </div>
+      <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开全文 ↓'">展开全文 ↓</button>
+      <div class="rdl">
+        <h5>Bain & Company 的战略解读</h5>
+        <blockquote>「Google positioned Agentic Defense as a central part of the enterprise AI stack, with new Google Security Operations agents for threat hunting, detection engineering, and third-party context, as well as tighter integration with Wiz. The broader security story included Wiz AI Application Protection Platform, Wiz Security Agents, Wiz Workflows, Model Armor integration with Agent Gateway.」</blockquote>
+        <p>翻译：Google 把安全放在 Agent 企业栈的核心位置——不是附加功能，而是架构级别的前提条件。这说明 Google 已经认识到「企业不会大规模部署 Agent，除非安全问题先被解决」。这与 OpenAI Daybreak 和 Microsoft MDASH 的时机选择形成了一个行业共识的信号：AI 安全是 2026 年企业 AI 采纳的关键瓶颈。</p>
+        <h5>260 项发布里最重要的 3 项</h5>
+        <p>① <strong>Gemini Enterprise Agent Platform 的 Agent Designer</strong>：图形化构建和测试 Agent，不需要写代码，类似 Zapier 但面向企业级 Agent。这会极大降低非技术用户构建 Agent 的门槛。</p>
+        <p>② <strong>Long-running agents</strong>：Google 的 Managed Agents 现在支持持续数天/周的任务，而不是单次会话——直接对标 Anthropic 的 Managed Agents。</p>
+        <p>③ <strong>Agentic Defense + Wiz 整合</strong>：把 $32B 收购的 Wiz（云安全）和 Google Security Operations（SOC 自动化）与 Agent 能力深度整合。这是 Google 到目前为止在安全领域最有实质内容的一次发布，可能改变企业安全软件市场格局。</p>
+      </div>
+      <a href="https://www.bain.com/insights/google_cloud_next_2026_the_agentic_enterprise_control_plane_comes_into_view/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ Bain & Company 战略分析</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 001 期 · 2026-05-05~07<br>
+  数据源：Google Blog · CNBC · TechCrunch · Bain & Company · Poolside Blog · ICLR 2026 · aiagentstore.ai
+</div>
+</div>
+<script>
+document.querySelectorAll('.exp').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const det = this.nextElementSibling;
+    det.classList.toggle('open');
+    this.textContent = det.classList.contains('open') ? '收起 ↑' : '展开详细版 ↓';
+  });
+});
+</script>
+</div></div></div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第002期 · 2026-05-08~10</title>
+<style>
+:root{--bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;--bd:#242424;--bd2:#2e2e2e;--t1:#ebebeb;--t2:#aaa;--t3:#666;--t4:#444;--gold:#C9A84C;--gold2:#9B7A2F;--gold3:rgba(201,168,76,.1);--red:#E05252;--green:#52C47A;--blue:#5B8FE8;--purple:#9B7FE8;--orange:#E08C52;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:28px 24px}
+.back{font-size:12px;color:var(--t3);margin-bottom:16px;display:block}.back:hover{color:var(--gold)}
+.hdr{border-bottom:1px solid var(--bd);padding-bottom:20px;margin-bottom:28px}
+.itag{display:inline-block;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;margin-bottom:10px;letter-spacing:.05em}
+h1{font-size:22px;font-weight:700;margin-bottom:4px}
+.meta{font-size:12px;color:var(--t3)}
+.sec{margin-bottom:36px}
+.st{font-size:17px;font-weight:700;margin-bottom:14px}
+.sr{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:15px;position:relative}
+.tc.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--s1))}
+.tbg{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:7px}
+.bh{background:rgba(224,82,82,.12);color:var(--red)}.bt{background:rgba(201,168,76,.12);color:var(--gold)}.bm{background:rgba(82,132,224,.12);color:var(--blue)}
+.tct{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}
+.tcb{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:8px}
+.tci{font-size:11.5px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}
+.tci::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:12px;right:12px;font-size:10px;color:var(--gold)}
+.li{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.lih{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.lin{font-size:13.5px;font-weight:700;flex:1}
+.lim{font-size:11px;color:var(--t3);margin-top:1px}
+.litag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;flex-shrink:0}
+.ta{background:rgba(82,196,122,.1);color:var(--green)}.ts{background:rgba(224,82,82,.1);color:#e07575}.tm{background:rgba(155,127,232,.1);color:var(--purple)}.ti{background:rgba(91,143,232,.1);color:var(--blue)}
+.lid{font-size:12px;color:var(--t2);line-height:1.6}
+.exp{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10px;padding:3px 9px;border-radius:4px;cursor:pointer;margin:6px 0;transition:all .12s}.exp:hover{border-color:var(--gold);color:var(--gold)}
+.det{background:var(--s2);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.65;display:none;border-left:2px solid var(--bd2);margin-top:4px}.det.open{display:block}
+.det h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.det h5:first-child{margin-top:0}
+.det blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic;color:var(--t2)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:13px}
+.kh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.kav{width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kn{font-size:12.5px;font-weight:600}.kha{font-size:11px;color:var(--t3)}.kl{font-size:12.5px;font-weight:700;color:var(--red);margin-left:auto}.kd{font-size:10px;color:var(--t4)}
+.kp{font-size:12px;color:var(--t1);background:var(--s2);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.ka{font-size:11.5px;color:var(--t2);line-height:1.6}
+.fc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.fh{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid var(--bd)}
+.fn{font-size:13.5px;font-weight:700}.fs{font-size:11px;color:var(--t3);margin-top:2px}.fa{font-size:19px;font-weight:800;color:var(--gold)}
+.ftg{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:rgba(201,168,76,.1);color:var(--gold)}
+.fb{padding:11px 15px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fl{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}.fv{font-size:12px;color:var(--t1)}
+.fw{grid-column:1/-1;background:var(--s2);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.rc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.rh{padding:12px 15px;border-bottom:1px solid var(--bd)}
+.rs{font-size:10px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}.rs.inst{color:var(--blue)}.rs.media{color:var(--green)}
+.rt{font-size:13px;font-weight:700;line-height:1.4}
+.rb{padding:11px 15px}.rsh{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.rpts{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+.rpt{font-size:12px;color:var(--t2);display:flex;gap:7px;line-height:1.6}.rbl{color:var(--gold);font-weight:700;flex-shrink:0}
+.rdl{background:var(--s2);border-radius:7px;padding:10px 12px;display:none;font-size:12px;color:var(--t2);line-height:1.65;border-left:2px solid var(--bd2)}.rdl.open{display:block}
+.rdl h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.rdl h5:first-child{margin-top:0}
+.rdl blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic}
+.t2c{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.tcat{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;background:rgba(155,127,232,.1);color:var(--purple);display:inline-block;margin-bottom:7px}
+.t2t{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.t2b{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:7px}
+.t2i{font-size:11.5px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}
+.sg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;background:var(--s2);border-radius:10px;padding:14px;border:1px solid var(--bd2);margin-top:10px}
+.stl{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t4);margin-bottom:10px;grid-column:1/-1}
+.sc h5{font-size:11.5px;font-weight:600;margin-bottom:5px}.sc p{font-size:11.5px;color:var(--t2);line-height:1.65}
+.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
+@media(max-width:700px){.tgrid,.kgrid,.fb,.sg{grid-template-columns:1fr}}
+
+  .layout{display:flex;min-height:100vh}
+  .sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+  .main{margin-left:220px;flex:1;min-width:0}
+  .sb-logo{padding:16px 16px 12px;border-bottom:1px solid var(--bd)}
+  .sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+  .sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
+  .sb-nav{padding:6px 0}
+  .sb-section{padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+  .sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;text-decoration:none;cursor:pointer}
+  .sb-item:hover{color:var(--t1);background:var(--s2)}
+  .sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08)}
+  .sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
+  @media(max-width:800px){.sidebar{display:none}.main{margin-left:0}}
+
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo">
+    <a href="index.html" style="text-decoration:none">
+      <div class="sb-brand">CREEKSTONE</div>
+      <div class="sb-sub">Intelligence · 5月刊</div>
+    </a>
+  </div>
+  <div class="sb-nav">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <div class="sb-section">本月期刊</div>
+    <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#E05252"></span>第003期 · 05-11~13</a>
+        <a class="sb-item active" href="brief_002.html"><span class="sb-dot" style="background:#52C47A"></span>第002期 · 05-08~10</a>
+        <a class="sb-item" href="brief_001.html"><span class="sb-dot" style="background:#5B8FE8"></span>第001期 · 05-05~07</a>
+        <a class="sb-item" href="brief_000.html"><span class="sb-dot" style="background:#9B7FE8"></span>第000期 · 05-01~04</a>
+    <hr class="sb-divider">
+    <div class="sb-section">历史归档</div>
+    <a class="sb-item" href="brief_hist1.html"><span class="sb-dot" style="background:#666"></span>04-24~27</a>
+        <a class="sb-item" href="brief_hist2.html"><span class="sb-dot" style="background:#666"></span>04-18~22</a>
+  </div>
+</nav>
+<div class="main"><div class="wrap">
+
+<div class="hdr">
+  <div class="itag">第 002 期 · 本周三</div>
+  <h1>Creekstone Intelligence Brief</h1>
+  <div class="meta">2026-05-08 ~ 05-10 · X KOL · 播客 · 媒体 · 融资 · 技术前沿</div>
+</div>
+
+<!-- ① 投资热点 -->
+<div class="sec">
+  <div class="st">🔥 投资热点趋势</div><hr class="sr">
+  <div class="tgrid">
+
+    <div class="tc hot">
+      <div class="stars">★★★</div>
+      <span class="tbg bh">本期最强</span>
+      <div class="tct">Karpathy「LLM 输出 HTML」走红 + Sama GPT-5.5 暗示：新一代 ChatGPT 越过质变门槛</div>
+      <div class="tcb">@karpathy（♥17,037）建议在 LLM query 末尾加「structure your response as HTML」然后在浏览器查看——这个简单技巧引爆 AI 工程师社区。同一天 @sama 连发多条：暗示新模型代号「goblin」（♥11,376），询问用户希望下一个模型改进什么（♥8,990），并说「5.5 is an autistic genius with very strange taste in naming」（♥8,187）。重大信号：OpenAI 正在 OpenAI Daybreak 发布前（05-11）密集预热新产品线。</div>
+      <div class="tci">Karpathy 的技巧正在被快速复制，同日 @simonw 也做了同样的尝试（♥846）。「LLM 输出富媒体格式」正从技巧变成工程范式，这会驱动对 「AI 输出可视化」工具链的需求。</div>
+    </div>
+
+    <div class="tc hot">
+      <div class="stars">★★★</div>
+      <span class="tbg bt">大会信号</span>
+      <div class="tct">LangChain 「Interrupt」大会（05-13~14）在即：Agent 可观测性正在成为独立赛道</div>
+      <div class="tcb">LangChain 官宣「Interrupt — The Agent Conference」于 05-13~14 在旧金山举办，与 Anthropic Code with Claude（05-06 刚结束）首尾相接。两场大会合在一起构成「Agent Developer Week」。LangChain 即将发布 LangSmith Engine（已在 05-13 正式发布），把 Agent 调试-评估-修复循环完全自动化。</div>
+      <div class="tci">Agent 可观测性（谁在运行、出了什么错、怎么修）正在从「开发工具附件」变成独立的商业赛道。LangSmith 是最大玩家，但这个需求还未被充分满足。</div>
+    </div>
+
+    <div class="tc">
+      <div class="stars">★★</div>
+      <span class="tbg bm">X 数据</span>
+      <div class="tct">Shopify River Agent：企业 Agent 文化的「Midjourney Discord 时刻」</div>
+      <div class="tcb">@simonw（♥1,037）揭示了 Shopify 内部 River Agent 系统的设计：只能在 Slack 公开频道使用，强制所有员工可见——和 Midjourney 2022 年只在 Discord 上运行完全相同的策略。这是「用可见性加速 Agent 文化传播」的具体产品设计案例。</div>
+      <div class="tci">对于 Creekstone 的企业 Agent 被投公司：「Agent 使用公开可见」是建立内部 AI 文化最低成本的方式，比培训项目有效 10 倍。</div>
+    </div>
+
+    <div class="tc">
+      <div class="stars">★★</div>
+      <span class="tbg bt">市场信号</span>
+      <div class="tct">@sama 连续「炒热」：Codex 4M 用户 + Daybreak 预热 + SuperApp 暗示，OpenAI 的内容营销机器全速运转</div>
+      <div class="tcb">2026-05-08~10 期间，@sama 高互动帖子 7 条以上（♥37K 总计），其中 5 条都在预热下一个产品：询问用户想要什么改进、调侃模型命名、暗示质变已发生。这是 OpenAI 上市前营造话题声量的系统性行为，背后是 Q4 2026 IPO 目标的时间表驱动。</div>
+      <div class="tci">OpenAI 的 IPO 营销战已经开始。Anthropic 对应策略：Code with Claude 大会 + Dreaming 发布（05-06）打企业端故事。两家在争夺截然不同的叙事——消费者心智（OpenAI）vs 企业信任（Anthropic）。</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ② 产品发布 -->
+<div class="sec">
+  <div class="st">🚀 重大产品发布</div><hr class="sr">
+
+  <div class="li">
+    <div class="lih">
+      <div>
+        <div class="lin"><a href="https://openai.com/daybreak" target="_blank">OpenAI Daybreak（预发布信号）</a></div>
+        <div class="lim">OpenAI · @sama 预热 · 2026-05-11 正式发布</div>
+      </div>
+      <span class="litag ts">AI 安全</span>
+    </div>
+    <div class="lid">本期 @sama 多次暗示正在准备「重大发布」（♥8,224）并询问用户对网络安全领域的期望。Daybreak 于 05-11 正式发布——AI 网络安全计划，提供 GPT-5.5-Cyber 模型。提前信号：本周内 @sama 帖子中「cybersecurity」出现频次是过去 30 天的 3 倍。</div>
+  </div>
+
+  <div class="li">
+    <div class="lih">
+      <div>
+        <div class="lin"><a href="https://www.langchain.com/blog/introducing-langsmith-engine" target="_blank">LangSmith Engine（公开 Beta）</a></div>
+        <div class="lim">LangChain · @hwchase17 · 2026-05-13 Interrupt 大会发布</div>
+      </div>
+      <span class="litag ti">Agent 可观测性</span>
+    </div>
+    <div class="lid">本期 hwchase17（♥251）宣布 LangSmith Engine 将在 Interrupt 大会发布，「用 Agent 调试 Agent」——监控生产 traces，聚类失败，识别根因，自动起草 PR 修复。</div>
+    <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开详细版 ↓'">展开详细版 ↓</button>
+    <div class="det">
+      <h5>核心功能</h5>
+      <p>LangSmith Engine 把 Agent 开发的核心循环（debug → eval → fix → prevent regression）完全自动化：</p>
+      <p>① <strong>Trace 监控</strong>：持续观察生产环境中的 Agent 执行日志<br>② <strong>失败聚类</strong>：把相似失败自动归为一个「named issue」（如「Agent fails to handle subscription cancellation requests accurately」，影响 12% 会话）<br>③ <strong>根因诊断</strong>：读取代码库，定位问题的具体代码位置（如发现工具描述歧义）<br>④ <strong>自动修复 PR</strong>：起草具体的代码修改建议，人工 review 后合并<br>⑤ <strong>Eval 建议</strong>：为这类失败添加持续监控的测试用例</p>
+      <h5>与 Anthropic Dreaming 的关系</h5>
+      <p>Anthropic Dreaming（05-06 发布）是「事后回顾、写入记忆」；LangSmith Engine 是「实时监控、主动修复」。两者互补——前者让 Agent 通过经验积累变得更好，后者让开发者更快发现和修复 Agent 的问题。合在一起，是「Agent 持续改进」的两个核心支柱。</p>
+    </div>
+  </div>
+
+  <div class="li">
+    <div class="lih">
+      <div>
+        <div class="lin"><a href="https://thinkingmachines.ai" target="_blank">Thinking Machines Lab 实时交互模型（Research Preview）</a></div>
+        <div class="lim">Mira Murati 创办 · @swyx ♥1,014 · 2026-05-11</div>
+      </div>
+      <span class="litag tm">基础模型</span>
+    </div>
+    <div class="lid">@swyx：「brutally framemogged GDM and OAI——basically everyone's definition of 'realtime' just got a massive fricking upgrade」。从零构建的实时交互模型，真正的连续双向实时协作，而非 turn-based 对话。团队：Soumith Chintala（PyTorch 联创，CTO），Piotr Dollár（前 Meta Research Director）。</div>
+  </div>
+
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="sec">
+  <div class="st">💬 KOL 核心观点</div><hr class="sr">
+  <div class="kgrid">
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">AK</div>
+        <div><div class="kn">Andrej Karpathy</div><div class="kha">@karpathy · 前 OpenAI / 前特斯拉 AI</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">♥ 17,037</div><div class="kd">05-11</div></div>
+      </div>
+      <div class="kp">「This works really well btw, at the end of your query ask your LLM to 'structure your response as HTML', then view the generated file in your browser. I've also had success asking the LLM to present its output as slideshows...」</div>
+      <div class="ka">一个简单技巧引爆了整个 AI 工程师社区。背后的深意：LLM 的输出格式正在从「文本答案」进化到「可交互的富媒体展示」。这与他此前的 LLM Knowledge Base（Markdown 替代 RAG）和「Agentic Engineering」概念一起，描绘了一个「AI 原生工作流」的完整图景——不是用 AI 做已有工作，而是让 AI 创造出新的展示/交互范式。</div>
+      <a href="https://x.com/karpathy/status/2053872850101285137" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 原帖</a>
+    </div>
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">SA</div>
+        <div><div class="kn">Sam Altman</div><div class="kha">@sama · OpenAI CEO</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">♥ 11,376</div><div class="kd">05-10</div></div>
+      </div>
+      <div class="kp">「what if we name the next model "goblin" — almost worth it to make you all happy...」</div>
+      <div class="ka">表面是玩笑，实际上是密集产品预热周期的一部分。本期 sama 5 天内 7 条高互动帖，组合信号：询问用户期望（在做市场调研）+ 调侃命名（制造话题）+ 暗示质变（管理期望）。这是上市前有意识的「热度管理」。另一条 ♥8,990：「what would you most like to see improve in our next model?」——在公开做 product feedback 收集，罕见。</div>
+      <a href="https://x.com/sama/status/2053572868936761350" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 原帖</a>
+    </div>
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">SW</div>
+        <div><div class="kn">swyx</div><div class="kha">@swyx · Latent Space 创始人</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">♥ 1,014</div><div class="kd">05-11</div></div>
+      </div>
+      <div class="kp">「I believe the kids call this '@thinkymachines just brutally framemogged gdm and oai'. basically everyone's definition of 'realtime' just got a massive fricking upgrade」</div>
+      <div class="ka">swyx 对 Thinking Machines Lab 实时模型的评价：「framemogged」= 用全新框架让对手产品看起来过时了。他是 AI Engineer 社区最重要的 taste-maker 之一——他说某个产品好，会直接驱动数万工程师去关注和尝试。这个评价会加速 TML 的开发者采纳。</div>
+      <a href="https://x.com/swyx/status/2053960011748098462" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 原帖</a>
+    </div>
+
+    <div class="kc">
+      <div class="kh">
+        <div class="kav">SW2</div>
+        <div><div class="kn">Simon Willison</div><div class="kha">@simonw · LLM 工具链专家</div></div>
+        <div style="margin-left:auto;text-align:right"><div class="kl">♥ 1,037</div><div class="kd">05-10</div></div>
+      </div>
+      <div class="kp">「Shopify's River agent system lives in Slack and can only be used in public so that other employees can learn from what you do with it. Reminds me of how Midjourney's Discord-only launch helped people learn from each other」</div>
+      <div class="ka">simonw 识别出了一个企业 Agent 部署的重要设计模式：「强制可见性 → 加速文化传播」。他本人也做了 Karpathy 的 HTML 技巧实验（♥846），分享了自己用 JavaScript 反混淆的案例。simonw 是目前最持续记录「AI 工具真实使用体验」的人，他的帖子是产品 PMF 的早期信号。</div>
+      <a href="https://x.com/simonw/status/2053529689122328947" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ X 原帖</a>
+    </div>
+
+  </div>
+
+  <!-- 补充信号 -->
+  <div class="sg">
+    <div class="stl">补充信号 · X 热点</div>
+    <div class="sc">
+      <h5 style="color:var(--gold)">Karpathy HTML 技巧的扩散</h5>
+      <p>技巧本身 3 小时内被 simonw、mckaywrigley、levelsio 等人转引测试，形成了一个小型「群体实验」。说明这个需求是真实的：开发者想要 AI 输出超越文本的展示形式，但当前工具链还没有系统化的支持。</p>
+    </div>
+    <div class="sc">
+      <h5 style="color:var(--blue)">LangChain Interrupt 大会信号</h5>
+      <p>LangChain 的「Interrupt」大会命名本身就是一个信号——「中断」现有 AI 开发工作流，重新定义 Agent 生命周期管理。大会嘉宾包含 Anthropic、OpenAI、Google 各方代表，实际上是整个 Agent 工具链生态的年度站位秀。</p>
+    </div>
+    <div class="sc">
+      <h5 style="color:var(--red)">OpenAI 上市前舆论管理</h5>
+      <p>@sama 本期发帖频率和互动量异常高，且帖子质量从「有观点」退化为「制造互动」（模型命名 meme、调侃）。这是上市前 IR（投资者关系）叙事构建的典型信号，投资人应以 10-15% 折扣看待这段时期的 OpenAI 公开信息。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="sec">
+  <div class="st">💰 融资动态</div><hr class="sr">
+
+  <div class="fc">
+    <div class="fh">
+      <div><div class="fn"><a href="https://skift.com/2026/05/04/amex-gbt-acquired-general-catalyst-long-lake-6-3-billion/" target="_blank">Long Lake / Amex GBT · AI 驱动私有化</a></div><div class="fs">General Catalyst + Alpha Wave · 收购纳斯达克上市 GBTG</div></div>
+      <div style="text-align:right"><div class="fa">$6.3B</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Take-Private</span><span class="ftg" style="background:rgba(224,82,82,.1);color:var(--red)">★★★</span></div></div>
+    </div>
+    <div class="fb">
+      <div><div class="fl">交易类型</div><div class="fv">全现金收购 + 退市私有化</div></div>
+      <div><div class="fl">宣布日期</div><div class="fv">2026-05-04</div></div>
+      <div class="fw">Elad Gil 称「全球首个 AI 驱动的 take-private」。$1.3T 商务旅行管理市场，严重依赖人工流程（行程规划、费用报销、政策合规）。AI 改造方案 → 成本结构根本改变 → 利润率提升 → 重新上市。这个并购逻辑对所有「有大量数据但软件层老旧的传统行业上市公司」都适用。</div>
+    </div>
+  </div>
+
+  <div class="fc">
+    <div class="fh">
+      <div><div class="fn"><a href="https://business20channel.tv/aidoc-150m-series-e-2026-goldman-sachs-backs-clinical-ai-bef-1-may-2026" target="_blank">Aidoc · 临床 AI 平台</a></div><div class="fs">以色列 · 1.1 亿患者案例 · 近 2000 家医院</div></div>
+      <div style="text-align:right"><div class="fa">$150M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Series E</span><span class="ftg" style="background:rgba(224,82,82,.1);color:var(--red)">★★★</span></div></div>
+    </div>
+    <div class="fb">
+      <div><div class="fl">领投</div><div class="fv">Goldman Sachs Alternatives Growth Equity</div></div>
+      <div><div class="fl">跟投</div><div class="fv">General Catalyst · SoftBank VF2 · NVentures（NVIDIA）</div></div>
+      <div class="fw">医疗 AI 中罕见的「已大规模部署」公司——真实在 2000 家医院每天处理数百万医学影像，而非 demo 阶段。护城河不在模型，在 1.1 亿患者案例数据。Goldman 领投 + NVIDIA 参投 = 财务+战略双重验证。IPO 在筹备中。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ⑤ 技术前沿 -->
+<div class="sec">
+  <div class="st">🔬 技术前沿</div><hr class="sr">
+
+  <div class="t2c">
+    <span class="tcat">GitHub Trending</span>
+    <div class="t2t">opencode：开源 Coding Agent 28天 +2,052 stars，增速超 Claude Code 官方 repo 1.7 倍</div>
+    <div class="t2b">anomalyco/opencode（总 54,643 ★）。核心价值：「你的代码不需要送到 Anthropic 服务器」——数据主权 + 成本控制。Claude Code 本期隐形成本问题（+20,000 tokens/请求，cache TTL 回退）是 opencode 增速的直接驱动。同期 dify（+454/28天）、open-webui（+663/28天）也在强势上涨。<br><br>→ <a href="https://ossinsight.io/trending/ai" target="_blank">ossinsight.io 实时排名</a></div>
+    <div class="t2i">开发者正在用行动投票反对 Claude Code 的成本涨价。这是 Anthropic 需要解决的产品层问题，也是开源替代品的机会窗口。</div>
+  </div>
+
+  <div class="t2c">
+    <span class="tcat">模型发布</span>
+    <div class="t2t">Poolside Laguna M.1（225B MoE）+ XS.2（33B 开源）：专为长周期 agentic coding 构建，SWE-Bench 72.5%</div>
+    <div class="t2b">Poolside（$626M 融资，前 GitHub CTO Jason Warner 创办）发布首批公开模型（2026-04-28）。Laguna M.1：225B 总参数，23B 激活（MoE 架构），在 6,144 块 NVIDIA H200 上用 30 万亿 token 从头训练，SWE-Bench Verified 72.5%。Laguna XS.2：33B/3B 激活，开源，在 OpenRouter 可用，专为本地 agentic coding 设计。同期还发布了 Agent harness「pool」和移动优先的 IDE「shimmer」。<br><br>→ <a href="https://poolside.ai/blog/introducing-laguna-xs2-m1" target="_blank">Poolside 博客</a></div>
+    <div class="t2i">Poolside 的 MoE 架构 + 30T token 从头训练（而不是在通用模型上 fine-tune）代表了「专用 Agent 模型」的完整方法论。这验证了 Sarah Guo 的预测：coding 之后，每个垂直都会有自己的 post-trained 专用模型。</div>
+  </div>
+
+</div>
+
+<!-- ⑥ 深度阅读 -->
+<div class="sec">
+  <div class="st">📚 深度阅读</div><hr class="sr">
+
+  <div class="rc">
+    <div class="rh">
+      <div class="rs">🎙 播客</div>
+      <div class="rt"><a href="https://podcasts.apple.com/us/podcast/all-in-with-chamath-jason-sacks-friedberg/id1502871393" target="_blank">All-In 最新期：OpenAI Identity Crisis + Datacenter Wars + Travis Kalanick on AI</a></div>
+    </div>
+    <div class="rb">
+      <div class="rsh">Chamath、Jason、Sacks、Friedberg + 特邀 Travis Kalanick（Uber 创始人）。主题：OpenAI 的身份危机、数据中心战争、Allbirds 的 AI 转型。本期 All-In 最重要的不是具体讨论，而是 Kalanick 的参与——他正在 AI 基础设施方向重新创业（CloudKitchens），他对「AI 如何重塑重资产行业」的判断值得关注。</div>
+      <div class="rpts">
+        <div class="rpt"><span class="rbl">▸</span><span>Sacks 继续推进「OpenAI 身份危机」叙事：nonprofit vs profit 的内部张力正在影响产品决策和人才留存</span></div>
+        <div class="rpt"><span class="rbl">▸</span><span>Datacenter Wars：Chamath 分析了超大规模算力集群（Colossus、Stargate）的地缘政治含义——谁控制算力，谁控制 AI 的未来形态</span></div>
+        <div class="rpt"><span class="rbl">▸</span><span>Travis Kalanick 观点：AI Agent 对「重资产 + 重人工」行业的渗透速度比大多数人预期慢，但一旦发生就不可逆——「重要的不是速度，是临界点」</span></div>
+      </div>
+      <a class="rds" href="https://podcasts.apple.com/us/podcast/all-in-with-chamath-jason-sacks-friedberg/id1502871393" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ Apple Podcasts</a>
+    </div>
+  </div>
+
+  <div class="rc">
+    <div class="rh">
+      <div class="rs inst">机构文章 · a16z</div>
+      <div class="rt"><a href="https://a16z.com/your-data-agents-need-context/" target="_blank">Your Data Agents Need Context — a16z · Jason Cui & Jennifer Li</a></div>
+    </div>
+    <div class="rb">
+      <div class="rsh">a16z 基础设施团队定义了「AI 时代数据栈的新核心」：Context 层。过去十年建好的现代数据栈（Snowflake/dbt）解决了「数据放哪里、怎么查」，但 Agent 无法有效使用这些数据——因为它不知道「revenue 字段指的是 GAAP 还是 bookings」。Context 层（语义定义 + 数据血缘 + 访问策略 + 知识图谱）是所有数据 Agent 的共同前提依赖。</div>
+      <div class="rpts">
+        <div class="rpt"><span class="rbl">▸</span><span>三代数据栈框架：孤岛时代 → 现代数据栈（第二代） → Agent-ready 语义层（第三代，正在发生）</span></div>
+        <div class="rpt"><span class="rbl">▸</span><span>a16z 原文：「每个正在构建数据 Agent 的公司，都会在 6 个月内遭遇同一堵墙：Context 缺失。Context 层是整个类别的基础设施，不是某个产品的差异化功能。」</span></div>
+        <div class="rpt"><span class="rbl">▸</span><span>投资方向：a16z 在寻找「从零为 Agent 设计的 Context Layer 产品」，而非传统数据目录改造的版本</span></div>
+      </div>
+      <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开全文 ↓'">展开全文 ↓</button>
+      <div class="rdl">
+        <h5>问题的本质</h5>
+        <blockquote>「Over the past year, the market has realized that data and analytics agents are essentially useless without the right context – they aren't able to tease apart vague questions, decipher business definitions, and reason across disparate data effectively.」</blockquote>
+        <p>翻译：「过去一年，市场已经意识到，数据和分析 Agent 在没有正确上下文的情况下基本上是没用的——它们无法拆解模糊的问题、解读业务定义，也无法有效地跨不同数据进行推理。」</p>
+        <h5>Context 层的四个组成</h5>
+        <p><strong>Semantic Layer</strong>：业务指标的精确定义。「revenue = GAAP ASC 606 标准下的已确认收入，按季度统计，排除内部交易...」没有这一层，Agent 查到的数字对应什么含义是不确定的。</p>
+        <p><strong>Lineage Graph</strong>：数据血缘。这个数字从哪来？经过哪些变换？被哪些报表依赖？Agent 发现异常值时，需要知道是哪条 pipeline 生成的。</p>
+        <p><strong>Policy Layer</strong>：权限策略。谁能看哪些数据？在什么条件下？传统 RBAC 不够用，需要「Agent 意图感知」的权限系统。</p>
+        <p><strong>Knowledge Graph</strong>：实体关系。客户 → 合同 → 产品 → 订单 → 发票 → 收入。Agent 回答「客户 A 健康状况」需要理解这条关系链。</p>
+        <h5>a16z 的投资判断</h5>
+        <blockquote>「Every company building a data agent will hit the same wall within six months: context. The companies that solve this will be the picks and shovels of the agentic data economy. This is not a feature for a single product. It is infrastructure for an entire category.」</blockquote>
+      </div>
+      <a href="https://a16z.com/your-data-agents-need-context/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ a16z 原文</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 002 期 · 2026-05-08~10<br>
+  数据源：X OAuth1（28 KOL）· All-In · Latent Space · a16z · TechCrunch · GitHub Trending · Poolside Blog
+</div>
+</div>
+<script>
+document.querySelectorAll('.exp').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const det = this.nextElementSibling;
+    det.classList.toggle('open');
+    this.textContent = det.classList.contains('open') ? '收起 ↑' : '展开详细版 ↓';
+  });
+});
+</script>
+</div></div></div>
+</body>
+</html>
