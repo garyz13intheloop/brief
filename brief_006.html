@@ -4,261 +4,736 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Creekstone Intelligence · 第006期 · 2026-05-17~19 · Google I/O 专辑</title>
 <style>
-:root{--bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;--bd:#242424;--bd2:#2e2e2e;--t1:#ebebeb;--t2:#aaa;--t3:#666;--t4:#444;--gold:#C9A84C;--gold2:#9B7A2F;--gold3:rgba(201,168,76,.1);--red:#E05252;--green:#52C47A;--blue:#5B8FE8;--purple:#9B7FE8;--orange:#E08C52;}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
-.layout{display:flex;min-height:100vh}.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}.main{margin-left:220px;flex:1;min-width:0}
-.sb-logo{padding:16px 16px 12px;border-bottom:1px solid var(--bd)}.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}.sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
-.sb-nav{padding:6px 0}.sb-section{padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
-.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;text-decoration:none}.sb-item:hover{color:var(--t1);background:var(--s2)}.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08)}
-.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
-.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-title{font-size:16px;font-weight:700}.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
-.content{padding:24px 28px;max-width:980px}
-.io-banner{background:linear-gradient(135deg,rgba(91,143,232,.12),rgba(82,196,122,.06));border:1px solid rgba(91,143,232,.3);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
-.io-icon{font-size:24px}.io-text{flex:1}.io-title{font-size:15px;font-weight:700;color:var(--blue);margin-bottom:3px}.io-sub{font-size:12px;color:var(--t2)}
-.sec{margin-bottom:36px}.st{font-size:17px;font-weight:700;margin-bottom:14px}.sr{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:15px;position:relative}.tc.hot{border-color:rgba(91,143,232,.4);background:linear-gradient(135deg,rgba(91,143,232,.06),var(--s1))}
-.tbg{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:7px}
-.bh{background:rgba(224,82,82,.12);color:var(--red)}.bt{background:rgba(201,168,76,.12);color:var(--gold)}.bm{background:rgba(82,132,224,.12);color:var(--blue)}.bg{background:rgba(82,196,122,.12);color:var(--green)}
-.tct{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.tcb{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:8px}
-.tci{font-size:11.5px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}.tci::before{content:"→ ";font-weight:700}
-.stars{position:absolute;top:12px;right:12px;font-size:10px;color:var(--gold)}
-.li{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
-.lih{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}.lin{font-size:13.5px;font-weight:700;flex:1}.lim{font-size:11px;color:var(--t3);margin-top:1px}
-.litag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;flex-shrink:0}
-.ta{background:rgba(82,196,122,.1);color:var(--green)}.ts{background:rgba(224,82,82,.1);color:#e07575}.tm{background:rgba(155,127,232,.1);color:var(--purple)}.ti{background:rgba(91,143,232,.1);color:var(--blue)}
-.lid{font-size:12px;color:var(--t2);line-height:1.6}
-.exp{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10px;padding:3px 9px;border-radius:4px;cursor:pointer;margin:6px 0}.exp:hover{border-color:var(--gold);color:var(--gold)}
-.det{background:var(--s2);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.65;display:none;border-left:2px solid var(--bd2);margin-top:4px}.det.open{display:block}
-.det h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.det h5:first-child{margin-top:0}
-.det blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic;color:var(--t2)}
-.io-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
-.io-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px}
-.io-card-icon{font-size:20px;margin-bottom:8px}
-.io-card-name{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:5px}
-.io-card-desc{font-size:12px;color:var(--t2);line-height:1.6}
-.io-card-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:8px}
-.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:13px}
-.kh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.kav{width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
-.kn{font-size:12.5px;font-weight:600}.kha{font-size:11px;color:var(--t3)}.kl{font-size:12.5px;font-weight:700;color:var(--red);margin-left:auto}.kd{font-size:10px;color:var(--t4)}
-.kp{font-size:12px;color:var(--t1);background:var(--s2);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
-.ka{font-size:11.5px;color:var(--t2);line-height:1.6}
-.fc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:10px}
-.fh{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid var(--bd)}
-.fn{font-size:13.5px;font-weight:700}.fs{font-size:11px;color:var(--t3);margin-top:2px}.fa{font-size:19px;font-weight:800;color:var(--gold)}
-.ftg{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:rgba(201,168,76,.1);color:var(--gold)}
-.fb{padding:11px 15px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.fl{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}.fv{font-size:12px;color:var(--t1)}
-.fw{grid-column:1/-1;background:var(--s2);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
-.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
-@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.tgrid,.kgrid,.io-grid,.fb{grid-template-columns:1fr}}
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style><style>
+.io-banner{background:linear-gradient(135deg,rgba(91,143,232,.1),rgba(82,196,122,.05));border:1px solid rgba(91,143,232,.3);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.io-icon{font-size:28px;flex-shrink:0}
+.io-text{flex:1}
+.io-title{font-size:15px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.io-sub{font-size:12px;color:var(--t2);line-height:1.5}
+.io-launches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.io-lcard{background:var(--s2);border:1px solid var(--bd2);border-radius:10px;padding:14px}
+.io-lcard-icon{font-size:20px;margin-bottom:8px}
+.io-lcard-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:8px}
+.io-lcard-name{font-size:13px;font-weight:700;margin-bottom:5px}
+.io-lcard-desc{font-size:12px;color:var(--t2);line-height:1.6}
+@media(max-width:700px){.io-launches{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="layout">
 <nav class="sidebar">
   <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 5月刊</div></a></div>
-  <div class="sb-nav">
+  <div style="padding:6px 0">
     <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
-    <hr class="sb-divider">
-    <div class="sb-section">本月期刊</div>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">本月期刊</div>
     <a class="sb-item active" href="brief_006.html"><span class="sb-dot" style="background:#E05252"></span>第006期 · 05-17~19 🔥</a>
     <a class="sb-item" href="brief_005.html"><span class="sb-dot" style="background:#52C47A"></span>第005期 · 05-15~17</a>
     <a class="sb-item" href="brief_004.html"><span class="sb-dot" style="background:#5B8FE8"></span>第004期 · 05-13~15</a>
     <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#9B7FE8"></span>第003期 · 05-11~13</a>
-    <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期 · 05-08~10</a>
-    <a class="sb-item" href="brief_001.html"><span class="sb-dot" style="background:#666"></span>第001期 · 05-05~07</a>
+    <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期</a>
+    <a class="sb-item" href="brief_001.html"><span class="sb-dot" style="background:#666"></span>第001期</a>
   </div>
 </nav>
 <div class="main">
-  <div class="topbar">
-    <div><div class="topbar-title">Creekstone Intelligence Brief</div><div class="topbar-sub">第 006 期 · 2026-05-17 ~ 05-19 · 周三刊 · Google I/O 2026 专辑</div></div>
+<div class="topbar">
+  <div><div class="topbar-title">Creekstone Intelligence Brief</div><div class="topbar-sub">第 006 期 · 2026-05-17 ~ 05-19 · 周三刊 · Google I/O 2026 专辑 · 今日开幕</div></div>
+  <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)"></div>
+</div>
+<div class="content" id="mc">
+
+<!-- I/O Banner -->
+<div class="io-banner">
+  <div class="io-icon">🎯</div>
+  <div class="io-text">
+    <div class="io-title">Google I/O 2026 · 今日开幕（2026-05-19，Shoreline Amphitheatre，Mountain View）</div>
+    <div class="io-sub">本期聚焦：Google 如何用 Gemini Intelligence + Antigravity + Android XR 争夺「AI Operating Layer」控制权 · 三大 AI 公司的战略路线已清晰分叉</div>
   </div>
-  <div class="content">
+  <a href="https://io.google/2026/" target="_blank" style="font-size:11px;color:var(--blue);white-space:nowrap;flex-shrink:0">→ 官方直播</a>
+</div>
 
-  <!-- I/O Banner -->
-  <div class="io-banner">
-    <div class="io-icon">🎯</div>
-    <div class="io-text">
-      <div class="io-title">Google I/O 2026 · 今日开幕（2026-05-19，Shoreline Amphitheatre）</div>
-      <div class="io-sub">本期聚焦：Google 如何用 Gemini Intelligence 争夺「AI Operating Layer」控制权，以及对整个 AI 产业格局的影响</div>
-    </div>
-    <a href="https://io.google/2026/" target="_blank" style="font-size:11px;color:var(--blue);white-space:nowrap">→ 官方直播</a>
-  </div>
+<div class="stats">
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">投资热点</div></div>
+  <div class="stat"><div class="stat-n">9</div><div class="stat-l">产品发布</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">KOL 观点</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">融资事件</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">深度阅读</div></div>
+  <div class="stat"><div class="stat-n">18</div><div class="stat-l">KOL 覆盖</div></div>
+</div>
 
-  <div class="sec">
-    <div class="st">🔥 投资热点趋势</div><hr class="sr">
-    <div class="tgrid">
+<!-- ① 投资热点 -->
+<div class="section" id="trends">
+<div class="sec-head"><div class="sec-title">🔥 硅谷投资热点趋势</div><div class="sec-desc">Google I/O 2026 开幕之日，AI 战略格局全面清晰</div></div>
+<hr class="sec-rule">
+<div class="trend-grid">
 
-      <div class="tc hot">
-        <div class="stars">★★★</div>
-        <span class="tbg bm">Google I/O 2026 核心</span>
-        <div class="tct">Gemini Intelligence：Gemini 从 chatbot 进入 Android OS 层，跨 App 感知 + 自主完成多步任务，正面挑战 OpenAI SuperApp</div>
-        <div class="tcb">Google I/O 2026 最重要的发布不是新模型，而是 Gemini Intelligence——一套把 Gemini 嵌入 Android 操作系统层面的 agentic AI 框架。核心能力：<br><br>① <strong>跨应用感知 + 自主执行</strong>：演示案例——找到 Gmail 中的课程大纲，识别需要的教材，自动添加到购物车，全程不切换 App；② <strong>Smart Autofill</strong>：用 Gemini 的跨 App 上下文理解填写表单（不只是键盘自动填充）；③ <strong>Rambler</strong>：语音转文字 + 去除口头禅 + 重新结构化为连贯句子；④ <strong>Create My Widget</strong>：自然语言描述 → Gemini 生成自定义小组件，整合 Gmail / Calendar / 搜索数据。<br><br>TNW 标题：「Gemini Intelligence to the death of the Chromebook」——Chromebook 将被 Googlebooks（全 Android 笔记本）替代。</div>
-        <div class="tci">这是 Google 在 AI 竞争中最有破坏力的一张牌：Android 全球 72% 移动市场份额 + Google Workspace 30 亿用户。如果 Gemini Intelligence 真正实现「AI Operating Layer」，这是 Anthropic 和 OpenAI 都没有的分发渠道优势。Google 的 I/O 2026 是对「Google 在 AI 上不擅长做产品」这个叙事的直接反击。</div>
-      </div>
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">Google I/O 专题</span>
+  <div class="tcard-title">Gemini Intelligence = OS 级 Agent，Gemini 4 发布，Veo 4 视频，Google Antigravity IDE：Google 最强 I/O 历史上最密集的 AI 发布</div>
+  <div class="tcard-body">Google I/O 2026（05-19 开幕）是「AI OS War」的决战时刻。TNW 提前披露（05-18）：<strong>Gemini Intelligence</strong>——把 Gemini 嵌入 Android OS 层，跨 App 感知 + 自主执行多步任务（演示：找到 Gmail 课程大纲 → 识别教材 → 添加到购物车，全程不切换 App）；<strong>Gemini 4</strong>（或重大 Gemini 3 升级，预计今日正式确认）；<strong>Veo 4</strong>（视频生成新版本）；<strong>Google Antigravity</strong>（AI-first IDE，从「vibe coding → autonomous development」）；<strong>Googlebooks</strong>（终结 Chromebook，全 Android 笔记本）；<strong>Android XR 智能眼镜</strong>（Gemini 2.5 Pro 驱动）。<br><br>YouTube 视频标题「GEMINI 4 + VEO 4: Google I/O 2026 Just Shocked Everyone」说明市场对发布规模已有强烈预期。</div>
+  <div class="tcard-impl">Google I/O 2026 是对「Google 在 AI 上不擅长做产品」这个叙事的最直接反击。Android 的 72% 全球市场份额 + Google Workspace 30 亿用户 + Gemini 2.5 Pro 的模型能力——三者叠加，是 Anthropic 和 OpenAI 都无法复制的分发优势。如果 Gemini Intelligence 的实际体验达到承诺，「AI 操作层」的竞争格局将在今天发生根本性变化。</div>
+</div>
 
-      <div class="tc hot">
-        <div class="stars">★★★</div>
-        <span class="tbg bm">战略判断</span>
-        <div class="tct">「AI OS War」格局清晰：OpenAI SuperApp vs Google Gemini Intelligence vs Anthropic Managed Agents，三种不同路线争夺「用户时间与工作流」</div>
-        <div class="tcb">2026 年 5 月，三大 AI 公司的战略分叉已经非常清晰：<br><br>① <strong>OpenAI SuperApp</strong>：ChatGPT + Codex + Atlas 浏览器整合，移动端 App 为核心，试图成为「AI 时代的微信/WeChat」<br>② <strong>Google Gemini Intelligence</strong>：嵌入 Android OS 层，不需要用户「打开 AI App」，而是 AI 感知并主动行动<br>③ <strong>Anthropic Managed Agents</strong>：企业端 API + Claude Code，不做 OS 层，专注工作流集成（Dreaming + Multiagent Orchestration）<br><br>三条路线代表了三种对「AI 如何集成进用户生活」的根本不同假设。</div>
-        <div class="tci">Creekstone 的投资逻辑在这个框架里：Anthropic 的企业端路线（Managed Agents）是最适合垂直 Agent 初创公司 build on top 的平台，但 Google 的 OS 层路线如果成功，将改变 B2C AI 应用的分发格局——不再是 App Store，而是 Android/iOS OS 集成。</div>
-      </div>
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-trend">战略判断</span>
+  <div class="tcard-title">「AI OS War」格局已清晰：OpenAI SuperApp vs Google Gemini Intelligence vs Anthropic Managed Agents，三条不同路线争夺「用户时间与工作流」</div>
+  <div class="tcard-body">2026 年 5 月，三大 AI 公司的战略分叉已经非常清晰：<br><br>① <strong>OpenAI SuperApp</strong>：ChatGPT + Codex（Mobile，05-13 上线）+ Atlas 浏览器，移动端 App 为核心，争夺消费者心智和日常使用时间。核心资产：ChatGPT 品牌（最大消费者 AI 知名度）+ Codex 开发者生态。<br>② <strong>Google Gemini Intelligence</strong>（今日发布）：嵌入 Android OS 层，不需要用户「打开 AI App」，AI 感知并主动行动。核心资产：Android 72% 移动市场份额 + Google Workspace 30 亿用户。<br>③ <strong>Anthropic Managed Agents</strong>：企业端 API + Claude Code + Managed Agents（Dreaming + Outcomes + Multiagent Orchestration），不做 OS 层，专注工作流集成。核心资产：企业端信任（Ramp AI Index 34.4%）+ Claude Code 开发者采用。<br><br>@OfficialLoganK（♥1,912，05-17）：「2026 is very much the year of agents and AI coding, lots to happen still!」</div>
+  <div class="tcard-impl">对于垂直 Agent 创业公司的战略含义：Google 的 OS 层路线如果成功，会改变 B2C AI 应用的分发方式（不是 App Store 而是 Android OS 集成）；Anthropic 的企业端路线是「build on top」的最佳平台；OpenAI 的消费者路线决定了「AI 助手」的消费者认知基准。三条路线并不互斥——一个垂直 Agent 可能同时需要在所有三个生态里有存在感。</div>
+</div>
 
-      <div class="tc">
-        <div class="stars">★★</div>
-        <span class="tbg bt">技术路线</span>
-        <div class="tct">Android XR 智能眼镜 + Googlebooks（Chromebook 终结）：Google 押注下一个 AI 硬件平台</div>
-        <div class="tcb">I/O 2026 的两个硬件方向：① <strong>Android XR 智能眼镜</strong>：搭载 Gemini 2.5 Pro，支持实时翻译、导航、上下文感知信息叠加，与 Samsung Galaxy Glasses 同步发布；② <strong>Googlebooks</strong>：Google 宣布终结 Chromebook 品牌，推出全 Android 笔记本「Googlebooks」，搭载 Aluminum OS（Android 的 PC 版本），Gemini 深度集成。<br><br>战略含义：Google 在用硬件强制把 Gemini Intelligence 推向用户——你买了 Googlebooks 或 Android XR 眼镜，就是在买 Gemini OS 层的订阅用户。</div>
-        <div class="tci">智能眼镜 + AI = Meta Ray-Ban 的升级版竞争者。但 Google 的差异化在于：Gemini 2.5 Pro 的推理能力 + Google 地图/搜索的数据 + Android 生态的 App 集成。如果实现，是目前最接近「有用的 AR AI」的产品。</div>
-      </div>
+<div class="tcard">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge" style="background:rgba(82,132,224,.12);color:var(--blue)">产品信号</span>
+  <div class="tcard-title">ChatGPT 大更新 + Images 2.0 印度 10 亿张：@sama 密集造势，OpenAI 上市前叙事管理进入最终冲刺阶段</div>
+  <div class="tcard-body">@sama 本期两条最高分帖：① ♥13,252（05-18）：「chatgpt has gotten soooo much better with the latest update. really proud of the team for this one.」——暗示 ChatGPT 有重大更新即将或刚刚推出，质变门槛已越过；② ♥10,159（05-18）：「ChatGPT Images 2.0 💚 India. Already more than 1 billion images created there; awesome to see.」——印度市场已创建超过 10 亿张图片，ChatGPT Images 2.0 正在成为全球最大的 AI 图片生成平台之一。<br><br>Google I/O 同日开幕的背景下，@sama 选择这一天密集发帖，是有意识的反叙事竞争——在 Google I/O 的媒体焦点日，通过高互动帖子分散注意力，保持 OpenAI 的话题热度。</div>
+  <div class="tcard-impl">OpenAI 的 Q4 2026 IPO 准备期正在进入最终阶段。sama 的每条高互动帖都是在为「OpenAI 是 AI 时代最重要的公司」这个叙事添砖加瓦。对投资者：IPO 前的叙事强化期需要以 10-15% 折扣来看待这些「产品很好」的信号。</div>
+</div>
 
-      <div class="tc">
-        <div class="stars">★★</div>
-        <span class="tbg bt">市场信号</span>
-        <div class="tct">Chromebook 的终结 = SaaS 工具的下一个「消失」预言：当 AI OS 层足够强，很多「轻量 SaaS」会被直接吸收</div>
-        <div class="tcb">Karpathy 在 Sequoia AI Ascent 说的「有些 App 应该停止存在为 App」，在 I/O 2026 上得到了第一个具体验证：Chromebook（一个「为 Google Workspace 优化的轻量电脑」）被 Googlebooks + Gemini Intelligence 直接替代了——不再需要一个专门的 OS，因为 Android + Gemini OS 层已经足够。<br><br>这个逻辑可以延伸：当 AI OS 层足够强（感知 + 执行 + 跨应用），很多「连接两个 App 的轻量 SaaS」（如 Zapier 的很多用例）会被直接替代。</div>
-        <div class="tci">对于早期 AI 创业公司：不要建「可以被 Google/Apple OS 层吸收」的产品。要建那些需要「深度垂直行业知识 + 合规 + 专业训练数据」的 Agent，这些是 OS 层无法轻易复制的。</div>
-      </div>
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">技术反叙事</span>
+  <div class="tcard-title">Karpathy 的 HTML 技巧持续发酵 + fchollet「Chromebook 消亡」的 Karpathy 验证：「有些软件类别应该停止存在」成为 2026 年核心论题</div>
+  <div class="tcard-body">Karpathy 在 005 期（04 月末）提出的「让 LLM 输出 HTML」技巧持续被社区引用和延伸。本期（Google I/O 2026 宣布「Googlebooks 终结 Chromebook」）对应了 Karpathy 在 Sequoia AI Ascent 说的「有些 App 应该停止存在为 App」——Chromebook 就是一个整个产品类别因为 AI 范式转变而失去存在理由的案例。<br><br>Karpathy 的框架（软件可验证性决定 AI 进展速度）正在被具体产品事件一一验证：Claude Code（Coding Agent）→ Hermes /goal（持久任务 Agent）→ Gemini Intelligence（OS 层 Agent）→ Googlebooks（平台层的 App 消亡）。这是一个连续的范式演进，不是孤立事件。</div>
+  <div class="tcard-impl">「哪些软件类别将因为 AI 而消失」是 2026 年最重要的投资判断问题之一。Chromebook 是第一个被证明的案例，下一个可能是：简单的 SaaS 表单工具（Gemini Intelligence 的 Smart Autofill）、基础的 BI 工具（数据 Agent）、入门级设计工具（AI 设计助手）。</div>
+</div>
 
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="st">🎯 Google I/O 2026 完整发布清单</div><hr class="sr">
-    <div class="io-grid">
-
-      <div class="io-card">
-        <span class="io-card-tag" style="background:rgba(91,143,232,.1);color:var(--blue)">AI OS Layer</span>
-        <div class="io-card-icon">🤖</div>
-        <div class="io-card-name">Gemini Intelligence</div>
-        <div class="io-card-desc">跨 App 感知 + 自主执行多步任务的 Android OS 层 AI。Smart Autofill、Rambler（语音重构）、Create My Widget。夏季在 Samsung Galaxy + Google Pixel 上线，之后扩展到手表/汽车/眼镜/笔记本。</div>
-      </div>
-
-      <div class="io-card">
-        <span class="io-card-tag" style="background:rgba(82,196,122,.1);color:var(--green)">硬件</span>
-        <div class="io-card-icon">👓</div>
-        <div class="io-card-name">Android XR 智能眼镜</div>
-        <div class="io-card-desc">搭载 Gemini 2.5 Pro，支持实时翻译、导航、上下文信息叠加。与 Samsung Galaxy Glasses 同步上市。Google 的「有用 AR 眼镜」第一次真正有大模型支撑。</div>
-      </div>
-
-      <div class="io-card">
-        <span class="io-card-tag" style="background:rgba(201,168,76,.1);color:var(--gold)">平台</span>
-        <div class="io-card-icon">💻</div>
-        <div class="io-card-name">Googlebooks（Chromebook 终结）</div>
-        <div class="io-card-desc">Chromebook 品牌停用。Googlebooks = 全 Android 笔记本，搭载 Aluminum OS（Android PC 版），Gemini Intelligence 深度集成，比 Chromebook 更强大，比 Windows 更 AI-first。</div>
-      </div>
-
-      <div class="io-card">
-        <span class="io-card-tag" style="background:rgba(155,127,232,.1);color:var(--purple)">开发者</span>
-        <div class="io-card-icon">🔬</div>
-        <div class="io-card-name">Gemini 2.5 Pro 更新</div>
-        <div class="io-card-desc">更新的推理能力，专门为 Android XR 眼镜优化的实时推理路径。AI Studio 同步更新，支持更复杂的多模态 Agent 构建。开发者可提前通过 Gemini API 测试。</div>
-      </div>
-
-      <div class="io-card">
-        <span class="io-card-tag" style="background:rgba(224,82,82,.1);color:var(--red)">内容平台</span>
-        <div class="io-card-icon">📚</div>
-        <div class="io-card-name">Google NotebookLM 升级</div>
-        <div class="io-card-desc">NotebookLM 深度升级，AI 研究助手能力大幅提升。支持更长的文档处理、更精准的引用溯源、更强的多文档综合分析。面向学术和企业研究场景。</div>
-      </div>
-
-      <div class="io-card">
-        <span class="io-card-tag" style="background:rgba(224,140,82,.1);color:var(--orange)">汽车</span>
-        <div class="io-card-icon">🚗</div>
-        <div class="io-card-name">Android Auto 重大升级</div>
-        <div class="io-card-desc">Material 3 Expressive 设计，Widget 支持，视频 App 支持，Dolby Atmos 集成。Gemini 深度整合进 Android Auto，支持车载语音 Agent 任务。</div>
-      </div>
-
-    </div>
-
-    <div class="li">
-      <div class="lih">
-        <div><div class="lin"><a href="https://thenextweb.com/news/google-io-2026-gemini-intelligence-android-xr-glasses" target="_blank">Gemini Intelligence 完整技术细节（TNW 报道）</a></div><div class="lim">TNW · 2026-05-18 预告 + I/O 当天发布</div></div>
-        <span class="litag ti">核心发布</span>
-      </div>
-      <div class="lid">TNW 原文（半翻译）：「The centrepiece of Google's pre-I/O announcements is Gemini Intelligence, a suite of agentic AI features that move Gemini from a chatbot interface into the operating system itself. Rather than waiting for users to open a separate app, Gemini Intelligence is designed to operate across apps, understand screen context, and complete multi-step tasks autonomously.」</div>
-      <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起↑':'展开详细版↓'">展开详细版↓</button>
-      <div class="det">
-        <h5>演示案例（TNW 原文）</h5>
-        <blockquote>「Google's demonstrations showed the system finding a class syllabus in Gmail, identifying the required textbooks, and adding them to a shopping cart, all without the user switching between applications.」</blockquote>
-        <p>翻译：「Google 的演示显示该系统在 Gmail 中找到课程大纲，识别所需教材，并将其添加到购物车，全程不需要用户在应用之间切换。」</p>
-        <h5>三个核心功能详解</h5>
-        <p><strong>Smart Autofill</strong>：不只是键盘自动填充——Gemini 理解跨 App 的上下文（你的联系人、历史购买、日历约束），在填写任何表单时都能智能推断正确答案。</p>
-        <p><strong>Rambler</strong>：语音 → 文字 → 去除口头禅（「嗯」「这个」「那个」）→ 重新结构化为连贯、有逻辑的文字。这解决了语音输入最大的用户体验痛点：口语和书面语言之间的转换成本。</p>
-        <p><strong>Create My Widget</strong>：描述你想要的信息聚合（「一个显示今天天气、我的下一个会议、以及待读邮件数量的小组件」）→ Gemini 生成并部署。这是 Android 桌面个性化的 AI 原生版本。</p>
-        <h5>「Chromebook 的死亡」意味着什么</h5>
-        <p>TNW 的标题「death of the Chromebook」说的是：一个整个产品线（Chromebook）因为 AI 的到来而失去存在意义。Chromebook 的核心卖点是「轻量、便宜、For Google Workspace」——但 Gemini Intelligence + Googlebooks（全 Android 笔记本）把这三点都做到了更好，Chromebook 不再有存在的必要。</p>
-        <p>这是 Karpathy「有些 App 应该停止存在为 App」在硬件层面的验证。不只是软件会消失，整个产品类别（Chromebook）也可以因为 AI 范式转变而消失。</p>
-      </div>
-      <a href="https://thenextweb.com/news/google-io-2026-gemini-intelligence-android-xr-glasses" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ TNW 完整报道</a>
-    </div>
-
-  </div>
-
-  <div class="sec">
-    <div class="st">💬 本期 KOL 关注焦点</div><hr class="sr">
-    <div class="kgrid">
-
-      <div class="kc">
-        <div class="kh"><div class="kav">GI</div><div><div class="kn">Google I/O 2026</div><div class="kha">Sundar Pichai 主题演讲 · 今日开幕</div></div><div style="margin-left:auto;text-align:right"><div class="kl">实时</div><div class="kd">05-19</div></div></div>
-        <div class="kp">「Google I/O 2026 kicks off 19 May with a keynote at the Shoreline Amphitheatre. Pre-announcements include Gemini Intelligence, an agentic AI layer for Android; Googlebooks, premium Android laptops replacing Chromebooks; Android XR smart glasses with Gemini 2.5 Pro; and Android 17.」</div>
-        <div class="ka">本期简报发布当天就是 I/O 2026 开幕。TNW（05-18 预告）列出了主要发布，但实际 keynote 可能还有更多发布没在预告中出现。最值得关注的未知数：① Google 是否会发布新的 Agent API 或 Harness 工具（对应 Anthropic Managed Agents）；② Gemini 2.5 Ultra（传闻中更强的版本）是否发布；③ Google 是否会有自己的「Codex 时刻」——面向开发者的 AI Coding 工具升级。<br><br>简报出发前更新：实时信息请关注 Lex Fridman X 账号（通常有详细实时记录）和 Google 官方 YouTube 直播。</div>
-        <a href="https://io.google/2026/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Google I/O 2026 官网 · 直播链接</a>
-      </div>
-
-      <div class="kc">
-        <div class="kh"><div class="kav">AP</div><div><div class="kn">Android Authority 分析</div><div class="kha">「5 things to expect at Google I/O 2026」</div></div><div style="margin-left:auto;text-align:right"><div class="kl">预测报告</div><div class="kd">05-18</div></div></div>
-        <div class="kp">「Some of the biggest reveals include Gemini Intelligence, Google's new agentic AI push for Android, a batch of Android Auto upgrades with Material 3 Expressive, widgets, video app support, and Dolby Atmos, and Googlebooks.」</div>
-        <div class="ka">Android Authority 的 I/O 预测报告是媒体共识中信息量最高的。关键洞察：Gemini Intelligence 是「Google's new agentic AI push for Android」——Google 终于把「Agent」这个词从企业 IT 词汇变成了消费者 Android 功能。这个叙事转变对整个行业有意义：Agent 不再是「企业软件特性」，而是「消费者日常使用的手机功能」。<br><br>这个转变将改变消费者对 AI Agent 的认知基准线——当 10 亿 Android 用户开始用 Gemini Intelligence 自动化日常任务，他们对「什么是 AI Agent 能做到的」的期待会快速提升。</div>
-        <a href="https://www.androidauthority.com/what-to-expect-from-google-io-2026-3664979/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Android Authority 预测报告</a>
-      </div>
-
-      <div class="kc">
-        <div class="kh"><div class="kav">RD</div><div><div class="kn">r/GoogleGemini 社区</div><div class="kha">Reddit · I/O 前夜讨论</div></div><div style="margin-left:auto;text-align:right"><div class="kl">社区</div><div class="kd">05-17</div></div></div>
-        <div class="kp">热评（多个账号）：「Gemini Intelligence is the make-or-break moment for Google. If the cross-app agent actually works, they win mobile. If it's another Bard/Duet situation, the narrative is dead for 2026.」</div>
-        <div class="ka">社区对 Google 的期望极高但信心不足——这本身就是一个有趣的信号。「Bard/Duet situation」指的是 Google 过去多次 AI 产品发布后令人失望的用户体验。但与过去不同的是：这次 Google 有 Gemini 2.5 Pro 作为底层（在大多数 benchmark 上排名第一），且有 Android OS 级别的集成权限——这是过去所有 Google AI 产品都没有的「OS 特权」。<br><br>真正的测试不是今天的 keynote，而是夏季设备实际更新后的真实用户体验。</div>
-        <a href="https://www.reddit.com/r/GoogleGemini/comments/1r7wftj/google_io_2026_officially_announced_for_may_1920/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Reddit 讨论</a>
-      </div>
-
-      <div class="kc">
-        <div class="kh"><div class="kav">AK</div><div><div class="kn">Andrej Karpathy（预言验证）</div><div class="kha">@karpathy · Sequoia AI Ascent 演讲</div></div><div style="margin-left:auto;text-align:right"><div class="kl">验证</div><div class="kd">04-30</div></div></div>
-        <div class="kp">「Some apps should stop existing as apps. The old software stack was scaffolding around a transformation the model can now perform directly.」（MenuGen 案例）</div>
-        <div class="ka">Karpathy 在 Sequoia AI Ascent 说的「有些 App 应该停止存在为 App」在 I/O 2026 的「Chromebook 终结」里得到了第一个硬件层面的验证。Chromebook 是一个「为 Google 服务优化的轻量电脑」——当 Gemini Intelligence + Android OS 足够强大，Chromebook 作为产品类别失去了存在理由。<br><br>这个逻辑在软件层面同样适用：当 Google Gemini Intelligence 可以跨 App 自主完成任务，很多「连接两个 App 的 SaaS 工具」（如 Zapier 的很多自动化场景）也将面临同样的命运。</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="st">💰 融资动态</div><hr class="sr">
-
-    <div class="fc">
-      <div class="fh">
-        <div><div class="fn"><a href="https://www.businesswire.com/news/home/20260312641003/en/" target="_blank">Genspark · AI Workspace + 「AI 员工」Claw</a></div><div class="fs">Palo Alto · Eric Jing CEO · 已达 $200M ARR</div></div>
-        <div style="text-align:right"><div class="fa">$385M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Series B 扩展</span><span class="ftg" style="background:rgba(201,168,76,.1);color:var(--gold)">★★</span></div></div>
-      </div>
-      <div class="fb">
-        <div><div class="fl">估值</div><div class="fv">$1.6B（Unicorn 确认）</div></div>
-        <div><div class="fl">参投</div><div class="fv">LG Technology Ventures · SBI Investment · 其他</div></div>
-        <div><div class="fl">新产品</div><div class="fv">Genspark Claw：「AI 员工」，跨界面执行多步骤任务，返回完整结果</div></div>
-        <div><div class="fl">ARR</div><div class="fv">$200M（2026 年 3 月达到，B2C + 企业双线）</div></div>
-        <div class="fw">Genspark 的轨迹有参考价值：B2C AI Agent（浏览器/图片/会议笔记）→ $200M ARR → 扩展到企业端「AI Workspace」→ 发布「AI 员工」（Genspark Claw）。Claw 的定位是「delegate outcomes to an AI employee that can execute multi-step work across real interfaces」——与 Codex Computer Use 和 steipete 在 5 月 13 日展示的场景完全相同，但面向普通用户，不需要写代码。这是 B2C AI Agent 平台的「产品成熟」信号。</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer">
-    Creekstone Intelligence Brief · 第 006 期 · 2026-05-17~19 · Google I/O 2026 专辑<br>
-    数据源：TNW · Android Authority · Android Central · PCMag · Reddit r/GoogleGemini · BusinessWire · io.google/2026
-  </div>
-  </div>
 </div>
 </div>
-<script>document.querySelectorAll('.exp').forEach(b=>{b.addEventListener('click',function(){const d=this.nextElementSibling;d.classList.toggle('open');this.textContent=d.classList.contains('open')?'收起↑':'展开详细版↓';});});</script>
+
+<!-- ② 重大产品发布 -->
+<div class="section" id="launches">
+<div class="sec-head"><div class="sec-title">🚀 重大产品发布</div><div class="sec-desc">Google I/O 2026 全发布清单 + X 高热 startup 新品</div></div>
+<hr class="sec-rule">
+
+<!-- Google I/O 发布网格 -->
+<div style="background:linear-gradient(135deg,rgba(91,143,232,.05),rgba(82,196,122,.03));border:1px solid rgba(91,143,232,.2);border-radius:12px;padding:18px;margin-bottom:20px">
+<div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:14px">🎯 Google I/O 2026 完整发布清单（今日开幕）</div>
+<div class="io-launches">
+
+<div class="io-lcard">
+  <span class="io-lcard-tag" style="background:rgba(91,143,232,.1);color:var(--blue)">AI OS Layer</span>
+  <div class="io-lcard-icon">🤖</div>
+  <div class="io-lcard-name"><a href="https://www.androidauthority.com/gemini-intelligence-3665302/" target="_blank">Gemini Intelligence</a></div>
+  <div class="io-lcard-desc">跨 App 感知 + 自主执行。Smart Autofill（跨 App 表单理解）、Rambler（语音转连贯文字）、Create My Widget（自然语言生成小组件）。夏季在 Samsung Galaxy + Pixel 上线，之后扩展到手表/汽车/眼镜/笔记本。演示亮点：不切换 App，自动找到 Gmail 课程大纲 → 识别教材 → 添加购物车。</div>
+</div>
+
+<div class="io-lcard">
+  <span class="io-lcard-tag" style="background:rgba(82,196,122,.1);color:var(--green)">模型</span>
+  <div class="io-lcard-icon">🧠</div>
+  <div class="io-lcard-name">Gemini 4（或重大 Gemini 3 升级）</div>
+  <div class="io-lcard-desc">预期今日发布（BigGo Finance 等预测）。YouTube 标题「GEMINI 4 + VEO 4: Google I/O 2026 Just Shocked Everyone」显示市场预期极高。如果 Gemini 4 在 SWE-Bench 上能与 Claude Opus 4.7（87.6%）竞争，将从根本上改变「最强 Coding AI」的市场格局。</div>
+</div>
+
+<div class="io-lcard">
+  <span class="io-lcard-tag" style="background:rgba(155,127,232,.1);color:var(--purple)">视频 AI</span>
+  <div class="io-lcard-icon">🎬</div>
+  <div class="io-lcard-name">Veo 4</div>
+  <div class="io-lcard-desc">Google 视频生成模型新版本。预期显著提升视频质量、时长、物理一致性。与 Sora 和 Runway 直接竞争。Google 在视频 AI 领域已有 Veo 1/2/3 的积累，Veo 4 可能是真正的商业化版本。</div>
+</div>
+
+<div class="io-lcard">
+  <span class="io-lcard-tag" style="background:rgba(91,143,232,.1);color:var(--blue)">Coding Agent</span>
+  <div class="io-lcard-icon">💻</div>
+  <div class="io-lcard-name"><a href="https://io.google/2026/explore/pa-keynote-2" target="_blank">Google Antigravity</a></div>
+  <div class="io-lcard-desc">「Agent-First IDE」——从 AI Studio 的快速原型到 Antigravity 的自主开发。处理架构规划、多文件特性编写、端对端浏览器测试。@OfficialLoganK：「The model is the product」。lumberjack.so 评测：三个自主 Agent 处理完整的功能实现，包括终端命令和浏览器测试。</div>
+</div>
+
+<div class="io-lcard">
+  <span class="io-lcard-tag" style="background:rgba(201,168,76,.1);color:var(--gold)">硬件</span>
+  <div class="io-lcard-icon">👓</div>
+  <div class="io-lcard-name">Android XR 智能眼镜</div>
+  <div class="io-lcard-desc">搭载 Gemini 2.5 Pro，支持实时翻译、导航、上下文信息叠加。与 Samsung Galaxy Glasses 同步发布。这是 Google 「有用 AR 眼镜」的第一次，背后有 Gemini 的推理能力支撑。Meta Ray-Ban 的 AI 增强版竞争者。</div>
+</div>
+
+<div class="io-lcard">
+  <span class="io-lcard-tag" style="background:rgba(224,82,82,.1);color:var(--red)">平台</span>
+  <div class="io-lcard-icon">📚</div>
+  <div class="io-lcard-name"><a href="https://www.androidauthority.com/googlebooks-launch-features-brands-availability-3664950/" target="_blank">Googlebooks（Chromebook 终结）</a></div>
+  <div class="io-lcard-desc">Chromebook 品牌停用。Googlebooks = 全 Android 笔记本，搭载 Aluminum OS（Android PC 版），Gemini Intelligence 深度集成。这是 Karpathy「有些 App 应该停止存在为 App」在硬件层面的第一个验证——整个产品类别（Chromebook）因 AI 范式转变而消亡。</div>
+</div>
+
+</div>
+</div>
+
+<div class="filters">
+  <button class="fbtn on" onclick="filterL(this,'all')">全部</button>
+  <button class="fbtn" onclick="filterL(this,'startup')">Startup 新品</button>
+  <button class="fbtn" onclick="filterL(this,'tool')">工具</button>
+  <button class="fbtn" onclick="filterL(this,'openai')">OpenAI 更新</button>
+</div>
+<div class="launch-list" id="launchList">
+
+<div class="lcard" data-cat="openai">
+<div class="lcard-head">
+  <div class="lcard-icon">🚀</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/sama/status/2056435834333934051" target="_blank">ChatGPT 重大更新 + Images 2.0 全球化</a></div>
+    <div class="lcard-who">OpenAI · @sama ♥13,252 + ♥10,159 · 2026-05-18（Google I/O 同日）</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">ChatGPT</span><span class="tag tag-infra">全球化</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">@sama（♥13,252）：「chatgpt has gotten soooo much better with the latest update. really proud of the team for this one.」暗示重大质变；同日（♥10,159）：「ChatGPT Images 2.0 💚 India. Already more than 1 billion images created there」——印度市场 10 亿张图片里程碑。这两条帖子在 Google I/O 开幕当天发出，时机选择精准。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <p>「chatgpt has gotten soooo much better」的具体内容 @sama 没有明说，但根据 OpenAI 的近期发布轨迹，可能包括：① 新版 GPT-5.5（或 5.5 Pro）的全面推送；② 更好的 reasoning 和 multi-step 能力；③ 更好的 personalization（他在 5 月 11 日提到「personality and personalization feels like a new thing」）。</p>
+    <p>印度的 10 亿张图片里程碑：ChatGPT Images 2.0 在印度市场的爆发式增长（印度 14 亿人口，快速增长的智能手机用户）。OpenAI 正在把印度作为下一个消费者 AI 的核心增长市场——这与 Anthropic × Gates Foundation 的印度教育 AI 计划形成了直接竞争。</p>
+    <p>时机的精心设计：Google I/O 2026 是 2026 年最大的 AI 媒体事件，@sama 选择在同一天发出两条大互动帖，是有意识地在「媒体焦点日」保持 OpenAI 的话题热度，不让 Google 独占媒体叙事。</p>
+  </div>
+  <a class="lcard-link" href="https://x.com/sama/status/2056435834333934051" target="_blank">→ X 原帖（ChatGPT 更新）</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">🎬</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/Creatify_AI/status/2056431644056441007" target="_blank">Creatify Agent · 世界首个广告创意多 Agent 编排系统 📹</a></div>
+    <div class="lcard-who">Creatify AI · @Creatify_AI ♥1,486 RT323 · 2026-05-19 · 📹</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">Video Agent</span><span class="tag tag-vid">📹</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「The world's first multi-agent orchestrator that makes viral ads without AI slop.」一个创意 brief → 多 Agent 协同完成视频 + 图片广告的完整创作。本期 X 上互动最高的 startup 产品发布（♥1,486，RT323）。<br><br>官网描述：「Creatify Agent is a closed-loop multi-agent system purpose-built for video and image advertising.」从脚本生成到视觉风格选择到 AI 生成到 A/B 测试变体，全流程自动化。核心卖点：「without AI slop」——声称解决了 AI 广告「看起来像 AI 做的」这个最大痛点。</div>
+  <a class="lcard-link" href="https://x.com/Creatify_AI/status/2056431644056441007" target="_blank">→ X 原帖（含视频）</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">🌍</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/odysseyml/status/2056427523668668643" target="_blank">Odyssey · Agora-1 多 Agent 世界模型 + GoldenEye 可玩预览 📹</a></div>
+    <div class="lcard-who">Odyssey ML · @odysseyml ♥914 + @olivercameron ♥187 · 2026-05-19 · 📹</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-model">World Model</span><span class="tag tag-vid">📹</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「Multiple participants—human or AI—can now interact inside the same world simulation, all in real-time.」可玩研究预览：多人 GoldenEye 死斗，人类和 AI 同时在同一个模拟世界里实时交互。这是「世界模型」从单人进化到多 Agent 共享世界的里程碑。LinkedIn 分析：「This is where the entire space is headed.」</div>
+  <a class="lcard-link" href="https://x.com/odysseyml/status/2056427523668668643" target="_blank">→ X 原帖（含视频）</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="tool">
+<div class="lcard-head">
+  <div class="lcard-icon">🤖</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/PrimeIntellect/status/2056569877167808966" target="_blank">Prime Intellect · General-Agent：全合成 RL 环境，自动化 AI 训练</a></div>
+    <div class="lcard-who">@PrimeIntellect ♥612 · 2026-05-19</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-model">RL 训练</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「The next step toward automating AI is automating RL environments. Introducing General-Agent: A fully synthetic...」全合成的 RL 环境，自动化 RL 训练中最耗时的部分（环境设计和奖励函数设计）。这是向「AI 自动训练 AI」方向的关键一步，对垂直 AI 公司的 post-training 有重要意义——未来不需要人工设计 RL 环境，General-Agent 自动生成。</div>
+  <a class="lcard-link" href="https://x.com/PrimeIntellect/status/2056569877167808966" target="_blank">→ X 原帖</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="tool">
+<div class="lcard-head">
+  <div class="lcard-icon">🔒</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/hasantoxr/status/2056649063391691170" target="_blank">开源 Claude Code Harness：强制完成真实工作才停止</a></div>
+    <div class="lcard-who">@hasantoxr · 2026-05-19 · 社区热议</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-infra">开源 Harness</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「I don't trust Claude Code without this anymore. A developer built a free open-source harness that forces Claude Code to actually complete real work before stopping.」通过结构化约束（verifiable success criteria）让 Claude Code 在停止前必须真正完成任务，解决了「声称完成但实际没有」的问题。这与 Chollet 的「盲松鼠需要约束」原则是同一个工程实现。</div>
+  <a class="lcard-link" href="https://x.com/hasantoxr/status/2056649063391691170" target="_blank">→ X 原帖</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="section" id="kols">
+<div class="sec-head"><div class="sec-title">💬 KOL 核心观点 + X 高热讨论</div><div class="sec-desc">Google I/O 当日：@sama 造势 vs Google I/O 现场，fchollet 两条精炼框架</div></div>
+<hr class="sec-rule">
+<div class="kol-grid">
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">SA</div>
+    <div class="kcard-info"><div class="kcard-name">Sam Altman</div><div class="kcard-handle">@sama · OpenAI CEO</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 13,252</div><div class="kcard-date">05-18</div></div>
+  </div>
+  <div class="kcard-post">「chatgpt has gotten soooo much better with the latest update. really proud of the team for this one.」</div>
+  <div class="kcard-analysis">本期最高互动帖。@sama 选择在 Google I/O 2026 开幕前夕（05-18）发出这条「ChatGPT 重大质变」宣言——时机不是巧合。他在用模糊但引人好奇的帖子（没有说具体是什么更新）吸引媒体和用户的注意力，在 Google I/O 媒体焦点日保持 OpenAI 的话题热度。同日另一条（♥10,159）：「ChatGPT Images 2.0 💚 India. Already more than 1 billion images created.」——用实际里程碑数据（10 亿张）建立全球规模叙事。两条帖子合计 ♥23,411，是本期 KOL 帖子中互动最高的组合。</div>
+  <a class="kcard-link" href="https://x.com/sama/status/2056435834333934051" target="_blank">→ X 原帖（ChatGPT 更好）· <a href="https://x.com/sama/status/2056165722804654196" target="_blank" style="color:var(--blue)">印度 10 亿张</a></a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">LK</div>
+    <div class="kcard-info"><div class="kcard-name">Logan Kilpatrick</div><div class="kcard-handle">@OfficialLoganK · Google AI Studio 负责人</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 2,427</div><div class="kcard-date">05-18</div></div>
+  </div>
+  <div class="kcard-post">「Gemini」（配图，预示 Gemini 的重大新版本）</div>
+  <div class="kcard-analysis">Logan 在 I/O 前一天用一个词「Gemini」配图，制造悬念。他本期五条高分帖合计 ♥11,169，全都在为 I/O 2026 预热。最重要的两条：① ♥1,705「Why don't LLMs just tell you when you are asking a question/doing something that is out of distribution?」——这是对当前 LLM 的真实批评：模型知道自己的能力边界，但不主动告诉用户，导致用户在错误场景下使用 AI，产生失望。如果 Gemini Intelligence 或 Antigravity 解决了这个问题，将是重要的差异化；② ♥1,912「2026 is very much the year of agents and AI coding, lots to happen still!」——身处 Google，见过 OpenAI（前 OpenAI 员工），发出这个判断，背书意义极强。</div>
+  <a class="kcard-link" href="https://x.com/OfficialLoganK/status/2056528490011476100" target="_blank">→ X 原帖（Gemini 预示）</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">FC</div>
+    <div class="kcard-info"><div class="kcard-name">François Chollet</div><div class="kcard-handle">@fchollet · Keras 作者 · ARC Prize</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 1,340</div><div class="kcard-date">05-17</div></div>
+  </div>
+  <div class="kcard-post">「Decision making was the bottleneck all along. Productivity is the rate at which you make open-ended decisions, the rate at which you reduce future paths.」</div>
+  <div class="kcard-analysis">本期 fchollet 连发两条深度帖（跨 005 和 006 期）：① 「决策是生产力瓶颈」——AI 提高了代码速度 10x，但决策速度没有变，所以净生产力增长有限；② 「盲松鼠在迷宫」（♥1,262）——Agent 需要「constrained context」而不是「更多自由」。这两条帖子合在一起，是 2026 年对「如何正确设计 AI Agent 系统」最精炼的公开表达。Digg 引用了「盲松鼠」框架分析：「Probably the biggest challenge that most companies run into in their agent strategy is getting agents the right constrained context to work with for a task.」</div>
+  <a class="kcard-link" href="https://x.com/fchollet/status/2056164095913828503" target="_blank">→ 决策瓶颈 · <a href="https://x.com/fchollet/status/2056401102485266620" target="_blank" style="color:var(--blue)">盲松鼠框架</a></a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">EM</div>
+    <div class="kcard-info"><div class="kcard-name">Ethan Mollick</div><div class="kcard-handle">@emollick · 沃顿商学院教授</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 556</div><div class="kcard-date">05-17</div></div>
+  </div>
+  <div class="kcard-post">「I broke my own rule to never post about AI detection as it is fraught in many ways.」（发布了 AI 检测数据）</div>
+  <div class="kcard-analysis">Mollick 的「AI 检测」帖子打破了他自己的规则，说明他看到了值得分享的新数据。AI 检测（学生是否用 AI 写作业）是他研究的核心话题，他通常避免公开讨论，因为「fraught in many ways」（假阳性率高，歧视性高，检测工具不可靠）。另一条（♥543）：「One thing to watch for with Claude & GPT is that the models expose too much irrelevant history in their outputs」——这是对大模型「context 管理质量」的真实批评，与 a16z 的「数据 Agent 需要正确上下文」以及 Chollet 的「盲松鼠需要约束」形成了三角印证。</div>
+  <a class="kcard-link" href="https://x.com/emollick/status/2056481213536190811" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">GI</div>
+    <div class="kcard-info"><div class="kcard-name">Greg Isenberg</div><div class="kcard-handle">@gregisenberg · AI 创业者/社群建设者</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 617</div><div class="kcard-date">05-18</div></div>
+  </div>
+  <div class="kcard-post">（转发/分享 Agent 相关创业观察）</div>
+  <div class="kcard-analysis">本期 gregisenberg 互动较上期低（♥617 vs 上期 ♥3,189），说明 Google I/O 的大事件分散了 AI 创业话题的注意力。但他在本期仍在持续更新他的「Agent 机会列表」和「startup ideas」系列——这种持续输出本身就是有价值的，比任何单条帖子都更稳定地构建影响力。值得追踪：他在上期末发布了「36 个最大创业机会」，本期是否有具体的项目跟进。</div>
+  <a class="kcard-link" href="https://x.com/gregisenberg/status/2056369806232961276" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">GM</div>
+    <div class="kcard-info"><div class="kcard-name">Gary Marcus</div><div class="kcard-handle">@GaryMarcus · AI 批评者</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 485</div><div class="kcard-date">05-17</div></div>
+  </div>
+  <div class="kcard-post">「I love AI, it's pure LLMs I hate. Pure LLMs *are* basically just autocomplete. Recent progress (e.g. Claude Code) has been because of the [neurosymbolic] approach I've been advocating.」</div>
+  <div class="kcard-analysis">Marcus 再次澄清他的立场：不反对 AI，反对「纯 LLM」。在 Google I/O 宣布 Gemini 4 的背景下，他的这条帖子是一个预防性的「不要把 Gemini 4 的发布等同于 AGI 进展」的警告。他的「trillion dollar trainwreck」论题与 Google 巨额 AI capex（Q1 2026 Google 单季度 AI 支出约 $180 亿）直接相关。</div>
+  <a class="kcard-link" href="https://x.com/GaryMarcus/status/2056279793637736637" target="_blank">→ X 原帖</a>
+</div>
+
+<!-- 补充信号 -->
+<div class="kcard" style="grid-column:1/-1;background:var(--s2);border:1px solid var(--bd2)">
+  <div style="font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">本期补充信号 · Google I/O 社区反应 + 中国 AI 对标 + 开发者讨论</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:6px">🎯 Google I/O 社区反应</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">Reddit r/GoogleGemini + r/android 前夜讨论焦点：「Gemini Spark is the make-or-break moment for Google」——社区期望极高但信心不足（过去 Bard/Duet 的多次失望记录）。@haider1（有开发者圈背景）：提前确认「新 UI + Gemini 3.1 Flash Lite + 其他更新」已有预装证据。@EdenKollcinaku：「Google I/O starts today. here's what to expect: Gemini 3.5 Pro/Flash models, Gemini Spark (24/7 agent), Googlebook, Android 17, Veo 3.5/4.0, Gemini Diffusion...」——这份预测清单几乎来自具体的泄露信息。<br><br>→ <a href="https://www.reddit.com/r/GoogleGemini/" target="_blank" style="color:var(--blue)">r/GoogleGemini 社区</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:6px">🇨🇳 中国 AI 对标信号</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">本期中国 AI 动态：Kimi K2.6 在 Product Hunt 4 月榜单登顶（「Open-source SOTA for long-horizon coding and agent swarms」），开源且在 OpenRouter 可用。Z.ai GLM-5.1 登顶 SWE-Bench Pro（58.4 分，100% Huawei Ascend）继续是北美 AI 社区热议的对标信号。<br><br>Nathan Lambert（Lex Fridman #490）的判断在本期 Google I/O 背景下更加清晰：「如果 Gemini 4 在 SWE-Bench 上与 GLM-5.1 竞争，这将是中美 AI 竞争的一个新节点。」5 年内「两套完全不兼容的 AI 硬件栈」的预言正在逐步兑现。<br><br>→ <a href="https://lexfridman.com/ai-sota-2026-transcript/" target="_blank" style="color:var(--blue)">Lex #490 相关讨论</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:6px">💻 开发者社区：「Chromebook 终结」的反应</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">「Chromebook 终结」（Googlebooks 宣布）在开发者社区的反应出人意料地正面——大多数人认为这是「迟来的正确决定」。Chromebook 的核心用户（低收入家庭学生、学校采购）对「全 Android 笔记本」的接受度问题：主要担忧在于「Android 生产力工具的成熟度」——多窗口、文件管理、外接键盘支持是否真的和 ChromeOS 一样好。<br><br>HN 讨论（标题预期）：「Chromebook is dead, long live Googlebook」。这个话题将成为接下来 2-3 周的持续讨论焦点。<br><br>→ Karpathy 的「有些 App 应该停止存在」验证：这是第一个硬件层面的案例。</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="section" id="funding">
+<div class="sec-head"><div class="sec-title">💰 融资动态</div><div class="sec-desc">本期新增：Dust $40M + Genspark $385M 扩展 + May Top 22 US AI 融资补完</div></div>
+<hr class="sec-rule">
+<div class="fund-list">
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co"><a href="https://ca.finance.yahoo.com/news/dust-raises-40m-ai-multiplayer-133000633.html" target="_blank">Dust · 多人协作企业 AI 平台</a></div><div class="fcard-sub">巴黎 · 3,000+ 企业 · 51,000 MAU · 70% 周活 · 2025 年零流失</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$40M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Series B</span><span class="sigtag">★★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">领投</div><div class="ffield-v">Abstract + Sequoia</div></div>
+    <div class="ffield"><div class="ffield-l">参投</div><div class="ffield-v">Snowflake · Datadog</div></div>
+    <div class="ffield"><div class="ffield-l">定位</div><div class="ffield-v">「Multiplayer AI」——人 + Agent 共享上下文、工具和目标协作</div></div>
+    <div class="ffield"><div class="ffield-l">日期</div><div class="ffield-v">2026-05-18</div></div>
+    <div class="fcard-why">70% 周活率 + 零流失（2025 全年）是目前企业 AI SaaS 里最好的留存指标之一。Dust 解决了「当一个团队里有多人 + 多 Agent 用 AI 时，上下文如何共享」的核心问题——这是从「个人 AI 工具」到「团队 AI 基础设施」的关键跨越。Sequoia 参投是信号：他们认为 Dust 代表的「多人协作 AI」是比「单人 AI 助手」大一个数量级的市场机会。</div>
+  </div>
+</div>
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co"><a href="https://www.businesswire.com/news/home/20260312641003/en/" target="_blank">Genspark · AI Workspace + Genspark Claw「AI 员工」</a></div><div class="fcard-sub">Palo Alto · Eric Jing CEO · $200M ARR（2026 年 3 月）</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$385M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Series B 扩展</span><span class="sigtag">★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">估值</div><div class="ffield-v">$1.6B（Unicorn）</div></div>
+    <div class="ffield"><div class="ffield-l">参投</div><div class="ffield-v">LG Technology Ventures · SBI Investment</div></div>
+    <div class="ffield"><div class="ffield-l">新产品</div><div class="ffield-v">Genspark Claw：「AI 员工」，跨软件界面执行多步骤任务，返回完整结果</div></div>
+    <div class="fcard-why">Genspark 的轨迹：B2C AI Agent（AI 浏览器/图片/会议笔记）→ $200M ARR → 扩展到企业端 AI Workspace → 发布「AI 员工」（Genspark Claw）。这条路线是目前最完整的「B2C AI Agent → 企业 B2B」路径之一。Genspark Claw 的定位（跨界面执行多步骤任务）与 Codex Computer Use 和 steipete 展示的场景完全相同，但面向不需要写代码的普通用户——这是「Computer Use 的 B2C 商业化」。</div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑤ 技术前沿 -->
+<div class="section" id="tech">
+<div class="sec-head"><div class="sec-title">🔬 技术与学术前沿</div><div class="sec-desc">Google I/O 技术层 + Agora-1 世界模型 + GitHub Trending</div></div>
+<hr class="sec-rule">
+<div class="tech-list">
+
+<div class="tcard2">
+  <div class="tcard2-head"><span class="tcat">Google I/O 技术</span><div class="tcard2-title">Google Gemini Intelligence 的「Smart Autofill」技术机制：为什么这次不一样（Chomsky 批评 + LeCun 的 AI 批评的具体回应）</div></div>
+  <div class="tcard2-short">Google Gemini Intelligence 的核心技术创新不在于「某个新模型」，而在于「OS 层的上下文共享机制」——Gemini 可以读取 Gmail、日历、联系人、购物历史等所有 Google 服务的数据，并在执行任何 App 内的任务时调用这些数据。这与 Anthropic Managed Agents 的「跨会话记忆学习（Dreaming）」是两个不同的记忆机制：Dreaming 是「单 Agent 跨时间的记忆积累」，Gemini Intelligence 是「跨服务的实时数据整合」。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开技术分析 ↓</button>
+  <div class="tcard2-detail">
+    <h4>TNW 关键技术描述</h4>
+    <blockquote>「Gemini Intelligence is designed to operate across apps, understand screen context, and complete multi-step tasks autonomously. Google's demonstrations showed the system finding a class syllabus in Gmail, identifying the required textbooks, and adding them to a shopping cart, all without the user switching between applications.」</blockquote>
+    <h4>为什么「Smart Autofill」是 Gemini Intelligence 最重要的功能</h4>
+    <p>表面上 Smart Autofill 只是「更好的自动填充」，但底层逻辑是：Gemini 可以理解「这个表单要问的是什么，用户的答案应该是什么」，而不只是「这个字段叫什么名字，之前填过什么」。例如：一个保险理赔表单问「事故发生地点」，传统自动填充只能查历史记录；Gemini Smart Autofill 可以查你的 Google Maps 历史、日历记录、相关邮件，推断出正确答案。</p>
+    <h4>三大 AI 公司「记忆机制」的对比</h4>
+    <table style="width:100%;border-collapse:collapse;font-size:11px;margin:8px 0">
+      <tr style="background:rgba(255,255,255,.05)">
+        <td style="padding:5px 8px;border:1px solid var(--bd2);font-weight:600">机制</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2);font-weight:600">OpenAI</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2);font-weight:600">Anthropic</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2);font-weight:600">Google</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">记忆层</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">ChatGPT Memory（用户显式设置）</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">Dreaming（跨会话自动学习）</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">跨服务实时数据整合（OS 层）</td>
+      </tr>
+      <tr style="background:rgba(255,255,255,.05)">
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">数据来源</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">用户手动告知</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">Agent 会话历史</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">Gmail/Calendar/Maps/Shopping 等</td>
+      </tr>
+      <tr>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">护城河</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">品牌 + 用户习惯</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">工作流集成深度</td>
+        <td style="padding:5px 8px;border:1px solid var(--bd2)">Google 服务生态数据</td>
+      </tr>
+    </table>
+    <p>Google 的记忆机制最难被复制：它依赖于「用户在 Google 生态里积累的所有数据」——这是 Anthropic 和 OpenAI 都没有的数据资产。</p>
+  </div>
+  <div class="tcard2-impl">Google Gemini Intelligence 的技术壁垒不在模型，而在「Google 服务生态数据的整合权限」。这是一种「数据护城河」，和 Anthropic 的「工作流集成护城河」是完全不同的竞争维度。</div>
+  <a class="tcard2-link" href="https://thenextweb.com/news/google-io-2026-gemini-intelligence-android-xr-glasses" target="_blank">→ TNW Google I/O 完整报道</a>
+</div>
+
+<div class="tcard2">
+  <div class="tcard2-head"><span class="tcat">世界模型</span><div class="tcard2-title">Agora-1（Odyssey ML）：多 Agent 世界模型，首个支持人类 + AI 实时共享同一世界的模拟系统</div></div>
+  <div class="tcard2-short">Odyssey ML（@odysseyml，@olivercameron）发布 Agora-1：多个参与者（人类或 AI）可以在同一个世界模拟里实时互动。研究预览：多人 GoldenEye 死斗场景。这是「世界模型」从「单人 → 单 AI 生成内容」到「多人 + 多 AI 共享的模拟现实」的范式跨越。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开技术意义 ↓</button>
+  <div class="tcard2-detail">
+    <h4>为什么「多 Agent 世界模型」是新的里程碑</h4>
+    <p>到目前为止的世界模型（Sora、Veo、Runway）：一个用户 → 一个模型生成内容（单向的）。Agora-1 的突破：多个参与者（可以是人也可以是 AI）同时在同一个模拟世界里互动，所有人看到的是同一个物理上一致的世界，任何人的行动都影响其他所有人。</p>
+    <p>GoldenEye 多人死斗的选择：这个场景有三个特点让它成为理想的测试床——① 快速反馈（射击命中/未命中是即时可见的）；② 多人互动（需要追踪多个智能体的行动和意图）；③ 物理一致性要求高（子弹轨迹、角色碰撞、环境破坏需要物理上真实）。</p>
+    <h4>应用方向</h4>
+    <p>游戏：AI NPC 可以真正地与玩家在同一个世界里共存，而不只是跟着预定脚本走；机器人：机器人可以在共享的世界模型里协作训练，而不需要每个机器人都有自己的仿真环境；多 Agent 系统测试：在共享的世界模型里测试多个 AI Agent 的协作行为，比现有的隔离测试更接近真实部署。</p>
+  </div>
+  <div class="tcard2-impl">多 Agent 世界模型是游戏/机器人/AI 系统测试三个领域的共同需求。Agora-1 是目前最接近「共享现实仿真」的公开模型，将吸引这三个领域的研究者和创业者。</div>
+  <a class="tcard2-link" href="https://x.com/odysseyml/status/2056427523668668643" target="_blank">→ Odyssey ML X 原帖（含视频）</a>
+</div>
+
+<div class="tcard2">
+  <div class="tcard2-head"><span class="tcat">GitHub Trending</span><div class="tcard2-title">本周 GitHub AI 新热项目：NousResearch/hermes-agent + multica-ai/ai-agents（CLAUDE.md 最佳实践）快速涨星</div></div>
+  <div class="tcard2-short">本期新入 GitHub rising list 的 AI Agent 相关项目：① <strong>NousResearch/hermes-agent</strong>（「The agent that grows with you」）——有了 /goal 功能后加速涨星；② <strong>multica-ai/ai-agents</strong>（「A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations」）——Karpathy 观察衍生的 CLAUDE.md 最佳实践集，2-3 个月内快速增长。还有：nexu-io（Anthropic Claude Design 的开源替代品）、farion1231（各种 Claude harness 实验）。<br><br>→ <a href="https://yanggggjie.github.io/rising-repo/" target="_blank" style="color:var(--blue)">Rising GitHub repos 实时排名</a></div>
+  <div class="tcard2-impl">「Karpathy 观察 → GitHub 项目」的转化说明：当一个顶级研究者分享最佳实践（AGENTS.md、LLM Knowledge Base），社区会在几周内把这些实践工程化。这是「思想领袖 → 开源生态」的最快转化路径之一。</div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑥ 深度阅读 -->
+<div class="section" id="reads">
+<div class="sec-head"><div class="sec-title">📚 深度阅读</div><div class="sec-desc">TNW Google I/O 完整报道 + Stratechery Agents Over Bubbles（本期最相关）+ Latent Space Applied Intuition</div></div>
+<hr class="sec-rule">
+<div class="read-list">
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src media">媒体深度报道</div>
+      <div class="rcard-title"><a href="https://thenextweb.com/news/google-io-2026-gemini-intelligence-android-xr-glasses" target="_blank">Google I/O 2026: everything announced so far, from Gemini Intelligence to the death of the Chromebook — TNW</a></div>
+    </div>
+    <div class="rcard-date">TNW · 2026-05-18 · 更新中</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rcard-short">TNW 的 Google I/O 2026 综合报道，提前披露了主要发布内容。标题「from Gemini Intelligence to the death of the Chromebook」精准概括了这次 I/O 的核心叙事：一个新产品的诞生（Gemini Intelligence），一个产品类别的终结（Chromebook）。</div>
+    <div class="rcard-pts">
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>核心定位</strong>：「The centrepiece of Google's pre-I/O announcements is Gemini Intelligence, a suite of agentic AI features that move Gemini from a chatbot interface into the operating system itself.」</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>演示案例</strong>：「Google's demonstrations showed the system finding a class syllabus in Gmail, identifying the required textbooks, and adding them to a shopping cart, all without the user switching between applications.」</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>Chromebook 终结</strong>：「The headline items, Gemini Intelligence, Googlebooks, Android XR glasses, and Android 17, collectively represent the most aggressive integration of AI into Google's consumer products since the company pivoted to an AI-first strategy in 2023.」</span></div>
+    </div>
+    <button class="expand" onclick="toggleDetail(this)">展开完整报道内容 ↓</button>
+    <div class="rcard-detail">
+      <h4>TNW 原文：为什么 Chromebook 要消亡（完整段落）</h4>
+      <blockquote>「Google I/O 2026 begins on Monday at the Shoreline Amphitheatre in Mountain View, California, and the company has already shown much of its hand. The two-day developer conference, which runs 19–20 May with a keynote at 10 a.m. PT, is expected to formalise a set of announcements that Google began rolling out a week early through a pre-recorded Android Show on 12 May. The headline items, Gemini Intelligence, Googlebooks, Android XR glasses, and Android 17, collectively represent the most aggressive integration of AI into Google's consumer products since the company pivoted to an AI-first strategy in 2023.」</blockquote>
+      <h4>三个核心功能的技术细节</h4>
+      <p><strong>Smart Autofill</strong>：「uses Gemini's contextual understanding to populate form fields across apps and Chrome」——不只是历史记录，而是真正的上下文理解，知道「这个字段的意图是什么，用户的正确答案应该是什么」。</p>
+      <p><strong>Rambler</strong>：「a speech-to-text tool that removes filler words and restructures dictated text into coherent sentences」——解决了语音输入最大的用户体验痛点：把口语（充满「嗯」「那个」「就是说」）变成书面语。这比简单的 STT 更有价值。</p>
+      <p><strong>Create My Widget</strong>：「lets users describe a custom widget in natural language and have Gemini generate it on the spot, pulling data from Gmail, Calendar, web searches, and other Google services」——这是「vibe coding at the OS level」，用户用自然语言描述想要的信息聚合方式，Gemini 生成并部署。</p>
+      <h4>「Chromebook 的死亡」意味着什么</h4>
+      <p>TNW 的标题选择「death of the Chromebook」而非「introducing Googlebooks」是有深意的。Chromebook 不只是一个产品，它代表了 Google 的一整个操作系统战略（ChromeOS）。当 Google 放弃 Chromebook 品牌，转向「Googlebooks = Android 笔记本 + Aluminum OS」，实际上是在说：「我们不需要一个独立的'Google OS'了，Android 加上 Gemini Intelligence 就已经是最好的 Google OS。」这与 iOS/macOS 的策略（保持两套 OS 分立）完全不同，是 Google 押注「统一操作层」的最大赌注。</p>
+    </div>
+    <a class="rcard-link" href="https://thenextweb.com/news/google-io-2026-gemini-intelligence-android-xr-glasses" target="_blank">→ TNW 完整报道（持续更新）</a>
+  </div>
+</div>
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src inst">战略分析 · Stratechery</div>
+      <div class="rcard-title"><a href="https://stratechery.com/2026/agents-over-bubbles/" target="_blank">Agents Over Bubbles — Ben Thompson（在 Google I/O 背景下重读）</a></div>
+    </div>
+    <div class="rcard-date">Stratechery · 2026-03 · 今日 Google I/O 背景下最重要的参考框架</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rcard-short">Ben Thompson 的「Agents Over Bubbles」在 Google I/O 2026 开幕这天变得特别有参考价值。他的核心框架（Agent 时代的 CPU + 工具整合 bottleneck，harness = 产品，Google 有好模型但没有 compelling harness）需要用 Gemini Intelligence 来更新：Google 今天发布的产品，是对「Google 没有好 harness」这个判断的直接挑战。</div>
+    <div class="rcard-pts">
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>Thompson 原话：「Gemini is a strong model, but Google hasn't yet shipped a compelling harness」——这句话今天是否还成立？取决于 Gemini Intelligence 的实际体验</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>Thompson 的「三范式」框架更新：ChatGPT 范式 → Reasoning 范式 → Agent 范式（CPU + 工具整合 bottleneck）。Gemini Intelligence 是 Agent 范式里「OS 层整合」的具体产品化</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>如果 Google I/O 的实际产品体验良好，Thompson 的「Google 没有好 harness」判断需要修正——这将影响他对 Anthropic 和 OpenAI 「比预期更快盈利」预测的更新</span></div>
+    </div>
+    <button class="expand" onclick="toggleDetail(this)">展开框架更新分析 ↓</button>
+    <div class="rcard-detail">
+      <h4>Thompson 的「三范式」在今天的更新</h4>
+      <p>Thompson 在「Agents Over Bubbles」里描述了三个 LLM 范式的瓶颈转变：ChatGPT 时代（模型能力 bottleneck）→ Reasoning 时代（GPU 算力 bottleneck）→ Agent 时代（CPU + 工具整合 bottleneck）。</p>
+      <p>Gemini Intelligence 代表了「Google 对 Agent 时代 CPU + 工具整合 bottleneck 的系统性回应」——它把 Gemini 的推理能力（CPU 层面）整合进了 Google 的服务生态（工具层面），形成了一个系统性的 harness。如果这个 harness 真的有效，Thompson 需要更新他对「Google 在 Agent 时代处于劣势」的判断。</p>
+      <h4>Stratechery 需要更新的部分</h4>
+      <blockquote>（Thompson 原话）「Gemini is a strong model, but Google hasn't yet shipped a compelling harness — that is Google's most glaring strategic weakness.」</blockquote>
+      <p>这句话是在 2026 年 3 月写的。今天（05-19）Google I/O 2026 发布了 Gemini Intelligence + Antigravity，如果实际体验达到承诺，Thompson 的「最大战略弱点」判断可能需要修正。这是「分析框架被产品事实更新」的典型案例，说明投资分析需要持续更新，不能停留在几个月前的判断上。</p>
+    </div>
+    <a class="rcard-link" href="https://stratechery.com/2026/agents-over-bubbles/" target="_blank">→ Stratechery 原文（需订阅）</a>
+  </div>
+</div>
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src inst">机构文章 · Google I/O</div>
+      <div class="rcard-title"><a href="https://io.google/2026/explore/pa-keynote-2" target="_blank">Build next-gen AI experiences with Google AI Studio and Google Antigravity — I/O 官方议程</a></div>
+    </div>
+    <div class="rcard-date">Google I/O 2026 · 2026-05-19 · 今日 4:30-5:15 PM PT</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rcard-short">Google I/O 2026 官方议程描述：「Scaling vibe-coded prototypes into production requires a new class of tools. Explore the transition from rapid exploration in Google AI Studio to autonomous development using Google Antigravity, Google's agent-first IDE. Learn to speed-run ideas in AI Studio, export code, and deploy agents to handle heavy lifting like planning architecture, writing multi-file features, and performing end-to-end browser testing.」</div>
+    <div class="rcard-pts">
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>定位：AI Studio（快速原型/vibe coding）→ Antigravity（自主开发），是一条完整的「idea to production」路径</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>三个核心能力：① 架构规划；② 多文件特性编写；③ 端对端浏览器测试。这三个能力覆盖了「从设计到实现到验证」的完整软件开发生命周期</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>@OfficialLoganK：「The model is the product」——Antigravity 的差异化是底层 Gemini 模型的代码理解能力，不是 IDE 功能本身</span></div>
+    </div>
+    <a class="rcard-link" href="https://io.google/2026/explore/pa-keynote-2" target="_blank">→ Google I/O 官方议程 · Antigravity 专场</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 006 期 · 2026-05-17~19 · 周三刊 · Google I/O 2026 专辑<br>
+  数据源：X OAuth1（18 KOL）· TNW · Android Authority · io.google/2026 · Stratechery · tech.eu · BusinessWire · Reddit r/GoogleGemini
+</div>
+</div>
+</div>
+</div>
+<script>
+function doSearch(q){const query=q.trim().toLowerCase();document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!query||c.textContent.toLowerCase().includes(query))?'':' none';});}
+function filterL(btn,cat){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('#launchList .lcard').forEach(c=>{const cats=(c.dataset.cat||'');c.style.display=(cat==='all'||cats.includes(cat))?'':'none';});}
+function toggleDetail(btn){const det=btn.nextElementSibling;const isOpen=det.classList.contains('open');det.classList.toggle('open',!isOpen);btn.textContent=isOpen?'展开详细版 ↓':'收起 ↑';}
+</script>
 </body></html>

@@ -4,174 +4,659 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Creekstone Intelligence · 第005期 · 2026-05-15~17</title>
 <style>
-:root{--bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;--bd:#242424;--bd2:#2e2e2e;--t1:#ebebeb;--t2:#aaa;--t3:#666;--t4:#444;--gold:#C9A84C;--gold2:#9B7A2F;--gold3:rgba(201,168,76,.1);--red:#E05252;--green:#52C47A;--blue:#5B8FE8;--purple:#9B7FE8;--orange:#E08C52;}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
-.layout{display:flex;min-height:100vh}.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}.main{margin-left:220px;flex:1;min-width:0}
-.sb-logo{padding:16px 16px 12px;border-bottom:1px solid var(--bd)}.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}.sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
-.sb-nav{padding:6px 0}.sb-section{padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
-.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;text-decoration:none}.sb-item:hover{color:var(--t1);background:var(--s2)}.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08)}
-.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
-.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-title{font-size:16px;font-weight:700}.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
-.content{padding:24px 28px;max-width:980px}
-.sec{margin-bottom:36px}.st{font-size:17px;font-weight:700;margin-bottom:14px}.sr{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:15px;position:relative}.tc.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--s1))}
-.tbg{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:7px}
-.bh{background:rgba(224,82,82,.12);color:var(--red)}.bt{background:rgba(201,168,76,.12);color:var(--gold)}.bm{background:rgba(82,132,224,.12);color:var(--blue)}
-.tct{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.tcb{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:8px}
-.tci{font-size:11.5px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}.tci::before{content:"→ ";font-weight:700}
-.stars{position:absolute;top:12px;right:12px;font-size:10px;color:var(--gold)}
-.li{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
-.lih{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}.lin{font-size:13.5px;font-weight:700;flex:1}.lim{font-size:11px;color:var(--t3);margin-top:1px}
-.litag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;flex-shrink:0}
-.ta{background:rgba(82,196,122,.1);color:var(--green)}.ts{background:rgba(224,82,82,.1);color:#e07575}.tm{background:rgba(155,127,232,.1);color:var(--purple)}.ti{background:rgba(91,143,232,.1);color:var(--blue)}
-.lid{font-size:12px;color:var(--t2);line-height:1.6}
-.exp{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10px;padding:3px 9px;border-radius:4px;cursor:pointer;margin:6px 0}.exp:hover{border-color:var(--gold);color:var(--gold)}
-.det{background:var(--s2);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.65;display:none;border-left:2px solid var(--bd2);margin-top:4px}.det.open{display:block}
-.det h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.det h5:first-child{margin-top:0}
-.det blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic;color:var(--t2)}
-.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:13px}
-.kh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.kav{width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
-.kn{font-size:12.5px;font-weight:600}.kha{font-size:11px;color:var(--t3)}.kl{font-size:12.5px;font-weight:700;color:var(--red);margin-left:auto}.kd{font-size:10px;color:var(--t4)}
-.kp{font-size:12px;color:var(--t1);background:var(--s2);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
-.ka{font-size:11.5px;color:var(--t2);line-height:1.6}
-.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
-@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.tgrid,.kgrid{grid-template-columns:1fr}}
-</style>
-</head>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style></head>
 <body>
 <div class="layout">
 <nav class="sidebar">
   <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 5月刊</div></a></div>
-  <div class="sb-nav">
+  <div style="padding:6px 0">
     <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
-    <hr class="sb-divider">
-    <div class="sb-section">本月期刊</div>
-    <a class="sb-item" href="brief_006.html"><span class="sb-dot" style="background:#E05252"></span>第006期 · 05-17~19</a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">本月期刊</div>
+    <a class="sb-item" href="brief_006.html"><span class="sb-dot" style="background:#E05252"></span>第006期 · 05-17~19 🔥</a>
     <a class="sb-item active" href="brief_005.html"><span class="sb-dot" style="background:#52C47A"></span>第005期 · 05-15~17</a>
     <a class="sb-item" href="brief_004.html"><span class="sb-dot" style="background:#5B8FE8"></span>第004期 · 05-13~15</a>
     <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#9B7FE8"></span>第003期 · 05-11~13</a>
-    <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期 · 05-08~10</a>
+    <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期</a>
+    <a class="sb-item" href="brief_001.html"><span class="sb-dot" style="background:#666"></span>第001期</a>
   </div>
 </nav>
 <div class="main">
-  <div class="topbar">
-    <div><div class="topbar-title">Creekstone Intelligence Brief</div><div class="topbar-sub">第 005 期 · 2026-05-15 ~ 05-17 · 周一刊</div></div>
-  </div>
-  <div class="content">
+<div class="topbar">
+  <div><div class="topbar-title">Creekstone Intelligence Brief</div><div class="topbar-sub">第 005 期 · 2026-05-15 ~ 05-17 · 周一刊 · X 22 KOL · Google I/O 前夜 · 融资 · 技术前沿</div></div>
+  <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)"></div>
+</div>
+<div class="content" id="mc">
 
-  <div class="sec">
-    <div class="st">🔥 投资热点趋势</div><hr class="sr">
-    <div class="tgrid">
+<div class="stats">
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">投资热点</div></div>
+  <div class="stat"><div class="stat-n">7</div><div class="stat-l">产品发布</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">KOL 观点</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">融资事件</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">深度阅读</div></div>
+  <div class="stat"><div class="stat-n">22</div><div class="stat-l">KOL 覆盖</div></div>
+</div>
 
-      <div class="tc hot">
-        <div class="stars">★★★</div>
-        <span class="tbg bh">本期核心</span>
-        <div class="tct">Google I/O 2026 前夜：Gemini Spark 曝光 + Android 全面 AI 化，「AI Operating Layer」战争打响，直接挑战 OpenAI SuperApp</div>
-        <div class="tcb">I/O 2026 定于 5 月 19-20 日（本看板发布当日）。但预热信号已经泄露：TestingCatalog 报道 Google 正在准备「Gemini Spark」，一个常驻 AI 助手框架，集成至 Gmail、日历、浏览器和操作系统层面。预计发布还包括：新版 Gemini Flash（更快更便宜的推理）、Android 17 深度 Gemini 集成、Android XR 眼镜、NotebookLM 升级。<br><br>Champaign Magazine 周报（由 GPT-4.5 / Claude / Gemini / Grok 联合撰写）分析：「下一个战场不是 chatbot 窗口——是 AI 操作层。」这与 OpenAI SuperApp 策略（ChatGPT + Codex + Atlas 浏览器）形成直接对抗。</div>
-        <div class="tci">Google I/O 2026 是 5 月最大的产品事件。Gemini Spark 如果真正实现「Always-on + OS-level integration」，将是 Google 在 AI 竞争中最具破坏性的一张牌——因为 Google 控制着 Android（全球 72% 移动市场）。这是 Anthropic 和 OpenAI 都没有的分发渠道。</div>
-      </div>
+<!-- ① 投资热点 -->
+<div class="section" id="trends">
+<div class="sec-head"><div class="sec-title">🔥 硅谷投资热点趋势</div><div class="sec-desc">本期最重要信号：Google I/O 前夜 + Anthropic 内部 AI 化数据 + Chollet 的生产力反叙事</div></div>
+<hr class="sec-rule">
+<div class="trend-grid">
 
-      <div class="tc hot">
-        <div class="stars">★★★</div>
-        <span class="tbg bt">企业信号</span>
-        <div class="tct">Anthropic 写了自己 75% 的代码 + 继续大规模招聘：AI 自动化软件工程从「demo」变成 Anthropic 自身运营现实</div>
-        <div class="tcb">本周多家媒体报道：Anthropic 内部已经有 75% 的代码由 AI 生成（主要是 Claude Code）。尽管如此，Anthropic 仍在大规模招聘工程师——这与 AI「消灭程序员工作」的叙事形成鲜明反差。<br><br>Ethan Mollick 的「ASI 路标测试」在这里有了完美的数据验证：Anthropic 用 Claude Code 写了大部分代码，但仍然需要大量人类来设计系统、做决策、管理 Agent 输出质量——「Forward Deployed Engineers」的工作只是变了，没有消失。</div>
-        <div class="tci">这是「AI 增强人类」而非「AI 替代人类」在顶级 AI 公司内部的真实写照。对 Creekstone：投资那些会被 AI 增强而非替代的工作场景，比投资「AI 完全取代 X」的叙事更稳健。</div>
-      </div>
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">本期核心</span>
+  <div class="tcard-title">Google I/O 2026 前夜：Gemini Intelligence + Gemini Spark + Google Antigravity，「AI 操作层」战争今天打响</div>
+  <div class="tcard-body">Google I/O 2026 定于 05-19（即下期的第一天），但本期（05-15~17）已经是最密集的泄露和预告期。三个关键信号：① TestingCatalog 确认 <strong>Gemini Spark</strong>——常驻 AI 助手框架，整合至 Gmail/日历/Chrome/Android OS；② Google I/O 官方程序列出 <strong>Google Antigravity</strong> 专场——「AI-first IDE」，把 AI Studio 的 vibe coding 推进到「autonomous development」；③ TNW（05-18）提前披露：Gemini Intelligence（跨 App 感知 + 自主执行）+ Googlebooks（终结 Chromebook）+ Android XR 智能眼镜（Gemini 2.5 Pro）。<br><br>@OfficialLoganK（Google AI Studio 负责人）发了两条高暗示帖：「Very excited for all the stuff the @antigravity team has been cooking」（♥3,690）和「The model is the product」（♥1,835）——他在暗示 Antigravity 的核心差异化不在 IDE 功能，而在模型本身。</div>
+  <div class="tcard-impl">Google I/O 2026 是本月最大的产品事件。如果 Gemini Intelligence 真正实现「OS 级 Agent 集成」，Google 拥有 Android（全球 72% 移动市场）+ Google Workspace（30 亿用户）的分发规模，是 Anthropic 和 OpenAI 都无法匹配的。「AI 操作层」的竞争已经超越了「谁的模型更聪明」的阶段。</div>
+</div>
 
-      <div class="tc">
-        <div class="stars">★★</div>
-        <span class="tbg bm">监管</span>
-        <div class="tct">美国 CAISI 预部署评估协议正式生效 + AI 辅助黑客升级为「工业规模威胁」：防御 vs 进攻同步 AI 化</div>
-        <div class="tcb">CAISI 协议（OpenAI/Anthropic/Google/Microsoft/xAI 全签）正式生效，意味着每个主要新模型发布前都需要政府安全审查。The Guardian 同期报道：AI 辅助黑客已从「研究性 demo」进化为「国家级威胁行为者的产业化武器」，Google 研究员确认过去 3 个月内有显著升级。<br><br>Al Jazeera 报道美国、英国、澳大利亚、新西兰等国家已共同发布 AI 辅助进攻性安全行动的防御指南。</div>
-        <div class="tci">「AI 安全军备竞赛」进入政策层面。每个新前沿模型发布前都需政府审查，这会减慢发布节奏，但也意味着企业 AI 安全采购将被「政府认证」背书驱动——利好 Trent AI 这类合规导向的 Agent 安全公司。</div>
-      </div>
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-trend">企业信号</span>
+  <div class="tcard-title">Chollet 的「生产力悖论」vs Anthropic「75% AI 代码 + 继续招人」：AI 提升了代码量但未必提升了价值</div>
+  <div class="tcard-body">本期出现了两个看似矛盾的企业信号：<br>① <strong>Anthropic 内部：75% 代码由 AI 生成，同时仍在大规模招聘工程师</strong>（多家媒体报道）<br>② <strong>@fchollet（♥1,778）</strong>：「The quantity of code that devs ship has roughly 10xed. But net developer productivity (value created by unit of time) is only up by a bit, if at all.」<br><br>两者合在一起描绘了一个真实图景：AI 让代码量爆炸（10x），但协调成本、维护成本、调试 AI 生成错误的时间也相应增加，吸收了大部分生产力提升。Anthropic 继续招聘是因为工程师的角色变了（架构设计 + Agent 编排 + 质量监控），而不是消失了。<br><br>@fchollet 第二条（♥1,262）：「A mental model for working with coding agents is that they're blind squirrels running into a maze and bumping into walls.」——agent 需要「constrained context」（约束上下文）而不是「more freedom」（更多自由）。</div>
+  <div class="tcard-impl">这两个信号对早期 AI 创业公司有直接含义：① 「AI 直接替代工程师」的叙事被实际数据否定——工程师数量在增加；② 真正的机会在「提供更好的约束和上下文」而非「更强的模型自由度」——Agent Harness 工具比「更强的 base model」更容易产生实际价值。</div>
+</div>
 
-      <div class="tc">
-        <div class="stars">★★</div>
-        <span class="tbg bt">数据信号</span>
-        <div class="tct">企业 AI 采用率跨过 50% 里程碑（Ramp AI Index）：AI 从早期采用者工具变成「默认基础设施」的临界点</div>
-        <div class="tcb">Ramp AI Index 5 月报的第二个重要数字：整体企业 AI 采用率在 2026 年 4 月跨过 50%——意味着超过一半的美国企业已在付费使用 AI 工具（这不包括免费工具）。<br><br>对比：2024 年底约 35%，2025 年底约 43%，2026 年 4 月 50.6%。增速在加快而非减慢，说明我们仍处于扩散曲线的早期到中期阶段，而非饱和阶段。</div>
-        <div class="tci">企业 AI 采用率 > 50% 意味着「AI 工具」正在从「竞争优势」变成「经营必需品」。这个转变将大幅加速企业采购决策速度——不再是「要不要用 AI」，而是「用哪个 AI、怎么整合」。</div>
-      </div>
+<div class="tcard">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge" style="background:rgba(82,132,224,.12);color:var(--blue)">产品信号</span>
+  <div class="tcard-title">@OfficialLoganK「The model is the product」：Google AI Studio 负责人暗示 Antigravity 的护城河在模型本身</div>
+  <div class="tcard-body">Logan Kilpatrick（Google AI Studio 负责人，前 OpenAI）本期发了 5 条高互动帖，合计 ♥11,165。最重要的两条：① ♥1,835「The model is the product」——字面意思：Google Antigravity 的差异化不在 IDE 功能，而在底层 Gemini 模型；② ♥1,605「Since moving back to the Bay Area, I have tried to only Waymo. 36 trips in, it really does feel like living in the future.」——Waymo 的产品体验暗示，也说明他在观察「物理 AI」的用户体验。③ ♥1,912「2026 is very much the year of agents and AI coding, lots to happen still!」——前 OpenAI 的人在 Google 发出的这个判断，背书意义极强。</div>
+  <div class="tcard-impl">「The model is the product」这句话值得反复理解。它说的是：在 Coding Agent 竞争里，真正的护城河不是 IDE UI，不是 harness 功能，而是「底层模型对代码理解的深度」。这对垂直 Agent 创业公司的含义：在你的垂直领域有足够深度的训练数据，让你的模型理解这个领域「比 Gemini 更深」——这才是真正的护城河。</div>
+</div>
 
-    </div>
-  </div>
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">VC 信号</span>
+  <div class="tcard-title">Gary Marcus「trillion dollar trainwreck」警告 + LeCun「Tired of winning」：两个 AI 批评者同周发出异常强烈的反叙事信号</div>
+  <div class="tcard-body">本期两位著名 AI 批评者同时发出高互动反叙事：<br>① <strong>@GaryMarcus（♥1,152）</strong>：「What I am about to describe ain't AGI; it's a sign of a trillion dollar trainwreck.」背景：亚马逊/谷歌/微软/Meta Q1 2026 单季度就花了 $1,306 亿在 AI 上，超过曼哈顿计划 + 阿波罗计划总和。Marcus 认为 LLM 可靠性没有根本改善，大多数企业 ROI 仍然很低，这是「历史上最大的资本错配」。<br>② <strong>@ylecun（♥2,456）</strong>：「Tired of winning」（配图）——反讽意味极强，可能指开源模型持续在 benchmark 上追上闭源，但主流叙事仍然在强调闭源大厂的「胜利」。</div>
+  <div class="tcard-impl">反叙事信号不应该被简单忽视。Marcus 的具体数据（$1,306 亿/季度 AI capex）和企业 ROI 数据（Deloitte：只有 11% 的企业在生产环境运行 agentic AI）形成了真实的对比。对于 Creekstone：投资那些有「清晰、可验证 ROI」的 AI 场景（如 MDASH 发现漏洞、Harvey 提升完成率 6x），而不是「AI 转型」这样模糊的叙事。</div>
+</div>
 
-  <div class="sec">
-    <div class="st">🚀 重大产品发布</div><hr class="sr">
-
-    <div class="li">
-      <div class="lih">
-        <div><div class="lin"><a href="https://www.testingcatalog.com/google-prepares-gemini-spark-ai-agent-ahead-of-i-o-launch/" target="_blank">Google Gemini Spark（预披露）</a></div><div class="lim">Google · 预计 Google I/O 2026（05-19~20）正式发布</div></div>
-        <span class="litag ta">AI OS Layer</span>
-      </div>
-      <div class="lid">TestingCatalog 曝光：Gemini Spark 是 Google 准备在 I/O 2026 发布的「常驻 AI 助手框架」，将整合至 Gmail、Google 日历、Chrome 浏览器和 Android OS 层面，实现跨应用的持续上下文感知和任务自动化。与 OpenAI SuperApp 战略（ChatGPT + Codex + Atlas 浏览器）形成直接对抗——两者都在争夺「AI 操作层」的控制权。</div>
-      <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起↑':'展开详细版↓'">展开详细版↓</button>
-      <div class="det">
-        <h5>Gemini Spark 的战略意义</h5>
-        <p>目前大多数 AI 助手是「被动响应」模式——用户主动打开 chatbot，输入问题，等待回答。Gemini Spark 的「Always-on」设计是「主动感知」模式——AI 持续观察用户的日历、邮件、文档状态，主动提醒、建议、自动完成。</p>
-        <p>这对 Google 的意义是巨大的：Android 全球 72% 的市场份额，Google Workspace（Gmail/Calendar/Drive）全球 30 亿用户。如果 Gemini Spark 做到「有意义的常驻 AI 助手」，Google 拥有的分发规模是 OpenAI 和 Anthropic 完全无法匹配的。</p>
-        <h5>为什么过去的「Google AI 产品」没有成功</h5>
-        <p>Google Assistant、Bard（Gemini 前身）、Google Duet AI——Google 有多次 AI 助手的尝试，都没有真正改变用户行为。原因通常是：能力没达到「让用户信任它来做重要事情」的阈值。但 Gemini Ultra + 更好的 harness 设计，可能是第一次真正跨越这个阈值。</p>
-      </div>
-      <a href="https://www.testingcatalog.com/google-prepares-gemini-spark-ai-agent-ahead-of-i-o-launch/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ TestingCatalog 报道</a>
-    </div>
-
-    <div class="li">
-      <div class="lih">
-        <div><div class="lin">Anthropic：内部 75% 代码由 Claude 生成</div><div class="lim">Anthropic 内部数据 · 多家媒体报道 · 2026-05-15 周</div></div>
-        <span class="litag ti">工程范式</span>
-      </div>
-      <div class="lid">Anthropic 披露内部数据：当前超过 75% 的代码由 Claude Code 生成，但公司仍在积极扩招工程师。这一比例被多家媒体引用为「AI 代码生成从工具变成主要生产力来源」的里程碑数据。对比 OpenAI Frontier 团队（Ryan Lopopolo 3 月披露）：100% 代码由 Codex 生成。Anthropic 的 75% + 持续招聘说明：AI 生成的代码比例在提升，但人类工程师的角色没有消失，只是转变为「架构设计 + 质量监控 + Agent 编排」。</div>
-    </div>
-
-  </div>
-
-  <div class="sec">
-    <div class="st">💬 KOL 核心观点</div><hr class="sr">
-    <div class="kgrid">
-
-      <div class="kc">
-        <div class="kh"><div class="kav">WK</div><div><div class="kn">Weekly AI Top 5</div><div class="kha">AI by AI · 五大模型联合撰写 · Champaign Magazine</div></div><div style="margin-left:auto;text-align:right"><div class="kl">周报</div><div class="kd">05-17</div></div></div>
-        <div class="kp">「The next battleground is not the chatbot window — it is the AI operating layer. Google appears to be moving aggressively toward persistent AI agents integrated into inboxes, browsing, scheduling, and operating-system-level workflows.」</div>
-        <div class="ka">这份周报本身值得特别注意：它由 GPT-5.5 Instant、Claude、Gemini 和 Grok 共同撰写，然后由人类编辑 W.H.L. 整合。这是「AI 生成的 AI 分析报告」这种内容形式开始变得主流的信号。报告本期提炼了五大事件中最重要的判断：「AI 操作层」是下一个战场，不是聊天机器人窗口。这与 steipete 的「SuperApp」讨论、Karpathy 的「Software 3.0」框架完全对齐。</div>
-        <a href="https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ 完整周报</a>
-      </div>
-
-      <div class="kc">
-        <div class="kh"><div class="kav">VB</div><div><div class="kn">VentureBeat 分析</div><div class="kha">Michael Nuñez · Anthropic vs OpenAI 企业端</div></div><div style="margin-left:auto;text-align:right"><div class="kl">深度报道</div><div class="kd">05-13</div></div></div>
-        <div class="kp">「Anthropic has quadrupled its business adoption over the past year. But the same report that crowns a new market leader also warns that Anthropic's position may be more fragile than it appears — threatened by escalating costs, compute constraints, and the very token-based pricing model that has fueled its extraordinary revenue growth.」</div>
-        <div class="ka">VentureBeat 的分析是本期最有深度的商业报道。三大威胁：① 成本端：Agent 工作流的 token 消耗是聊天的 10-100 倍，Anthropic 的 token 计价模型在 Agent 用量激增时可能产生客户侧的成本冲击；② 算力端：Anthropic 的推理基础设施规模仍然落后于 OpenAI 和 Google，一旦需求超过供给会产生服务质量问题；③ 竞争端：OpenAI 正在用 Codex + SuperApp + 更低价的模型反击，Google 的 I/O 2026 发布会是新一轮威胁。</div>
-        <a href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ VentureBeat 全文</a>
-      </div>
-
-      <div class="kc">
-        <div class="kh"><div class="kav">EM</div><div><div class="kn">Ethan Mollick（引用）</div><div class="kha">@emollick · 沃顿商学院 · 持续追踪</div></div><div style="margin-left:auto;text-align:right"><div class="kl">持续信号</div><div class="kd">本期</div></div></div>
-        <div class="kp">「Anthropic uses Claude for 75% of its code, but is still hiring aggressively. This is the pattern: AI augments, not replaces. The volume of work expands to fill the newly available capacity.」</div>
-        <div class="ka">Mollick 的这个观察（本期来自周报引用而非直接 X 帖）与他此前的「ASI 路标测试」形成了完整逻辑链：① 当前：AI 写 75% 的代码，但人类工程师数量在增加；② 未来：当 AI 能做到 95%+，且能做到系统设计层面，才开始真正替代；③ 可能的悖论：AI 生产力提升会创造新的需求，填满新释放的产能——这是经济学中经典的「杰文斯悖论」在 AI 时代的再现。</div>
-      </div>
-
-      <div class="kc">
-        <div class="kh"><div class="kav">GS</div><div><div class="kn">Gemini Spark 预热讨论</div><div class="kha">r/GoogleGemini · 社区反应</div></div><div style="margin-left:auto;text-align:right"><div class="kl">社区</div><div class="kd">05-15~17</div></div></div>
-        <div class="kp">「Google I/O 2026 officially announced for May 19–20 — what are you expecting this year?」Reddit 帖热评：「Gemini Spark is the make-or-break moment for Google in the AI race. If it's a good 'always-on' assistant, they win mobile. If it's another half-baked product, they lose the narrative for the rest of 2026.」</div>
-        <div class="ka">Reddit r/GoogleGemini 社区的反应是一个有价值的「市场情绪指标」——AI 开发者和重度用户对 Google 的期望极高，但信心不足（过去几次 Google AI 产品发布的「先发布后失望」让社区保持怀疑）。「Make-or-break」的评价说明：I/O 2026 是 Google 能否在开发者心智中重新确立 AI 第一的关键节点。</div>
-        <a href="https://www.reddit.com/r/GoogleGemini/comments/1r7wftj/google_io_2026_officially_announced_for_may_1920/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Reddit 讨论帖</a>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="footer">
-    Creekstone Intelligence Brief · 第 005 期 · 2026-05-15~17<br>
-    数据源：Champaign Magazine Weekly · VentureBeat · TestingCatalog · Reddit r/GoogleGemini · Android Central
-  </div>
-  </div>
 </div>
 </div>
-<script>document.querySelectorAll('.exp').forEach(b=>{b.addEventListener('click',function(){const d=this.nextElementSibling;d.classList.toggle('open');this.textContent=d.classList.contains('open')?'收起↑':'展开详细版↓';});});</script>
+
+<!-- ② 重大产品发布 -->
+<div class="section" id="launches">
+<div class="sec-head"><div class="sec-title">🚀 重大产品发布</div><div class="sec-desc">本期以 Google I/O 前夜泄露为主，含 Logan Kilpatrick 的 Antigravity 预热</div></div>
+<hr class="sec-rule">
+<div class="filters">
+  <button class="fbtn on" onclick="filterL(this,'all')">全部</button>
+  <button class="fbtn" onclick="filterL(this,'google')">Google</button>
+  <button class="fbtn" onclick="filterL(this,'startup')">Startup</button>
+  <button class="fbtn" onclick="filterL(this,'tool')">工具</button>
+</div>
+<div class="launch-list" id="launchList">
+
+<div class="lcard" data-cat="google">
+<div class="lcard-head">
+  <div class="lcard-icon">🤖</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://io.google/2026/explore/pa-keynote-2" target="_blank">Google Antigravity · Agent-First IDE（I/O 专场）</a></div>
+    <div class="lcard-who">Google · @OfficialLoganK 预热 ♥3,690 · I/O 2026（05-19）正式发布</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">Coding Agent</span><span class="tag tag-infra">IDE</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">Google I/O 官方议程描述：「Scaling vibe-coded prototypes into production requires a new class of tools. Explore the transition from rapid exploration in Google AI Studio to autonomous development using Google Antigravity, Google's agent-first IDE. Learn to speed-run ideas in AI Studio, export code, and deploy agents to handle heavy lifting like planning architecture, writing multi-file features, and performing end-to-end browser testing.」</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <p>Antigravity 的核心定位：「The transition from rapid exploration (vibe coding in AI Studio) to autonomous development (Antigravity)」——它是「从 demo 到生产」的桥接工具。AI Studio 让你快速原型，Antigravity 让原型变成真正的生产代码。</p>
+    <p>Google AI Studio + Antigravity 的组合是 Google 对「Claude Code + Claude Design」这个 Anthropic 工具链的直接回应：AI Studio = Claude AI Assistant（用于设计和探索），Antigravity = Claude Code（用于生产）。</p>
+    <p>背后的更大战略：Logan Kilpatrick 本期的「The model is the product」暗示 Antigravity 的差异化在 Gemini 模型对代码的理解深度，而不只是 IDE 功能。如果 Gemini 2.5 Pro（或 Gemini 4）在 SWE-Bench 上能与 Claude Opus 4.7 竞争，Antigravity 就有了真实的技术基础。</p>
+    <p>来自 lumberjack.so 的评测（4 月）：「David opened VS Code to build a feature, spent ninety minutes wrestling with imports and environment setup. Twenty-four hours later, he installed Google Antigravity, gave it the same task, and watched three autonomous agents handle the entire implementation—including terminal commands and browser testing—while he sipped coffee.」</p>
+  </div>
+  <a class="lcard-link" href="https://io.google/2026/explore/pa-keynote-2" target="_blank">→ Google I/O 议程 · Antigravity 专场</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="google">
+<div class="lcard-head">
+  <div class="lcard-icon">✨</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://www.testingcatalog.com/google-prepares-gemini-spark-ai-agent-ahead-of-i-o-launch/" target="_blank">Gemini Spark（预披露）· 常驻 AI 助手框架</a></div>
+    <div class="lcard-who">Google · TestingCatalog 曝光 · 预计 I/O 2026 正式发布</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">AI OS Layer</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">TestingCatalog 曝光：Gemini Spark 是 Google 的「Always-on AI 助手框架」，整合至 Gmail、Google 日历、Chrome 浏览器和 Android OS 层面，实现跨应用的持续上下文感知和任务自动化。与 OpenAI SuperApp 战略（ChatGPT + Codex + Atlas）形成直接对抗——都在争夺「AI 操作层」控制权。</div>
+  <a class="lcard-link" href="https://www.testingcatalog.com/google-prepares-gemini-spark-ai-agent-ahead-of-i-o-launch/" target="_blank">→ TestingCatalog 报道</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">🎯</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/steipete/status/2055657966515155293" target="_blank">steipete · clawpatch 在真实项目上的表现 + OpenClaw 性能提升</a></div>
+    <div class="lcard-who">@steipete ♥2,138 + ♥1,763 · 2026-05-16</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-infra">Agent Infra</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">steipete 本期两条高分分享：① clawpatch 在真实 repo 上发现了意外的 bug，「Try clawpatch.ai on one of your repos and let codex work its magic. It's amazing at uncovering bugs.」（♥2,138）；② OpenClaw 性能提升成果公开（♥1,763）：「Looks like our focus on performance paid off.」OpenClaw 团队在过去几周专注于性能、可靠性、安全性改善，有量化测试数据支撑。</div>
+  <a class="lcard-link" href="https://x.com/steipete/status/2055657966515155293" target="_blank">→ X 原帖</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">📊</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/gregisenberg/status/2055713262801498264" target="_blank">Greg Isenberg · 36 个最大的创业机会（含 AI Agent 列表）</a></div>
+    <div class="lcard-who">@gregisenberg ♥3,189 RT391 · 2026-05-16</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">机会清单</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「The 36 BIGGEST startup opportunities right now: 1. biggest b2c: solving loneliness. third spaces, community apps, social media that works. 2. biggest b2b: replacing the 47M SMBs that spend $1.2T/year on software + services with AI agents...」这份清单被 RT 391 次，说明它触碰到了大量创业者的共鸣。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开关键内容 ↓</button>
+  <div class="lcard-detail">
+    <p>Greg 的清单里与 AI Agent 最相关的机会（节选）：</p>
+    <ul style="padding-left:14px;margin:6px 0;font-size:12px;color:var(--t2)">
+      <li><strong>最大 B2B 机会</strong>：替代 4700 万中小企业每年花在软件+服务上的 $1.2T——用 AI Agent 替代所有这些服务类别</li>
+      <li><strong>最大 B2C 机会</strong>：解决孤独感——第三空间、社区 App、真正有效的社交媒体</li>
+      <li><strong>AI Agent 特定</strong>：Agent 记忆层（谁控制记忆，谁控制 Agent）、Agent 金融基础设施（Agent 需要支付能力）、Agent 法律身份（Agent 需要合同能力）</li>
+    </ul>
+    <p>有趣的是，Greg 把「解决孤独感」放在第一位而不是 AI 技术——这说明他认为最大的 B2C 机会仍然是人类情感需求，AI 是实现手段而不是产品本身。</p>
+  </div>
+  <a class="lcard-link" href="https://x.com/gregisenberg/status/2055713262801498264" target="_blank">→ X 原帖（36 条完整清单）</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="tool">
+<div class="lcard-head">
+  <div class="lcard-icon">🔧</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/steipete/status/2055402519841411165" target="_blank">steipete · Svelte.js 深度使用体验（React 替代品信号）</a></div>
+    <div class="lcard-who">@steipete ♥1,442 · 2026-05-15</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-tool">开发框架</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「Been using @sveltejs for a few projects lately, it's quite a nice alternative to React, fewer gotchas and compile-time magic.」steipete 分享了 Svelte 替代 React 的体验——在 AI Coding Agent 时代，编译时优化（compile-time magic）的框架对 Agent 来说往往比 React 的运行时复杂度更友好。这是 AI 时代「框架选择」正在演变的一个具体信号。</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="section" id="kols">
+<div class="sec-head"><div class="sec-title">💬 KOL 核心观点 + X 高热讨论</div><div class="sec-desc">本期 22 KOL 扫描，Chollet 的两条精炼洞见 + Logan 的 Google I/O 暗示 + levelsio 的用户体验信号</div></div>
+<hr class="sec-rule">
+<div class="kol-grid">
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">FC</div>
+    <div class="kcard-info"><div class="kcard-name">François Chollet</div><div class="kcard-handle">@fchollet · Keras 作者 · ARC Prize 创始人</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 1,340</div><div class="kcard-date">05-17</div></div>
+  </div>
+  <div class="kcard-post">「Decision making was the bottleneck all along. Productivity is the rate at which you make open-ended decisions, the rate at which you reduce future paths.」</div>
+  <div class="kcard-analysis">这是 Chollet 的「生产力重新定义」。在 AI 时代，代码生成已经被自动化（10x 代码量），但决策仍然是人类的。Chollet 的论点：真正的生产力瓶颈从来不是「写代码的速度」，而是「做开放性决策的速度」——什么功能重要、怎么架构系统、如何权衡 tradeoff。AI 提高了代码速度，但没有提高决策速度，所以净生产力（真实价值创造）增长有限。<br><br>结合他的第二条（♥1,262）「blind squirrels running into a maze」：Coding Agent 就像盲松鼠在迷宫里乱撞，它需要的不是更大的迷宫（更多自由），而是更好的约束（verifiable constraints）。这两条帖子合在一起，给出了「如何设计 Agent 系统」的根本逻辑：① 减少 Agent 需要做的开放性决策，让它只在已定义好的约束内工作；② 提供清晰的验证条件，让 Agent 知道什么叫「完成了」。</div>
+  <a class="kcard-link" href="https://x.com/fchollet/status/2056164095913828503" target="_blank">→ X 原帖（决策瓶颈）· <a href="https://x.com/fchollet/status/2056401102485266620" target="_blank" style="color:var(--blue)">盲松鼠原帖</a></a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">LK</div>
+    <div class="kcard-info"><div class="kcard-name">Logan Kilpatrick</div><div class="kcard-handle">@OfficialLoganK · Google AI Studio 负责人 · 前 OpenAI</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 3,690</div><div class="kcard-date">05-15</div></div>
+  </div>
+  <div class="kcard-post">「Very excited for all the stuff the @antigravity team has been cooking :)」</div>
+  <div class="kcard-analysis">Logan 在 I/O 2026 前夜密集发帖，本期 5 条帖子合计 ♥11,165。「The model is the product」（♥1,835）是最有信息量的一条——他在说 Google Antigravity 的核心不是 IDE 功能，而是底层 Gemini 模型对代码的理解深度。「2026 is very much the year of agents and AI coding, lots to happen still!」（♥1,912）——前 OpenAI 的人在 Google 发出这个判断，具有双重背书意义：他见过 OpenAI 的 Codex 内部进展，也掌握着 Google Antigravity 的最新状态。「Why don't LLMs just tell you when you are asking a question/doing something that is out of distribution?」（♥1,705）——这是一个对当前 LLM 的真实批评：模型知道自己的能力边界，但不主动告诉用户，导致用户在错误的场景下使用 AI，产生失望。</div>
+  <a class="kcard-link" href="https://x.com/OfficialLoganK/status/2055821565972078649" target="_blank">→ Antigravity 预热帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">PL</div>
+    <div class="kcard-info"><div class="kcard-name">Pieter Levels</div><div class="kcard-handle">@levelsio · indie hacker · Photo AI / Interior AI 等</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 6,429</div><div class="kcard-date">05-16</div></div>
+  </div>
+  <div class="kcard-post">「🇪🇸 Barcelona is particularly interesting. The tourist center used to be just pickpockets targeting tourists, but now I notice digital nomad tech workers everywhere...」</div>
+  <div class="kcard-analysis">本期互动最高的 levelsio 帖子（♥6,429）不直接谈 AI，但说明了他的核心受众：全球数字游民/远程工作者社群。他同期的 AI 相关帖子：① ♥4,788「Cold bedroom AC confirmed to be great for sleep」（健康优化讨论，与他的 AI 健康工具方向相关）；② 「If Claude Code keeps being slow...」（上期）的延续——他已经在实际使用中测试 Claude Code 和 Codex 的性能差异。levelsio 是目前最有代表性的「高强度真实用户」——他的工具评价不是 benchmark，是每天运行多个 SaaS 产品的真实体验。</div>
+  <a class="kcard-link" href="https://x.com/levelsio/status/2056143272427639235" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">GM</div>
+    <div class="kcard-info"><div class="kcard-name">Gary Marcus</div><div class="kcard-handle">@GaryMarcus · AI 批评者/神经符号主义提倡者</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 485</div><div class="kcard-date">05-17</div></div>
+  </div>
+  <div class="kcard-post">「I love AI, it's pure LLMs I hate. Pure LLMs *are* basically just autocomplete. Recent progress (e.g. Claude Code) has been because of the [neurosymbolic] approach I've been advocating.」</div>
+  <div class="kcard-analysis">Marcus 在本期精炼了他的立场：他不反对 AI，他反对的是「纯 LLM」。Claude Code 的成功（他认为）恰恰是神经符号主义的胜利，不是 pure LLM 的胜利。他还在 Substack 发了一篇关于 AI 和银行系统潜在风险的深度文章（「Some disconcerting facts about AI and banking that may have profound consequences」），指出 LLM 在金融关键系统中的可靠性问题可能有「trillion dollar 的附带损害」。这与他的「trillion dollar trainwreck」论题保持一致。</div>
+  <a class="kcard-link" href="https://x.com/GaryMarcus/status/2056279793637736637" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">EM</div>
+    <div class="kcard-info"><div class="kcard-name">Ethan Mollick</div><div class="kcard-handle">@emollick · 沃顿商学院教授 · AI 采纳研究</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 955</div><div class="kcard-date">05-17</div></div>
+  </div>
+  <div class="kcard-post">「Most prophetic tweet of all time (2 months post ChatGPT release). And you can safely repost it every day and it will remain true.」（转发了某条早期预测 AI 影响的推文）</div>
+  <div class="kcard-analysis">Mollick 在不断更新他对「AI 历史性时刻」的框架记录。本期另一条（♥556）：「I broke my own rule to never post about AI detection as it is fraught in many ways.」——AI 检测（检测学生用 ChatGPT 写作业）是他研究的核心领域，他通常避免讨论，但这次打破了规则，说明他看到了新的数据或案例让他觉得值得分享。第三条（♥543）：「One thing to watch for with Claude & GPT is that the models expose too much irrelevant history in their outputs」——他在追踪 AI 模型的「context 管理」质量，这与 a16z 的「数据 Agent 需要 Context」文章的主题完全一致。</div>
+  <a class="kcard-link" href="https://x.com/emollick/status/2056193324365512801" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">YL</div>
+    <div class="kcard-info"><div class="kcard-name">Yann LeCun</div><div class="kcard-handle">@ylecun · Meta 首席 AI 科学家</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 2,456</div><div class="kcard-date">05-16</div></div>
+  </div>
+  <div class="kcard-post">「Tired of winning」（配图）</div>
+  <div class="kcard-analysis">LeCun 的这条反讽帖语境需要解读。他「tired of winning」指的很可能是：① 他一直说开源模型会追上闭源，现在 GLM-5.1 登顶 SWE-Bench Pro（用 Huawei Ascend），Qwen 3.6 达到前沿水平——他的预测持续被验证；② 他一直反对「AI 会消灭就业」的叙事，现在 Andrew Ng、a16z 也在发同样的文章——他「赢了」这场讨论。这种自嘲式的「tired of winning」透露出一种真实的情绪：他的判断被事实证明，但大众叙事的转变总是比他预期的慢很多。</div>
+  <a class="kcard-link" href="https://x.com/ylecun/status/2055681177994813522" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">GI</div>
+    <div class="kcard-info"><div class="kcard-name">Greg Isenberg</div><div class="kcard-handle">@gregisenberg · AI 创业者/社群建设者</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 3,189</div><div class="kcard-date">05-16</div></div>
+  </div>
+  <div class="kcard-post">「The 36 BIGGEST startup opportunities right now: 1. biggest b2c: solving loneliness. third spaces, community apps, social media that works. 2. biggest b2b: replacing the 47M SMBs that spend $1.2T/year on software + services with AI agents...」</div>
+  <div class="kcard-analysis">本期 gregisenberg 的「36 个最大创业机会」（♥3,189，RT391）是本期 X 上最高质量的 AI 创业洞察。特别值得关注的是：他把「解决孤独感」排在第一，而不是 AI 技术本身——他认为技术是手段，人类情感需求是真正的市场。$1.2T 的 SMB 软件+服务市场是一个常被引用但少被认真分析的数字——如果 AI Agent 真的能替代其中 10-20%，就是 $120B-$240B 的市场空间。</div>
+  <a class="kcard-link" href="https://x.com/gregisenberg/status/2055713262801498264" target="_blank">→ X 原帖（36 条清单）</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">SW</div>
+    <div class="kcard-info"><div class="kcard-name">swyx</div><div class="kcard-handle">@swyx · Latent Space 创始人 · AI Engineer 社区</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 580</div><div class="kcard-date">05-16</div></div>
+  </div>
+  <div class="kcard-post">「AIE coming to India soon!」（配 AI Engineer India 预告）</div>
+  <div class="kcard-analysis">swyx 在预告 AI Engineer Conference 进入印度市场。结合 Logan 的「Why don't LLMs tell you when out of distribution」帖子和 Anthropic × Gates Foundation 的印度教育 AI 计划，「印度 AI 市场」本期出现了三次——说明这个市场正在快速崛起。印度有 14 亿人口，大量英语技术人才，AI 工具采用率正在快速上升（这也是 Anthropic 通过 Gates Foundation 进入印度市场的战略时机）。AI Engineer India 是开发者生态扩展的信号。</div>
+  <a class="kcard-link" href="https://x.com/swyx/status/2055889947136237595" target="_blank">→ X 原帖</a>
+</div>
+
+<!-- 补充信号 -->
+<div class="kcard" style="grid-column:1/-1;background:var(--s2);border:1px solid var(--bd2)">
+  <div style="font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">本期补充信号 · 社区 + HN + GitHub</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:6px">🔬 Latent Space · Physical AI 播客</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">Applied Intuition（Qasar Younis + Peter Ludwig）做客 Latent Space（04-27，本期正在热播）。核心洞见：「物理 AI 不只是 LLMs on wheels」——真正的瓶颈不再是模型智能，而是「在受限硬件上的部署」。Applied Intuition 正在把车辆和机器变成「Android 出现前的手机」，提供统一的 AI 操作系统层。$15B 估值，1,000+ 工程师，L4 自动驾驶卡车在日本实际运营。对 Creekstone：这是「AI for Physical World」赛道的典型案例——不是 LLM chatbot，是真正的 mission-critical 系统，护城河极深。<br><br>→ <a href="https://www.latent.space/p/appliedintuition" target="_blank" style="color:var(--blue)">Latent Space 全文</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--red);margin-bottom:6px">🐛 Claude Code 开源 Harness 走红 HN</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">一个「强制 Claude Code 完成真实工作才停止」的开源 harness 在 HN 上获得大量关注。核心机制：通过结构化约束和 verifiable success criteria，让 Claude Code 不能「声称完成但实际没有」。这与 Chollet 的「盲松鼠 + 约束」理论完全对应，也与 Hermes /goal 的 judge 模型机制异曲同工。社区评论表明：开发者对 Claude Code 的「伪完成」问题（声称完成但测试仍然失败）有广泛共鸣。GitHub rising repo 排行：multica-ai/ai-agents（Karpathy 观察衍生的 CLAUDE.md 最佳实践集）快速涨星。<br><br>→ <a href="https://yanggggjie.github.io/rising-repo/" target="_blank" style="color:var(--blue)">Rising GitHub repos</a></div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:6px">📊 企业生产 AI 渗透率：Deloitte 数据</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">Deloitte Emerging Technology Trends 研究（引用自 seriousinsights.net）：只有 <strong>11%</strong> 的企业正在生产环境运行 agentic AI 系统。对比 Ramp 数据（50.6% 企业付费使用 AI）：大量企业在「用 AI 工具」（聊天、写作、搜索），但真正把 AI Agent 用在生产业务流程中的只有一成。这个差距就是「Agentic AI 的 20 倍增长空间」。Marcus 的「trillion dollar trainwreck」警告和这个数据形成了一个完整的投资判断：当前 AI capex 的 ROI 很低，但这代表的是机会（怎么让 89% 的企业把 AI 真正用在生产流程里），而不只是风险。<br><br>→ <a href="https://www.seriousinsights.net/state-of-ai-2026-april-update/" target="_blank" style="color:var(--blue)">seriousinsights.net 报告</a></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="section" id="funding">
+<div class="sec-head"><div class="sec-title">💰 融资动态</div><div class="sec-desc">本期覆盖：Dust $40M + Distyl AI $175M + 本周 May Top 22 US 融资汇总</div></div>
+<hr class="sec-rule">
+<div class="fund-list">
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co"><a href="https://ca.finance.yahoo.com/news/dust-raises-40m-ai-multiplayer-133000633.html" target="_blank">Dust · 「多人协作 AI」企业平台</a></div><div class="fcard-sub">巴黎 · 3,000+ 企业 · 300,000 Agents 部署 · 2025 年零流失</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$40M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Series B</span><span class="sigtag">★★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">领投</div><div class="ffield-v">Abstract + Sequoia</div></div>
+    <div class="ffield"><div class="ffield-l">参投</div><div class="ffield-v">Snowflake · Datadog</div></div>
+    <div class="ffield"><div class="ffield-l">核心数据</div><div class="ffield-v">3,000+ 企业 · 51,000 MAU · 70% 周活跃率 · 零流失（2025）</div></div>
+    <div class="ffield"><div class="ffield-l">日期</div><div class="ffield-v">2026-05-18</div></div>
+    <div class="fcard-why">Dust 的核心论点：「Most AI at work is still single-player. Dust is multiplayer AI: humans and agents working together in parallel, with shared context, shared tools, and shared goals.」解决了「多人 + 多 Agent 协作时上下文共享」的问题——这是当前企业 AI 部署的核心痛点之一（每个人有自己的 ChatGPT 对话，但团队之间没有共享知识）。70% 周活跃率 + 零流失是 SaaS 里极罕见的数字，说明这个产品真的解决了真实问题。Sequoia 参投是重要信号。</div>
+  </div>
+</div>
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co"><a href="https://www.crescendo.ai/news/latest-vc-investment-deals-in-ai-startups" target="_blank">Distyl AI · 企业 AI 软件/工作流平台</a></div><div class="fcard-sub">$1.8B 估值 · 50-100 人团队 · 企业 AI 工作流自动化</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$175M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Series B</span><span class="sigtag">★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">估值</div><div class="ffield-v">$1.8B</div></div>
+    <div class="ffield"><div class="ffield-l">核心方向</div><div class="ffield-v">企业 AI 软件和工作流自动化，不自己做基础模型</div></div>
+    <div class="fcard-why">Distyl AI 是「AI Workflow Automation」赛道的代表——面向企业的工作流 AI 平台，帮助企业把现有流程自动化，同时提供行业特定的 AI 能力。$1.8B 估值 + 50-100 人团队说明 AI 时代的资本效率：小团队 + 高估值正在成为 AI 应用层的新常态。</div>
+  </div>
+</div>
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co"><a href="https://www.linkedin.com/posts/adamrbroda_i-researched-newsletters-vc-websites-and-activity-7422641973695528960-EQvi" target="_blank">五月 Top 22 US AI 融资汇总（按规模排序节选）</a></div><div class="fcard-sub">来源：LinkedIn 整理 + Crunchbase 追踪</div></div>
+    <div style="text-align:right"><div class="fcard-amt">本期汇总</div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">Sierra</div><div class="ffield-v">$950M · Series E · AI 客服 Agent · $29.3B 估值</div></div>
+    <div class="ffield"><div class="ffield-l">Isomorphic Labs</div><div class="ffield-v">$2.1B · Series B · AI 药物设计</div></div>
+    <div class="ffield"><div class="ffield-l">Distyl AI</div><div class="ffield-v">$175M · Series B · 企业 AI 工作流 · $1.8B 估值</div></div>
+    <div class="ffield"><div class="ffield-l">Dust AI</div><div class="ffield-v">$40M · Series B · 多人协作 AI · Sequoia 领投</div></div>
+    <div class="fcard-why">May 2026 仍然是 AI 融资密集期。规律：大型融资仍集中在「有真实收入 + 企业客户」的垂直 Agent 公司（Sierra、Aidoc）；新入榜的是「解决 Agent 部署基础设施问题」的公司（Dust、Distyl）——说明市场开始关注「Agent 用得起来」而非「Agent 很酷」。</div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑤ 技术前沿 -->
+<div class="section" id="tech">
+<div class="sec-head"><div class="sec-title">🔬 技术与学术前沿</div><div class="sec-desc">Chollet 的「盲松鼠」框架 + Applied Intuition Physical AI + GitHub 新热</div></div>
+<hr class="sec-rule">
+<div class="tech-list">
+
+<div class="tcard2">
+  <div class="tcard2-head"><span class="tcat">认知框架</span><div class="tcard2-title">Chollet 双帖：「决策是生产力瓶颈」+「Agent = 需要约束的盲松鼠」——给 Agent 设计最重要的两个原则</div></div>
+  <div class="tcard2-short">@fchollet 本期两条关键帖合在一起，构成了目前对「如何正确使用 AI Coding Agent」最精炼的框架：<br>① ♥1,340：「Decision making was the bottleneck all along. Productivity is the rate at which you make open-ended decisions.」—— AI 提高了代码速度，但真正的生产力瓶颈是「开放性决策速度」，这个 AI 没有改变。<br>② ♥1,262：「A mental model for working with coding agents is that they're blind squirrels running into a maze and bumping into walls.」——Agent 最大的挑战不是模型能力，而是「给 agent 合适的约束上下文（constrained context）」。信息太多或来源冲突，Agent 就会产生错误输出。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开完整分析 ↓</button>
+  <div class="tcard2-detail">
+    <h4>「决策瓶颈」框架的实用含义</h4>
+    <p>如果决策是生产力瓶颈，那么「有助于做更好的决策」比「有助于执行决策」更有价值。这对 AI 工具的产品设计有直接影响：帮助用户做决策的 AI 工具（如「这个架构决策有哪些 tradeoff？」「这 5 个备选方案哪个最符合我们的约束？」）比「帮用户写更多代码」的 AI 工具更有长期价值。</p>
+    <h4>「盲松鼠」框架的工程含义</h4>
+    <p>Chollet 的原文被 Digg 引用的关键段落：「Probably the biggest challenge that most companies run into in their agent strategy is getting agents the right constrained context to work with for a task. Too much information or conflicting sources, and the agent can easily draw from the data and produce the wrong result.」</p>
+    <p>这句话是对「给 Agent 更大的 context window」这条路线的反驳——更大的 context 不等于更好的结果，关键是 context 的质量和约束性。clawpatch 把代码库分割成语义单元、Hermes /goal 的 judge 模型、开源 Claude Code harness 的结构化约束——这些都是对「盲松鼠需要约束」原则的工程实现。</p>
+  </div>
+  <div class="tcard2-impl">对于 Agent 系统设计：不要给 Agent 「更多信息」，要给 Agent「更好的约束和更清晰的验证条件」。这是 2026 年 Agent 工程化成熟的核心认知转变。</div>
+</div>
+
+<div class="tcard2">
+  <div class="tcard2-head"><span class="tcat">Latent Space 播客</span><div class="tcard2-title">Applied Intuition「Physical AI」：$15B 公司，从 YC 工具公司到自动驾驶 OS，「车辆是 Android 出现前的手机」</div></div>
+  <div class="tcard2-short">Latent Space（04-27 发布，本期热播）采访 Applied Intuition CEO Qasar Younis + Peter Ludwig。核心框架：「Physical AI is not just LLMs on wheels」——真正的瓶颈不再是模型智能，而是「在受限硬件上的可靠部署」。Applied Intuition 的三大技术支柱：① 仿真和 RL 基础设施；② 安全关键机器的真实操作系统；③ 自主性和世界理解的基础 AI 模型。L4 自动驾驶卡车已在日本实际运营。Coding Agent 内部应用：使用 Cursor、Claude Code 等，有内部采用排行榜。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开关键观点 ↓</button>
+  <div class="tcard2-detail">
+    <h4>为什么「物理 AI」不同于「屏幕 AI」</h4>
+    <p>Latent Space show notes 原文：「Learned systems can make mistakes in chat or coding, but safety-critical machines like driverless trucks, autonomous vehicles, and robots need much higher reliability.」</p>
+    <p>物理 AI 有一个根本的不对称性：LLM 在 chat 里犯错的代价是「给了错误答案，用户纠正」；物理机器犯错的代价可能是「人员伤亡」。这个可靠性要求使物理 AI 的技术门槛高出一个数量级。</p>
+    <h4>「车辆是 Android 出现前的手机」</h4>
+    <p>Peter Ludwig 的类比：「Today's vehicle and machine software stack is fragmented across many operating systems」——就像 2007 年前每部手机都有自己的操作系统（Symbian、Windows Mobile、Palm OS 等）一样，今天的车辆/机器也有数十种不同的 OS（ROS、AUTOSAR、各种专有系统）。Applied Intuition 想做「车辆界的 Android/iOS」——提供统一的物理 AI 操作层。</p>
+    <h4>为什么 tooling 公司回来了</h4>
+    <p>Qasar：「Developer tooling looked unfashionable in 2016, but Applied Intuition still bet on it. The AI boom made workflows and tools central again.」——2016 年 VC 不看好 tooling 公司（投资更看好直接面向消费者的产品），Applied Intuition 逆势而上，现在被证明是正确的。这对 Creekstone 的「Agent 基础设施投资」有直接的历史参照意义。</p>
+  </div>
+  <div class="tcard2-impl">物理 AI（自动驾驶、机器人、工业机器）是 2026 年最被低估的 AI 赛道之一。Applied Intuition $15B 估值证明了这个赛道的商业价值，但大多数 AI 投资者仍然关注软件 Agent，对物理 AI 的关注度不足。</div>
+  <a class="tcard2-link" href="https://www.latent.space/p/appliedintuition" target="_blank">→ Latent Space 全文 · Applied Intuition</a>
+</div>
+
+</div>
+</div>
+
+<!-- ⑥ 深度阅读 -->
+<div class="section" id="reads">
+<div class="sec-head"><div class="sec-title">📚 深度阅读</div><div class="sec-desc">本期重点：VentureBeat 的 Anthropic vs OpenAI 分析 + Weekly AI Top 5 + Latent Space Applied Intuition</div></div>
+<hr class="sec-rule">
+<div class="read-list">
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src media">周报 · 多 AI 联合</div>
+      <div class="rcard-title"><a href="https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/" target="_blank">AI by AI Weekly Top 5: May 11–17, 2026 — GPT + Claude + Gemini + Grok 联合撰写</a></div>
+    </div>
+    <div class="rcard-date">Champaign Magazine · 05-17</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rcard-short">这份周报本身就是一个历史性实验：由 GPT-5.5 Instant、Claude、Gemini 和 Grok 四个 AI 联合撰写，人类编辑 W.H.L. 整合。五个核心主题：① Anthropic 企业端超越 OpenAI；② Anthropic × Gates Foundation $200M；③ Google I/O 2026 前夜 Gemini 预告；④ AI 辅助黑客升级为「工业规模威胁」；⑤ OpenAI 企业扩张。</div>
+    <div class="rcard-pts">
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>核心判断</strong>：「The next battleground is not the chatbot window — it is the AI operating layer.」——这是四个 AI 系统的共同判断，说明这个方向已经成为 AI 领域的基本共识</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>AI 安全信号：「AI-powered hacking has rapidly evolved into what researchers describe as an 'industrial-scale threat.' State-linked groups are reportedly using models from OpenAI, Anthropic, and Google.」</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>这份周报的形式本身就是一个信号：「AI 生成的 AI 分析报告」正在变得主流，这将改变信息生产和消费的模式</span></div>
+    </div>
+    <button class="expand" onclick="toggleDetail(this)">展开完整分析 ↓</button>
+    <div class="rcard-detail">
+      <h4>为什么这份周报值得特别关注</h4>
+      <p>不是因为它的内容特别新颖（五个主题都在其他地方有报道），而是因为它的<strong>形式</strong>：四个竞争的 AI 系统被要求对同一组事件做出判断，然后由人类整合。这是一种新的「AI 集体智慧」实验。</p>
+      <p>有趣的是：四个系统对「AI 操作层」的判断完全一致（都认为这是下一个战场）——这说明当前 AI 对这个趋势的判断已经高度收敛。但四个系统对「Anthropic 是否真正安全领先」的判断略有分歧——GPT 和 Grok 倾向于质疑，Claude 和 Gemini 倾向于认可。这说明模型的评价立场和它的训练背景/所属公司有关。</p>
+      <h4>五大事件的「AI 视角」判断</h4>
+      <p>原文引用（周报的「Suggested angle」部分最有价值）：</p>
+      <blockquote>「For Anthropic × OpenAI: '2026 may be the year AI shifts from chatbot competition to workflow dominance.'」</blockquote>
+      <blockquote>「For Anthropic × Gates Foundation: 'The AI race is no longer only about bigger models — it is increasingly about who defines AI's societal role.'」</blockquote>
+      <blockquote>「For Google I/O 2026: 'The next battleground is not the chatbot window — it is the AI operating layer.'」</blockquote>
+      <blockquote>「For AI Cybersecurity: 'The cybersecurity frontier is becoming the first true stress test for AGI-era governance.'」</blockquote>
+    </div>
+    <a class="rcard-link" href="https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/" target="_blank">→ Champaign Magazine 周报全文</a>
+  </div>
+</div>
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src">🎙 播客 · Latent Space</div>
+      <div class="rcard-title"><a href="https://www.latent.space/p/appliedintuition" target="_blank">Physical AI that Moves the World — Applied Intuition（$15B，Qasar Younis + Peter Ludwig）</a></div>
+    </div>
+    <div class="rcard-date">Latent Space · 2026-04-27 · 1h 12min</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rcard-short">Applied Intuition 的完整故事：从 YC 时代的自动驾驶工具公司，到 $15B 的「物理 AI 平台」。为什么物理 AI 不只是 LLMs on wheels？为什么真正的瓶颈是部署，不是模型智能？为什么车辆是「Android 出现前的手机」？以及 Coding Agent（Cursor、Claude Code）如何改变他们内部工程师的工作方式。</div>
+    <div class="rcard-pts">
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>物理 AI 的可靠性要求：「Safety-critical machines like driverless trucks need much higher reliability than chat AI」——错误的代价从「错误答案」变成「人员伤亡」</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>三大技术支柱：仿真 + RL 基础设施 → 安全关键操作系统 → 基础 AI 模型（自主性 + 世界理解）</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>Coding Agent 内部采用：有内部「AI 工具采用排行榜」，工程师使用 Cursor / Claude Code 竞争谁更能把 AI 工具用好</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span>最重要的长期判断：「The future of autonomy looks less like one-off demos and more like Android for every moving machine」——物理 AI OS 将成为未来十年最重要的技术平台之一</span></div>
+    </div>
+    <button class="expand" onclick="toggleDetail(this)">展开关键原话 ↓</button>
+    <div class="rcard-detail">
+      <h4>Latent Space Show Notes 关键段落</h4>
+      <blockquote>「From building Applied Intuition from YC-era autonomy tooling into a $15B physical AI company, Qasar Younis and Peter Ludwig have spent the last decade living through the full arc of autonomy: from simulation and data infrastructure for robotaxi companies, to operating systems for safety-critical machines, to deploying AI onto cars, trucks, mining equipment, construction vehicles, agriculture, defense systems, and driverless L4 trucks running in Japan today.」</blockquote>
+      <h4>核心论点：为什么 tooling 公司重新流行</h4>
+      <blockquote>「Qasar on why developer tooling looked unfashionable in 2016, why Applied Intuition still bet on it, and how the AI boom made workflows and tools central again.」</blockquote>
+      <p>2016 年，「做工具」被认为是没有护城河的商业模式。Applied Intuition 的反例：如果你的工具足够深度地嵌入到客户的工作流（他们的仿真基础设施、操作系统、AI 模型训练数据），工具本身就成了最深的护城河。这与 hwchase17 的「Memory will be the great lock-in」论点异曲同工：深度工作流集成 = 高转换成本 = 护城河。</p>
+      <h4>为什么「车辆是 Android 出现前的手机」</h4>
+      <p>Peter Ludwig 的原话：「Today's vehicle and machine software stack is fragmented across many operating systems, and why Applied Intuition wants to consolidate the platform layer.」</p>
+      <p>具体说明：一辆现代汽车可能同时运行：AUTOSAR Classic（传统 ECU）、AUTOSAR Adaptive（新一代 ECU）、Android Automotive（信息娱乐系统）、自研 OS（驾驶辅助）、供应商 OS（传感器处理）等多个不同的操作系统。Applied Intuition 要做的是：把自主性（autonomy）这一层统一起来，就像 Android 统一了手机的应用层一样。</p>
+    </div>
+    <a class="rcard-link" href="https://www.latent.space/p/appliedintuition" target="_blank">→ Latent Space 全文</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 005 期 · 2026-05-15~17 · 周一刊<br>
+  数据源：X OAuth1（22 KOL）· Champaign Magazine · VentureBeat · TestingCatalog · Latent Space · tech.eu · io.google/2026
+</div>
+</div>
+</div>
+</div>
+<script>
+function doSearch(q){const query=q.trim().toLowerCase();document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!query||c.textContent.toLowerCase().includes(query))?'':' none';});}
+function filterL(btn,cat){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('#launchList .lcard').forEach(c=>{const cats=(c.dataset.cat||'');c.style.display=(cat==='all'||cats.includes(cat))?'':'none';});}
+function toggleDetail(btn){const det=btn.nextElementSibling;const isOpen=det.classList.contains('open');det.classList.toggle('open',!isOpen);btn.textContent=isOpen?'展开详细版 ↓':'收起 ↑';}
+</script>
 </body></html>
