@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第005期 · 2026-05-15~17</title>
+<style>
+:root{--bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;--bd:#242424;--bd2:#2e2e2e;--t1:#ebebeb;--t2:#aaa;--t3:#666;--t4:#444;--gold:#C9A84C;--gold2:#9B7A2F;--gold3:rgba(201,168,76,.1);--red:#E05252;--green:#52C47A;--blue:#5B8FE8;--purple:#9B7FE8;--orange:#E08C52;}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}.main{margin-left:220px;flex:1;min-width:0}
+.sb-logo{padding:16px 16px 12px;border-bottom:1px solid var(--bd)}.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}.sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-nav{padding:6px 0}.sb-section{padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;text-decoration:none}.sb-item:hover{color:var(--t1);background:var(--s2)}.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-title{font-size:16px;font-weight:700}.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.content{padding:24px 28px;max-width:980px}
+.sec{margin-bottom:36px}.st{font-size:17px;font-weight:700;margin-bottom:14px}.sr{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:15px;position:relative}.tc.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--s1))}
+.tbg{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:7px}
+.bh{background:rgba(224,82,82,.12);color:var(--red)}.bt{background:rgba(201,168,76,.12);color:var(--gold)}.bm{background:rgba(82,132,224,.12);color:var(--blue)}
+.tct{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.tcb{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:8px}
+.tci{font-size:11.5px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}.tci::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:12px;right:12px;font-size:10px;color:var(--gold)}
+.li{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.lih{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}.lin{font-size:13.5px;font-weight:700;flex:1}.lim{font-size:11px;color:var(--t3);margin-top:1px}
+.litag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;flex-shrink:0}
+.ta{background:rgba(82,196,122,.1);color:var(--green)}.ts{background:rgba(224,82,82,.1);color:#e07575}.tm{background:rgba(155,127,232,.1);color:var(--purple)}.ti{background:rgba(91,143,232,.1);color:var(--blue)}
+.lid{font-size:12px;color:var(--t2);line-height:1.6}
+.exp{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10px;padding:3px 9px;border-radius:4px;cursor:pointer;margin:6px 0}.exp:hover{border-color:var(--gold);color:var(--gold)}
+.det{background:var(--s2);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.65;display:none;border-left:2px solid var(--bd2);margin-top:4px}.det.open{display:block}
+.det h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.det h5:first-child{margin-top:0}
+.det blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic;color:var(--t2)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:13px}
+.kh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.kav{width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kn{font-size:12.5px;font-weight:600}.kha{font-size:11px;color:var(--t3)}.kl{font-size:12.5px;font-weight:700;color:var(--red);margin-left:auto}.kd{font-size:10px;color:var(--t4)}
+.kp{font-size:12px;color:var(--t1);background:var(--s2);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.ka{font-size:11.5px;color:var(--t2);line-height:1.6}
+.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
+@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.tgrid,.kgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 5月刊</div></a></div>
+  <div class="sb-nav">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <hr class="sb-divider">
+    <div class="sb-section">本月期刊</div>
+    <a class="sb-item" href="brief_006.html"><span class="sb-dot" style="background:#E05252"></span>第006期 · 05-17~19</a>
+    <a class="sb-item active" href="brief_005.html"><span class="sb-dot" style="background:#52C47A"></span>第005期 · 05-15~17</a>
+    <a class="sb-item" href="brief_004.html"><span class="sb-dot" style="background:#5B8FE8"></span>第004期 · 05-13~15</a>
+    <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#9B7FE8"></span>第003期 · 05-11~13</a>
+    <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期 · 05-08~10</a>
+  </div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <div><div class="topbar-title">Creekstone Intelligence Brief</div><div class="topbar-sub">第 005 期 · 2026-05-15 ~ 05-17 · 周一刊</div></div>
+  </div>
+  <div class="content">
+
+  <div class="sec">
+    <div class="st">🔥 投资热点趋势</div><hr class="sr">
+    <div class="tgrid">
+
+      <div class="tc hot">
+        <div class="stars">★★★</div>
+        <span class="tbg bh">本期核心</span>
+        <div class="tct">Google I/O 2026 前夜：Gemini Spark 曝光 + Android 全面 AI 化，「AI Operating Layer」战争打响，直接挑战 OpenAI SuperApp</div>
+        <div class="tcb">I/O 2026 定于 5 月 19-20 日（本看板发布当日）。但预热信号已经泄露：TestingCatalog 报道 Google 正在准备「Gemini Spark」，一个常驻 AI 助手框架，集成至 Gmail、日历、浏览器和操作系统层面。预计发布还包括：新版 Gemini Flash（更快更便宜的推理）、Android 17 深度 Gemini 集成、Android XR 眼镜、NotebookLM 升级。<br><br>Champaign Magazine 周报（由 GPT-4.5 / Claude / Gemini / Grok 联合撰写）分析：「下一个战场不是 chatbot 窗口——是 AI 操作层。」这与 OpenAI SuperApp 策略（ChatGPT + Codex + Atlas 浏览器）形成直接对抗。</div>
+        <div class="tci">Google I/O 2026 是 5 月最大的产品事件。Gemini Spark 如果真正实现「Always-on + OS-level integration」，将是 Google 在 AI 竞争中最具破坏性的一张牌——因为 Google 控制着 Android（全球 72% 移动市场）。这是 Anthropic 和 OpenAI 都没有的分发渠道。</div>
+      </div>
+
+      <div class="tc hot">
+        <div class="stars">★★★</div>
+        <span class="tbg bt">企业信号</span>
+        <div class="tct">Anthropic 写了自己 75% 的代码 + 继续大规模招聘：AI 自动化软件工程从「demo」变成 Anthropic 自身运营现实</div>
+        <div class="tcb">本周多家媒体报道：Anthropic 内部已经有 75% 的代码由 AI 生成（主要是 Claude Code）。尽管如此，Anthropic 仍在大规模招聘工程师——这与 AI「消灭程序员工作」的叙事形成鲜明反差。<br><br>Ethan Mollick 的「ASI 路标测试」在这里有了完美的数据验证：Anthropic 用 Claude Code 写了大部分代码，但仍然需要大量人类来设计系统、做决策、管理 Agent 输出质量——「Forward Deployed Engineers」的工作只是变了，没有消失。</div>
+        <div class="tci">这是「AI 增强人类」而非「AI 替代人类」在顶级 AI 公司内部的真实写照。对 Creekstone：投资那些会被 AI 增强而非替代的工作场景，比投资「AI 完全取代 X」的叙事更稳健。</div>
+      </div>
+
+      <div class="tc">
+        <div class="stars">★★</div>
+        <span class="tbg bm">监管</span>
+        <div class="tct">美国 CAISI 预部署评估协议正式生效 + AI 辅助黑客升级为「工业规模威胁」：防御 vs 进攻同步 AI 化</div>
+        <div class="tcb">CAISI 协议（OpenAI/Anthropic/Google/Microsoft/xAI 全签）正式生效，意味着每个主要新模型发布前都需要政府安全审查。The Guardian 同期报道：AI 辅助黑客已从「研究性 demo」进化为「国家级威胁行为者的产业化武器」，Google 研究员确认过去 3 个月内有显著升级。<br><br>Al Jazeera 报道美国、英国、澳大利亚、新西兰等国家已共同发布 AI 辅助进攻性安全行动的防御指南。</div>
+        <div class="tci">「AI 安全军备竞赛」进入政策层面。每个新前沿模型发布前都需政府审查，这会减慢发布节奏，但也意味着企业 AI 安全采购将被「政府认证」背书驱动——利好 Trent AI 这类合规导向的 Agent 安全公司。</div>
+      </div>
+
+      <div class="tc">
+        <div class="stars">★★</div>
+        <span class="tbg bt">数据信号</span>
+        <div class="tct">企业 AI 采用率跨过 50% 里程碑（Ramp AI Index）：AI 从早期采用者工具变成「默认基础设施」的临界点</div>
+        <div class="tcb">Ramp AI Index 5 月报的第二个重要数字：整体企业 AI 采用率在 2026 年 4 月跨过 50%——意味着超过一半的美国企业已在付费使用 AI 工具（这不包括免费工具）。<br><br>对比：2024 年底约 35%，2025 年底约 43%，2026 年 4 月 50.6%。增速在加快而非减慢，说明我们仍处于扩散曲线的早期到中期阶段，而非饱和阶段。</div>
+        <div class="tci">企业 AI 采用率 > 50% 意味着「AI 工具」正在从「竞争优势」变成「经营必需品」。这个转变将大幅加速企业采购决策速度——不再是「要不要用 AI」，而是「用哪个 AI、怎么整合」。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">🚀 重大产品发布</div><hr class="sr">
+
+    <div class="li">
+      <div class="lih">
+        <div><div class="lin"><a href="https://www.testingcatalog.com/google-prepares-gemini-spark-ai-agent-ahead-of-i-o-launch/" target="_blank">Google Gemini Spark（预披露）</a></div><div class="lim">Google · 预计 Google I/O 2026（05-19~20）正式发布</div></div>
+        <span class="litag ta">AI OS Layer</span>
+      </div>
+      <div class="lid">TestingCatalog 曝光：Gemini Spark 是 Google 准备在 I/O 2026 发布的「常驻 AI 助手框架」，将整合至 Gmail、Google 日历、Chrome 浏览器和 Android OS 层面，实现跨应用的持续上下文感知和任务自动化。与 OpenAI SuperApp 战略（ChatGPT + Codex + Atlas 浏览器）形成直接对抗——两者都在争夺「AI 操作层」的控制权。</div>
+      <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起↑':'展开详细版↓'">展开详细版↓</button>
+      <div class="det">
+        <h5>Gemini Spark 的战略意义</h5>
+        <p>目前大多数 AI 助手是「被动响应」模式——用户主动打开 chatbot，输入问题，等待回答。Gemini Spark 的「Always-on」设计是「主动感知」模式——AI 持续观察用户的日历、邮件、文档状态，主动提醒、建议、自动完成。</p>
+        <p>这对 Google 的意义是巨大的：Android 全球 72% 的市场份额，Google Workspace（Gmail/Calendar/Drive）全球 30 亿用户。如果 Gemini Spark 做到「有意义的常驻 AI 助手」，Google 拥有的分发规模是 OpenAI 和 Anthropic 完全无法匹配的。</p>
+        <h5>为什么过去的「Google AI 产品」没有成功</h5>
+        <p>Google Assistant、Bard（Gemini 前身）、Google Duet AI——Google 有多次 AI 助手的尝试，都没有真正改变用户行为。原因通常是：能力没达到「让用户信任它来做重要事情」的阈值。但 Gemini Ultra + 更好的 harness 设计，可能是第一次真正跨越这个阈值。</p>
+      </div>
+      <a href="https://www.testingcatalog.com/google-prepares-gemini-spark-ai-agent-ahead-of-i-o-launch/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ TestingCatalog 报道</a>
+    </div>
+
+    <div class="li">
+      <div class="lih">
+        <div><div class="lin">Anthropic：内部 75% 代码由 Claude 生成</div><div class="lim">Anthropic 内部数据 · 多家媒体报道 · 2026-05-15 周</div></div>
+        <span class="litag ti">工程范式</span>
+      </div>
+      <div class="lid">Anthropic 披露内部数据：当前超过 75% 的代码由 Claude Code 生成，但公司仍在积极扩招工程师。这一比例被多家媒体引用为「AI 代码生成从工具变成主要生产力来源」的里程碑数据。对比 OpenAI Frontier 团队（Ryan Lopopolo 3 月披露）：100% 代码由 Codex 生成。Anthropic 的 75% + 持续招聘说明：AI 生成的代码比例在提升，但人类工程师的角色没有消失，只是转变为「架构设计 + 质量监控 + Agent 编排」。</div>
+    </div>
+
+  </div>
+
+  <div class="sec">
+    <div class="st">💬 KOL 核心观点</div><hr class="sr">
+    <div class="kgrid">
+
+      <div class="kc">
+        <div class="kh"><div class="kav">WK</div><div><div class="kn">Weekly AI Top 5</div><div class="kha">AI by AI · 五大模型联合撰写 · Champaign Magazine</div></div><div style="margin-left:auto;text-align:right"><div class="kl">周报</div><div class="kd">05-17</div></div></div>
+        <div class="kp">「The next battleground is not the chatbot window — it is the AI operating layer. Google appears to be moving aggressively toward persistent AI agents integrated into inboxes, browsing, scheduling, and operating-system-level workflows.」</div>
+        <div class="ka">这份周报本身值得特别注意：它由 GPT-5.5 Instant、Claude、Gemini 和 Grok 共同撰写，然后由人类编辑 W.H.L. 整合。这是「AI 生成的 AI 分析报告」这种内容形式开始变得主流的信号。报告本期提炼了五大事件中最重要的判断：「AI 操作层」是下一个战场，不是聊天机器人窗口。这与 steipete 的「SuperApp」讨论、Karpathy 的「Software 3.0」框架完全对齐。</div>
+        <a href="https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ 完整周报</a>
+      </div>
+
+      <div class="kc">
+        <div class="kh"><div class="kav">VB</div><div><div class="kn">VentureBeat 分析</div><div class="kha">Michael Nuñez · Anthropic vs OpenAI 企业端</div></div><div style="margin-left:auto;text-align:right"><div class="kl">深度报道</div><div class="kd">05-13</div></div></div>
+        <div class="kp">「Anthropic has quadrupled its business adoption over the past year. But the same report that crowns a new market leader also warns that Anthropic's position may be more fragile than it appears — threatened by escalating costs, compute constraints, and the very token-based pricing model that has fueled its extraordinary revenue growth.」</div>
+        <div class="ka">VentureBeat 的分析是本期最有深度的商业报道。三大威胁：① 成本端：Agent 工作流的 token 消耗是聊天的 10-100 倍，Anthropic 的 token 计价模型在 Agent 用量激增时可能产生客户侧的成本冲击；② 算力端：Anthropic 的推理基础设施规模仍然落后于 OpenAI 和 Google，一旦需求超过供给会产生服务质量问题；③ 竞争端：OpenAI 正在用 Codex + SuperApp + 更低价的模型反击，Google 的 I/O 2026 发布会是新一轮威胁。</div>
+        <a href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ VentureBeat 全文</a>
+      </div>
+
+      <div class="kc">
+        <div class="kh"><div class="kav">EM</div><div><div class="kn">Ethan Mollick（引用）</div><div class="kha">@emollick · 沃顿商学院 · 持续追踪</div></div><div style="margin-left:auto;text-align:right"><div class="kl">持续信号</div><div class="kd">本期</div></div></div>
+        <div class="kp">「Anthropic uses Claude for 75% of its code, but is still hiring aggressively. This is the pattern: AI augments, not replaces. The volume of work expands to fill the newly available capacity.」</div>
+        <div class="ka">Mollick 的这个观察（本期来自周报引用而非直接 X 帖）与他此前的「ASI 路标测试」形成了完整逻辑链：① 当前：AI 写 75% 的代码，但人类工程师数量在增加；② 未来：当 AI 能做到 95%+，且能做到系统设计层面，才开始真正替代；③ 可能的悖论：AI 生产力提升会创造新的需求，填满新释放的产能——这是经济学中经典的「杰文斯悖论」在 AI 时代的再现。</div>
+      </div>
+
+      <div class="kc">
+        <div class="kh"><div class="kav">GS</div><div><div class="kn">Gemini Spark 预热讨论</div><div class="kha">r/GoogleGemini · 社区反应</div></div><div style="margin-left:auto;text-align:right"><div class="kl">社区</div><div class="kd">05-15~17</div></div></div>
+        <div class="kp">「Google I/O 2026 officially announced for May 19–20 — what are you expecting this year?」Reddit 帖热评：「Gemini Spark is the make-or-break moment for Google in the AI race. If it's a good 'always-on' assistant, they win mobile. If it's another half-baked product, they lose the narrative for the rest of 2026.」</div>
+        <div class="ka">Reddit r/GoogleGemini 社区的反应是一个有价值的「市场情绪指标」——AI 开发者和重度用户对 Google 的期望极高，但信心不足（过去几次 Google AI 产品发布的「先发布后失望」让社区保持怀疑）。「Make-or-break」的评价说明：I/O 2026 是 Google 能否在开发者心智中重新确立 AI 第一的关键节点。</div>
+        <a href="https://www.reddit.com/r/GoogleGemini/comments/1r7wftj/google_io_2026_officially_announced_for_may_1920/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Reddit 讨论帖</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Creekstone Intelligence Brief · 第 005 期 · 2026-05-15~17<br>
+    数据源：Champaign Magazine Weekly · VentureBeat · TestingCatalog · Reddit r/GoogleGemini · Android Central
+  </div>
+  </div>
+</div>
+</div>
+<script>document.querySelectorAll('.exp').forEach(b=>{b.addEventListener('click',function(){const d=this.nextElementSibling;d.classList.toggle('open');this.textContent=d.classList.contains('open')?'收起↑':'展开详细版↓';});});</script>
+</body></html>

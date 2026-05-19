@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第004期 · 2026-05-13~15</title>
+<style>
+:root{--bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;--bd:#242424;--bd2:#2e2e2e;--t1:#ebebeb;--t2:#aaa;--t3:#666;--t4:#444;--gold:#C9A84C;--gold2:#9B7A2F;--gold3:rgba(201,168,76,.1);--red:#E05252;--green:#52C47A;--blue:#5B8FE8;--purple:#9B7FE8;--orange:#E08C52;}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}.main{margin-left:220px;flex:1;min-width:0}
+.sb-logo{padding:16px 16px 12px;border-bottom:1px solid var(--bd)}.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}.sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-nav{padding:6px 0}.sb-section{padding:10px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s;text-decoration:none}.sb-item:hover{color:var(--t1);background:var(--s2)}.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.08)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-title{font-size:16px;font-weight:700}.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.content{padding:24px 28px;max-width:980px}
+.sec{margin-bottom:36px}.st{font-size:17px;font-weight:700;margin-bottom:14px}.sr{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:15px;position:relative}.tc.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--s1))}
+.tbg{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:7px}
+.bh{background:rgba(224,82,82,.12);color:var(--red)}.bt{background:rgba(201,168,76,.12);color:var(--gold)}.bm{background:rgba(82,132,224,.12);color:var(--blue)}
+.tct{font-size:13px;font-weight:700;line-height:1.4;margin-bottom:7px}.tcb{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:8px}
+.tci{font-size:11.5px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:6px 9px;border-radius:0 5px 5px 0;line-height:1.55}.tci::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:12px;right:12px;font-size:10px;color:var(--gold)}
+.li{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.lih{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}.lin{font-size:13.5px;font-weight:700;flex:1}.lim{font-size:11px;color:var(--t3);margin-top:1px}
+.litag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;flex-shrink:0}
+.ta{background:rgba(82,196,122,.1);color:var(--green)}.ts{background:rgba(224,82,82,.1);color:#e07575}.tm{background:rgba(155,127,232,.1);color:var(--purple)}.ti{background:rgba(91,143,232,.1);color:var(--blue)}
+.lid{font-size:12px;color:var(--t2);line-height:1.6}
+.exp{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10px;padding:3px 9px;border-radius:4px;cursor:pointer;margin:6px 0;transition:all .12s}.exp:hover{border-color:var(--gold);color:var(--gold)}
+.det{background:var(--s2);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.65;display:none;border-left:2px solid var(--bd2);margin-top:4px}.det.open{display:block}
+.det h5{font-size:11.5px;font-weight:600;color:var(--t1);margin:8px 0 4px}.det h5:first-child{margin-top:0}
+.det blockquote{border-left:2px solid var(--gold2);padding-left:8px;margin:6px 0;font-style:italic;color:var(--t2)}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:13px}
+.kh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.kav{width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kn{font-size:12.5px;font-weight:600}.kha{font-size:11px;color:var(--t3)}.kl{font-size:12.5px;font-weight:700;color:var(--red);margin-left:auto}.kd{font-size:10px;color:var(--t4)}
+.kp{font-size:12px;color:var(--t1);background:var(--s2);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.ka{font-size:11.5px;color:var(--t2);line-height:1.6}
+.fc{background:var(--s1);border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.fh{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;border-bottom:1px solid var(--bd)}
+.fn{font-size:13.5px;font-weight:700}.fs{font-size:11px;color:var(--t3);margin-top:2px}.fa{font-size:19px;font-weight:800;color:var(--gold)}
+.ftg{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;background:rgba(201,168,76,.1);color:var(--gold)}
+.fb{padding:11px 15px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.fl{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}.fv{font-size:12px;color:var(--t1)}
+.fw{grid-column:1/-1;background:var(--s2);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
+@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.tgrid,.kgrid,.fb{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 5月刊</div></a></div>
+  <div class="sb-nav">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <hr class="sb-divider">
+    <div class="sb-section">本月期刊</div>
+    <a class="sb-item" href="brief_006.html"><span class="sb-dot" style="background:#E05252"></span>第006期 · 05-17~19</a>
+    <a class="sb-item" href="brief_005.html"><span class="sb-dot" style="background:#52C47A"></span>第005期 · 05-15~17</a>
+    <a class="sb-item active" href="brief_004.html"><span class="sb-dot" style="background:#5B8FE8"></span>第004期 · 05-13~15</a>
+    <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#9B7FE8"></span>第003期 · 05-11~13</a>
+    <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期 · 05-08~10</a>
+    <a class="sb-item" href="brief_001.html"><span class="sb-dot" style="background:#666"></span>第001期 · 05-05~07</a>
+  </div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <div><div class="topbar-title">Creekstone Intelligence Brief</div><div class="topbar-sub">第 004 期 · 2026-05-13 ~ 05-15 · 周五刊</div></div>
+  </div>
+  <div class="content">
+
+  <div class="sec">
+    <div class="st">🔥 投资热点趋势</div><hr class="sr">
+    <div class="tgrid">
+
+      <div class="tc hot">
+        <div class="stars">★★★</div>
+        <span class="tbg bh">本期最强</span>
+        <div class="tct">Anthropic 历史性超越 OpenAI 企业端：Ramp AI Index，Claude 34.4% vs ChatGPT 32.3%，一年前差距还是 8% vs 32%</div>
+        <div class="tcb">2026-05-13，Ramp（覆盖 50,000+ 美国企业的企业卡平台）发布 AI Index 5 月报：Anthropic 在企业 AI 工具采用率上首次超越 OpenAI——Claude 34.4%，ChatGPT 32.3%，整体 AI 企业采用率跨过 50% 里程碑。<br><br>一年前（2025 年 4 月）的数字是：OpenAI 32%，Anthropic 不到 8%。这是一次极罕见的市场份额逆转，且逆转速度之快令人震惊——Anthropic 一年内企业采用率增长 4 倍以上，而 OpenAI 在企业端仅增长 0.3%。<br><br>VentureBeat 同期报道了 3 个潜在威胁：成本上升、算力限制、token 定价模型的可持续性。</div>
+        <div class="tci">这是 AI 商业史上最重要的市场份额逆转之一。驱动力：Claude Code + Managed Agents 在开发者和企业工作流中的深度集成——不是 chatbot 竞争，而是工作流平台竞争。Creekstone 的「Harness = 护城河」判断正在被市场数据验证。</div>
+      </div>
+
+      <div class="tc hot">
+        <div class="stars">★★★</div>
+        <span class="tbg bt">融资里程碑</span>
+        <div class="tct">Isomorphic Labs $2.1B Series B：AI for Science 的最大单轮，Demis Hassabis 的「第二章」，IsoDDE 超越 AlphaFold3</div>
+        <div class="tcb">2026-05-13，Google DeepMind 分拆出的 Isomorphic Labs（Demis Hassabis 领导）完成 $2.1B Series B，Thrive Capital 领投，Alphabet、GV、MGX、Temasek、CapitalG、英国主权 AI 基金参投。这是欧洲 AI 生命科学有史以来最大单笔融资。<br><br>核心产品：IsoDDE（Isomorphic Drug Design Engine），一个统一 AI 系统，预测生物分子结构、结合亲和力、跨小分子/生物制剂/抗体的新药候选物——称已超越 AlphaFold3。资金用途：扩大内部在肿瘤学和免疫学的临床试验管线，扩充伦敦和旧金山团队。</div>
+        <div class="tci">「AI for Science」赛道的最大押注之一。Hassabis 和 Isomorphic 的意义：第一次有 Nobel 级科学家（AlphaFold）带着已验证的技术路线专门做 AI 药物发现公司，且有 Alphabet/Thrive 双重背书。这将拉动整个 AI 生命科学赛道的估值和投资者关注度。</div>
+      </div>
+
+      <div class="tc">
+        <div class="stars">★★★</div>
+        <span class="tbg bt">战略合作</span>
+        <div class="tct">Anthropic × Gates Foundation $200M：「公益 AI 基础设施」战略，Claude 进入全球健康/教育/新兴市场，4 年期</div>
+        <div class="tcb">2026-05-14，Anthropic 和比尔及梅琳达·盖茨基金会宣布 $200M、4 年期合作。内容：① 资助全球健康 AI 工具（疫苗研发：脊髓灰质炎、HPV、子痫前期）；② 教育 AI 工具（K-12 辅导、大学升学咨询、非洲 + 印度 + 美国）；③ 经济流动性项目；④ 同时提供 Claude 使用积分和技术支持，不只是现金。<br><br>VentureBeat 的解读：「这是前沿模型公司向'公益 AI 基础设施'而非只做商业部署的战略转型。」</div>
+        <div class="tci">对 Creekstone 的含义：「社会影响 + AI」赛道正在获得大型机构资金（Gates Foundation 拥有 $70B+ 资产），且 Anthropic 通过这种合作建立了在新兴市场的品牌和政策影响力——这是 OpenAI 目前还没有的战略资产。</div>
+      </div>
+
+      <div class="tc">
+        <div class="stars">★★</div>
+        <span class="tbg bm">监管信号</span>
+        <div class="tct">美国 CAISI 完成「模型预部署评估」协议：OpenAI、Anthropic、Google、Microsoft、xAI 全部签署，每个新模型政府先审</div>
+        <div class="tcb">2026-05-15，美国商务部 CAISI（AI 安全研究所）宣布已与所有五大前沿 AI 实验室完成预部署评估协议——OpenAI、Anthropic、Google DeepMind、Microsoft、xAI 全部签署。含义：每个主要模型在公开发布前都必须经过美国政府的安全评估。<br><br>这是继 UK AI Safety Institute 的类似协议之后，美国版本首次正式落地。CNN 报道这是「里程碑式的监管协议」。</div>
+        <div class="tci">这是「Anthropic Mythos 引发全球恐慌」这条线的直接监管结果。对创业公司：如果政府评估协议最终扩展到所有模型，小型 AI 公司的合规成本将大幅上升，这利于大厂。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">🚀 重大产品发布</div><hr class="sr">
+
+    <div class="li">
+      <div class="lih">
+        <div><div class="lin"><a href="https://aitoolsrecap.com/Blog/ai-news-may-13-2026" target="_blank">OpenAI GPT-5.5-Cyber → EU 扩展</a></div><div class="lim">OpenAI · 2026-05-13 · Daybreak 扩展至欧盟</div></div>
+        <span class="litag ts">AI 安全</span>
+      </div>
+      <div class="lid">OpenAI 宣布将 GPT-5.5-Cyber（网络安全专用模型）扩展至欧盟，向经过审核的 EU 网络安全团队、政府机构、EU 机构提供限量预览访问。这是 OpenAI Daybreak 计划从美国市场向国际市场扩张的第一步，也是 Anthropic Mythos（仅限少数机构）和 Microsoft MDASH 之后，欧洲 AI 安全生态的新入局者。</div>
+    </div>
+
+    <div class="li">
+      <div class="lih">
+        <div><div class="lin"><a href="https://www.isomorphiclabs.com/articles/isomorphic-labs-announces-series-b-investment-round" target="_blank">Isomorphic Labs IsoDDE — AI 药物设计引擎</a></div><div class="lim">Isomorphic Labs · Demis Hassabis · $2.1B 融资同期</div></div>
+        <span class="litag tm">AI for Science</span>
+      </div>
+      <div class="lid">IsoDDE（Isomorphic Drug Design Engine）：统一 AI 系统，同时预测生物分子结构、结合亲和力和跨模态药物候选物（小分子、生物制剂、抗体）。Isomorphic 称 IsoDDE 在多个关键基准上已超越 AlphaFold3。与多家大型制药公司有合作研发协议，包括礼来（Eli Lilly）和诺华（Novartis）。</div>
+      <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起↑':'展开详细版↓'">展开详细版↓</button>
+      <div class="det">
+        <h5>IsoDDE 的技术架构</h5>
+        <p>AlphaFold 解决了蛋白质结构预测问题，IsoDDE 的目标更宏大：把「知道蛋白质长什么样」变成「设计出能特异性结合它的药物分子」。IsoDDE 能同时处理：</p>
+        <ul style="padding-left:14px;margin:6px 0;font-size:12px;color:var(--t2)">
+          <li>结构预测（蛋白质 + 配体的 3D 构象）</li>
+          <li>结合亲和力预测（药物-靶点相互作用强度）</li>
+          <li>分子设计（从靶点反向生成候选药物分子）</li>
+          <li>跨模态：小分子药、生物制剂（蛋白质药）、抗体一体化处理</li>
+        </ul>
+        <h5>为什么 $2.1B 是合理估值</h5>
+        <p>传统药物发现从靶点到上市平均需要 12-15 年、$2-3B 成本，成功率不到 10%。AI 驱动的药物发现如果能把这个周期压缩到 3-5 年、成功率提升 2-3 倍，对应的商业价值是数千亿美元级别。Isomorphic 目前已有多个 Phase I 临床试验项目正在推进，这是大多数 AI 药物公司（只有 in silico 结果，没有临床数据）没有的。</p>
+      </div>
+      <a href="https://www.isomorphiclabs.com/articles/isomorphic-labs-announces-series-b-investment-round" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ Isomorphic Labs 官方公告</a>
+    </div>
+
+  </div>
+
+  <div class="sec">
+    <div class="st">💬 KOL 核心观点</div><hr class="sr">
+    <div class="kgrid">
+
+      <div class="kc">
+        <div class="kh"><div class="kav">RB</div><div><div class="kn">Ramp AI Index 报告</div><div class="kha">企业卡数据 · 50,000+ 美国企业</div></div><div style="margin-left:auto;text-align:right"><div class="kl">数据</div><div class="kd">05-13</div></div></div>
+        <div class="kp">「Anthropic's share of business AI adoption rose to 34.4%, surpassing OpenAI's 32.3% for the first time. Overall business AI adoption crossed 50%.」</div>
+        <div class="ka">这不是 analyst 的预测，是真实的企业卡消费数据。Ramp 覆盖 50,000+ 企业，代表了美国企业 AI 实际付费行为。「Anthropic 从 2023 年中的 1% 以下涨到现在 34.4%」——这一年的增速可能是企业软件历史上最快的之一。<br><br>VentureBeat 同期分析了三大潜在威胁：① Anthropic 的 token 定价模式（越用越贵）在 Agent 用量激增时会产生非线性成本冲击；② 算力约束（Anthropic 的基础设施还没达到 OpenAI 规模）；③ OpenAI 的反击（SuperApp + Codex 扩展）。</div>
+        <a href="https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ VentureBeat 深度分析</a>
+      </div>
+
+      <div class="kc">
+        <div class="kh"><div class="kav">DH</div><div><div class="kn">Demis Hassabis</div><div class="kha">Google DeepMind CEO · Isomorphic Labs</div></div><div style="margin-left:auto;text-align:right"><div class="kl">公告</div><div class="kd">05-13</div></div></div>
+        <div class="kp">「IsoDDE represents the realization of what we set out to do: a unified AI system that can design drugs across all modalities. We're not just predicting structures anymore — we're designing medicines.」</div>
+        <div class="ka">Hassabis 在宣布 $2.1B 融资时的核心表态。「designing medicines」和「predicting structures」的差异是整个 AI 药物赛道的核心叙事转变——AlphaFold 时代回答了「蛋白质长什么样」，IsoDDE 要回答「怎么设计出作用于它的药物」。<br><br>Hassabis 同时掌管 Google DeepMind CEO 和 Isomorphic Labs CEO 两个身份，这种结构本身就是一个信号：Google 把 Isomorphic 视为 DeepMind AI 能力向生命科学商业化的旗舰项目，而不只是一个独立 portfolio 公司。</div>
+        <a href="https://www.isomorphiclabs.com/articles/isomorphic-labs-announces-series-b-investment-round" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Isomorphic Labs 公告</a>
+      </div>
+
+      <div class="kc">
+        <div class="kh"><div class="kav">WH</div><div><div class="kn">Weekly AI Top 5 分析</div><div class="kha">AI by AI · Champaign Magazine</div></div><div style="margin-left:auto;text-align:right"><div class="kl">周报</div><div class="kd">05-17</div></div></div>
+        <div class="kp">「AI-powered hacking has rapidly evolved into what researchers describe as an 'industrial-scale threat.' State-linked groups are reportedly using models from OpenAI, Anthropic, and Google to accelerate malware development and vulnerability discovery.」</div>
+        <div class="ka">The Guardian（05-11）的报道被本周多份 AI 周报引用为最重要安全信号：AI 辅助黑客行为已从「个别研究者的 demo」变成了「国家级威胁行为者的产业化工具」。这直接呼应了本周 OpenAI 把 GPT-5.5-Cyber 扩展至欧盟、以及 CAISI 完成五大厂预部署评估协议这两个事件——这不是巧合，而是面对同一个威胁的不同层面的响应。<br><br>对 Creekstone：AI 网络安全的「攻防两端同时 AI 化」是一个持续的结构性需求，不会随着某个政策或产品的发布而消失。</div>
+        <a href="https://champaignmagazine.com/2026/05/17/ai-by-ai-weekly-top-5-may-11-17-2026/" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ 周报全文</a>
+      </div>
+
+      <div class="kc">
+        <div class="kh"><div class="kav">AN</div><div><div class="kn">Anthropic + Gates Foundation</div><div class="kha">联合声明 · Reuters 报道</div></div><div style="margin-left:auto;text-align:right"><div class="kl">公告</div><div class="kd">05-14</div></div></div>
+        <div class="kp">「The partnership will focus on improving health outcomes in low- and middle-income countries, supporting vaccine and therapy research for diseases such as polio, HPV, and preeclampsia, and building AI tools for education in the US, India, and sub-Saharan Africa.」</div>
+        <div class="ka">Anthropic 的「公益 AI 基础设施」战略的最大一步。结构上：$200M 包含现金资助、Claude 使用积分、技术支持——说明 Anthropic 不是在做慈善，而是在把 Claude 植入全球最大的公益生态系统（Gates Foundation 项目覆盖 100+ 国家）。<br><br>战略含义：Gates Foundation 的背书让 Anthropic 在医疗 AI 领域建立了监管信誉（FDA、WHO 对话的筹码），在教育 AI 领域建立了大规模真实用户数据源（用于 post-training 的反馈循环）。这两点都是 OpenAI 目前没有的战略资产。</div>
+        <a href="https://www.anthropic.com/news/gates-foundation-partnership" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:7px">→ Anthropic 官方公告</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">💰 融资动态</div><hr class="sr">
+
+    <div class="fc">
+      <div class="fh">
+        <div><div class="fn"><a href="https://www.isomorphiclabs.com/articles/isomorphic-labs-announces-series-b-investment-round" target="_blank">Isomorphic Labs · AI 药物设计引擎</a></div><div class="fs">Demis Hassabis 领导 · Google DeepMind 分拆 · 伦敦</div></div>
+        <div style="text-align:right"><div class="fa">$2.1B</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Series B</span><span class="ftg" style="background:rgba(224,82,82,.1);color:var(--red)">★★★</span></div></div>
+      </div>
+      <div class="fb">
+        <div><div class="fl">领投</div><div class="fv">Thrive Capital（连续第二次领投）</div></div>
+        <div><div class="fl">参投</div><div class="fv">Alphabet · GV · MGX · Temasek · CapitalG · 英国主权 AI 基金</div></div>
+        <div><div class="fl">用途</div><div class="fv">扩大 IsoDDE 商业化 + 推进肿瘤学/免疫学临床试验 + 扩招</div></div>
+        <div><div class="fl">日期</div><div class="fv">2026-05-13</div></div>
+        <div class="fw">欧洲 AI 生命科学史上最大融资。Isomorphic 是「AI for Science」赛道的最强证明——有 Nobel 背书、有真实临床管线、有 Big Pharma 合作（礼来、诺华）。IsoDDE 的「超越 AlphaFold3」声称如果可验证，将重新定义整个 AI 药物发现领域的技术基准。</div>
+      </div>
+    </div>
+
+    <div class="fc">
+      <div class="fh">
+        <div><div class="fn"><a href="https://www.businesswire.com/news/home/20260312641003/en/" target="_blank">Genspark · AI 个人 Agent 平台</a></div><div class="fs">Palo Alto · CEO Eric Jing · $200M ARR · 已扩展至企业端</div></div>
+        <div style="text-align:right"><div class="fa">$385M</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="ftg">Series B 扩展</span><span class="ftg" style="background:rgba(201,168,76,.1);color:var(--gold)">★★</span></div></div>
+      </div>
+      <div class="fb">
+        <div><div class="fl">估值</div><div class="fv">$1.6B</div></div>
+        <div><div class="fl">参投</div><div class="fv">LG Technology Ventures · SBI Investment</div></div>
+        <div><div class="fl">新产品</div><div class="fv">Genspark Claw：「AI 员工」，跨软件界面执行多步骤任务</div></div>
+        <div><div class="fl">ARR</div><div class="fv">$200M（2026 年 3 月达到）</div></div>
+        <div class="fw">Genspark 的轨迹：B2C AI agent（AI 浏览器、AI 图片编辑、会议笔记）→ 企业 AI Workspace。Genspark Claw 定位是「AI 员工」，类似 Codex Computer Use 但面向更广泛的知识工作场景（不只是编程）。$200M ARR 在 B2C AI 里是少见的真实收入规模。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Creekstone Intelligence Brief · 第 004 期 · 2026-05-13~15<br>
+    数据源：Business Insider · VentureBeat · Reuters · Isomorphic Labs · Anthropic · CNN · aitoolsrecap.com
+  </div>
+  </div>
+</div>
+</div>
+<script>document.querySelectorAll('.exp').forEach(b=>{b.addEventListener('click',function(){const d=this.nextElementSibling;d.classList.toggle('open');this.textContent=d.classList.contains('open')?'收起↑':'展开详细版↓';});});</script>
+</body></html>
