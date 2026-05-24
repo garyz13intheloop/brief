@@ -1,4 +1,6 @@
-*.json
 *.pyc
 __pycache__/
 .DS_Store
+/brief_20260513.json
+/briefs/
+# state.json 需要被追踪，不忽略

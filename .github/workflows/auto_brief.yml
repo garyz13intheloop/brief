@@ -1,0 +1,69 @@
+name: Creekstone Intelligence Brief — Auto Generate
+
+on:
+  # 每周一、周三、周五 SGT 09:00 = UTC 01:00
+  schedule:
+    - cron: "0 1 * * 1,3,5"
+
+  # 允许手动触发（在 GitHub Actions 页面点 Run workflow）
+  workflow_dispatch:
+    inputs:
+      force_issue:
+        description: "强制指定期号（留空则自动递增）"
+        required: false
+        default: ""
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Override issue number (optional)
+        if: ${{ github.event.inputs.force_issue != '' }}
+        run: |
+          python3 -c "
+          import json, pathlib
+          p = pathlib.Path('scripts/state.json')
+          s = json.loads(p.read_text())
+          s['last_issue'] = int('${{ github.event.inputs.force_issue }}') - 1
+          p.write_text(json.dumps(s, indent=2))
+          print('Forced issue:', '${{ github.event.inputs.force_issue }}')
+          "
+
+      - name: Generate brief
+        env:
+          X_API_KEY:              ${{ secrets.X_API_KEY }}
+          X_API_SECRET:           ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN:         ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET:  ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          NETLIFY_TOKEN:          ${{ secrets.NETLIFY_TOKEN }}
+          NETLIFY_SITE_ID:        ${{ secrets.NETLIFY_SITE_ID }}
+          SERPER_API_KEY:         ${{ secrets.SERPER_API_KEY }}
+        run: python3 scripts/generate_brief.py
+
+      - name: Commit & push updated files
+        run: |
+          git config user.name  "Creekstone Bot"
+          git config user.email "bot@creekstone.vc"
+          git add -A
+          git diff --staged --quiet || \
+            git commit -m "🤖 Auto-brief $(date +'%Y-%m-%d') [skip ci]"
+          git push
+
+      - name: Summary
+        run: |
+          echo "### ✅ Brief generated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🌐 **Live:** https://creekstone-brief.netlify.app/" >> $GITHUB_STEP_SUMMARY
+          echo "🕐 **SGT:** $(TZ=Asia/Singapore date +'%Y-%m-%d %H:%M')" >> $GITHUB_STEP_SUMMARY
