@@ -18,7 +18,7 @@ from pathlib import Path
 # ── 配置 ─────────────────────────────────────────────────────────
 DASH_DIR       = Path(__file__).parent.parent
 STATE_FILE     = DASH_DIR / "scripts" / "state.json"
-NETLIFY_SITE   = os.environ.get("NETLIFY_SITE_ID", "f08316b5-d2b4-451e-8a75-b2edad9b2a14")
+NETLIFY_SITE   = os.environ.get("NETLIFY_SITE_ID", "f08316b5-d2b4-451e-8a75-b2edad9b2a14").strip()
 NETLIFY_URL    = "https://creekstone-brief.netlify.app/"
 WINDOW_HOURS   = 52   # 覆盖过去 52 小时（双日报，留一点 overlap）
 
@@ -503,8 +503,9 @@ def main():
     print(f"Time: {datetime.now(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M SGT')}")
 
     # 读凭证
-    creds = load_creds()
-    netlify_token = os.environ.get('NETLIFY_TOKEN', '')
+    # strip 所有凭证防止换行符
+    creds = {k: v.strip() for k, v in load_creds().items()}
+    netlify_token = os.environ.get('NETLIFY_TOKEN', '').strip()
 
     # 读状态
     state      = load_state()
