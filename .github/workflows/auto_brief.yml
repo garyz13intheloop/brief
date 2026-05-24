@@ -13,6 +13,10 @@ on:
         required: false
         default: ""
 
+# 允许 workflow 写入仓库
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
