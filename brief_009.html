@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第009期 · 2026-05-19~22</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style></head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 5月刊</div></a></div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">本月期刊</div>
+    <a class="sb-item" href="brief_010.html"><span class="sb-dot" style="background:#E05252"></span>第010期 · 05-25~27 🔥</a>
+    <a class="sb-item active" href="brief_009.html"><span class="sb-dot" style="background:#52C47A"></span>第009期 · 05-19~22</a>
+    <a class="sb-item" href="brief_008.html"><span class="sb-dot" style="background:#5B8FE8"></span>第008期 · 05-22~24</a>
+    <a class="sb-item" href="brief_007.html"><span class="sb-dot" style="background:#9B7FE8"></span>第007期 · 05-19~22</a>
+    <a class="sb-item" href="brief_006.html"><span class="sb-dot" style="background:#666"></span>第006期 · 05-17~19</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div><div class="topbar-title">Creekstone Intelligence Brief</div>
+  <div class="topbar-sub">第 009 期 · 2026-05-19 ~ 05-22 · 周三刊 · 22 KOL 全量扫描 · I/O 官方大发布 + 科学 AI 突破</div></div>
+  <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)"></div>
+</div>
+<div class="content" id="mc">
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">投资热点</div></div>
+  <div class="stat"><div class="stat-n">8</div><div class="stat-l">产品发布</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">KOL 观点</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">融资事件</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">深度阅读</div></div>
+  <div class="stat"><div class="stat-n">22</div><div class="stat-l">KOL 覆盖</div></div>
+</div>
+
+<!-- ① 投资热点 -->
+<div class="section" id="trends">
+<div class="sec-head"><div class="sec-title">🔥 硅谷投资热点趋势</div><div class="sec-desc">本期焦点：Karpathy 加入 Anthropic 重弹、OpenAI Erdős 80年难题突破、Google I/O 官方全面落地</div></div>
+<hr class="sec-rule">
+<div class="trend-grid">
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">本期最强 · 历史性</span>
+  <div class="tcard-title">Andrej Karpathy 加入 Anthropic 预训练团队：♥148,426，他选择 Anthropic 的深刻产业含义——向「用 AI 自动化训练研究本身」下注</div>
+  <div class="tcard-body">2026-05-19（Google I/O 开幕同日），OpenAI 联合创始人、前 Tesla AI 总监 Andrej Karpathy 宣布加入 Anthropic。这一动荡性的重磅加盟吸引了全网 ♥148,426 的惊人互动。<br><br><strong>具体职责：</strong>他加入了 Nick Joseph（Anthropic 联合创始人、Claude pre-training 系统总架构师）治下的预训练团队，并不是以「顾问」或「科学家」的虚职入局，而是要在公司内部构建一个崭新的预训练研究团队：<strong>用 Claude 对前沿 LLM 研究和训练本身进行自动化与加速</strong>。这标志着 Anthropic 已经正式把「Recursive Self-Improvement（递归自我改进：模型训练模型、模型编写微调代码、模型设计 pre-training 实验）」作为最重要的技术突破口。</div>
+  <div class="tcard-impl">Karpathy 加入 Anthropic 的投资背书极高：第一，这说明他认为 Anthropic 当前在前沿基础模型的架构严肃性上已经超过了 OpenAI；第二，这意味着「模型训练模型」将是走向 AGI 期间最快速的智力获取路径，垂直 Agent 在其中可以复用这套自我改进原则（比如 self-learn）。</div>
+</div>
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tbg bt">科学 AI 突破</span>
+  <div class="tct">OpenAI 通用推理模型突破 Paul Erdős Planar Unit Distance 问题：「这是通用 AI 首次自主推翻人类 80 年的数学信念」</div>
+  <div class="tcb">2026-05-20，Sam Altman（♥6,626）：「a general-purpose model solved a major open problem in mathematics. we'll be saying this a lot over the coming years.」<br><br>具体事实：OpenAI 的内部大型通用推理模型，在没有专门训练或灌入数学公式的情况下，解决了 1946 年 Paul Erdős（数学大师保罗·埃尔德什）提出的平面单位距离问题——数学界 80 年来一直坚信在平面上放 n 个点、最多能形成 n^{4/3} 数量级的单位距离对（最优构型类似于方格）。OpenAI 模型打破了这一限制，发现并证明了一整族全新的非方格构型具有更高的距离密度。<br><br>这一突破得到了顶尖组合数学家 Noga Alon（以色列理工）、Melanie Wood（哈佛）以及 Thomas Bloom（Erdos Problems 网站主理人）的公开同行评审背书，并在 Nature 的同周期讨论中被称为「a milestone for mathematical reasoning」。</div>
+  <div class="tcard-impl">通用大模型能够自主在最抽象的基础学科上产生「真正的智识突破」，这是 AI 从「知识搬运工（ autocomplete）」到「知识创造者（reasoner）」的根本性迈步。AI for Science 的天花板被拉到了以前无法想象的高度。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-trend">Google I/O 复盘</span>
+  <div class="tcard-title">Google I/O 2026 开启：以 Gemini 3.5 Flash 驱动 Antigravity 2.0，以及 Gemini Omni（真正的全模态世界模型）</div>
+  <div class="tcard-body">Google I/O（05-19）全套升级落地：① <strong>Gemini 3.5 Flash</strong>：全新的 AI 模式默认模型，具有极高的推理速度和效率（intelligence per compute 概念），今日开始全面接管 Google 的 Chrome 插件和 Workspace；② <strong>Gemini Omni</strong>：真正的「全多模态统一模型」——可输入文字/音频/图像/视频的任意组合，瞬时生成能够进行实时互动的 3D/视频拟真世界（首发 Demo：GoldenEye 多人死斗 3D 模拟，@emollick：这是完全不同的多模态架构）；③ <strong>Google Antigravity 2.0</strong>：一期后立马扩容 3 倍限制，显示了极高的工程进展。</div>
+  <div class="tcard-impl">Google 本次展示了它无与伦比的基础设施和生态整合能力。Gemini Omni 不只是视频工具，它是一个世界模型，预示了车载、机器人、和端侧设备（Android XR Glasses）真正有了一个能够「理解物理现实」的底座。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-debate">地缘政策</span>
+  <div class="tcard-title">Andrew Ng（♥11,397）痛批白宫「绿卡新政」Capricious Attack：AI 全球人才之争已经成为美国最大的软肋</div>
+  <div class="tcard-body">@AndrewYNg 获得了本本周第二高的 X 互动。他的原话：白宫的新政策（强制要求高级技术移民出境才能申请 permanent residency）是「Capricious attack on legal immigration... It will hurt families, leave us with fewer scientists, and hurt American competitiveness in AI」。<br><br>这一帖子在 X、LinkedIn 和 Silicon Valley 印裔企业家群体中引发巨大对立，Zoho 创始人 Sridhar Vembu 等同步发推警告，认为这严重剥夺了移民的「自尊心」。</div>
+  <div class="tcard-impl">技术无国界但人才有。「人才获取难度」正在成为除「算力」以外美国大模型公司的最严酷物理限制口径。如果本轮移民政策真向这个粗暴方向实施，欧洲和亚洲开源 lab（Qwen / GLM 生态）在未来 2-3 年的相对人才溢价会扩大。Creekstone 应该对非美团队、特别是主权 AI 投资逻辑多一分倾斜。</div>
+</div>
+
+</div>
+</div>
+
+<!-- ② 重大产品发布 -->
+<div class="section" id="launches">
+<div class="sec-head"><div class="sec-title">🚀 重大产品发布</div><div class="sec-desc">本期以 OpenAI Codex 大招 + Google I/O 技术细节 + X 明星新品</div></div>
+<hr class="sec-rule">
+<div class="filters">
+  <button class="fbtn on" onclick="filterL(this,'all')">全部</button>
+  <button class="fbtn" onclick="filterL(this,'openai')">OpenAI</button>
+  <button class="fbtn" onclick="filterL(this,'google')">Google I/O</button>
+  <button class="fbtn" onclick="filterL(this,'startup')">Startup</button>
+</div>
+<div class="launch-list" id="launchList">
+
+<div class="lcard" data-cat="openai">
+<div class="lcard-head">
+  <div class="lcard-icon">💻</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://techcrunch.com/2026/05/14/openai-says-codex-is-coming-to-your-phone/" target="_blank">OpenAI Codex Major Release · 移动 App 集成 + 30天免费</a></div>
+    <div class="lcard-who">OpenAI · 2026-05-13 · @sama ♥21,357 + ♥10,063</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">Coding Agent</span><span class="tag tag-infra">B2C 反攻</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">OpenAI 将其旗舰 Coding Agent — Codex 正式内置于 ChatGPT iOS 和 Android 手机客户端。并在接下来 30 天内提供完全免费的 20-turn 级别高推理额度测试。这一举动，是对 Anthropic 在企业卡数据（Ramp 34.4% 超越 OpenAI 32.3%）上的直接回应。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <h5>为什么 OpenAI 选择「Codex 进手机」</h5>
+    <p>行业之前在思考，你拿着手机屏幕，写什么代码？但 OpenAI 这次产品设计的逻辑很清晰：手机版不是让你在手机上「手写代码」，而是作为<strong>AI 开发团队的移动端遥控器</strong>：</p>
+    <ul style="padding-left:14px;margin:6px 0;font-size:12px;color:var(--t2)">
+      <li><strong>审核（Review Mode）</strong>：你在吃饭或等飞机，电脑在后台（Codex Mac / CLI）跑着多步骤重构，出错或需要 approve 时，手机 ChatGPT App 弹出通知，输入自然语言就能纠偏；</li>
+      <li><strong>指令下发（Goal Command）</strong>：发送「/goal 帮我昨天的那个 repo 写一套 unit test，覆盖率要达到 90%」——后台自动创建 workspace sandbox 并开始跑；</li>
+      <li><strong>30天免费</strong>：sama 亲自发帖推荐，「for the next 30 days, we are giving codex...」是在用 ChatGPT 品牌（最大消费者 AI）反吸 Claude Code 的月费开发者用户。</li>
+    </ul>
+    <h5>计费改革：彻底干掉座席费（Seat Fee）</h5>
+    <p>OpenAI 宣布，新版 Codex 彻底废除每人 $20-$100 级别的座席固定费，改用「纯用量（token-based）」计费。这是极其聪明的一手：对于小团队或测试用户，不再需要每个月为没怎么用过的账号付高额订阅，用多少付多少，直接增加了中小型团队的采纳意愿。</p>
+  </div>
+  <a class="lcard-link" href="https://techcrunch.com/2026/05/14/openai-says-codex-is-coming-to-your-phone/" target="_blank">→ TechCrunch 报道</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="google">
+<div class="lcard-head">
+  <div class="lcard-icon">🔮</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://mashable.com/article/gemini-omni-flash-ai-video-generation-google-io-2026" target="_blank">Google Gemini Omni — 全模态世界模型</a></div>
+    <div class="lcard-who">Google Cloud · 2026-05-19 · @OfficialLoganK ♥5,974</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-model">世界模型</span><span class="tag tag-vid">📹</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">Google 最具野心的模型之一。不同于以往的「视频生成」（text → video），Omni 允许输入文字/音频/图像/视频的任意组合，实时生成并编辑一个能进行 3D 互动的世界。第一个开放 preview 的版本叫 Gemini Omni Flash，对标 Sora 且能在设备端高效执行。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <h5>何为「真正的多模态」</h5>
+    <p>@emollick（♥2,787）对 Gemini Omni 的评价切中了要害：现在的所谓多模态视频（如 Sora），底层是「模态转换的 pipeline」（文字通过编码转成图像扩散，声音通过独立通道对齐）。Gemini Omni 改写了这条路：在同一个注意力空间里同时接收文字、声音、视频信息，对世界有了一个「综合的物理意义上的理解」，然后再输出。它不是在「生视频」，它是在「模拟世界行为」。</p>
+    <h5>GoldenEye 多人死斗 3D 模拟</h5>
+    <p>I/O 的 Demo 令人震撼：多个人和 Agent 被放在同一个由 Gemini Omni 实时模拟生成的 GoldenEye（经典 N64 游戏）3D 世界里进行实时死斗，光影、物理反馈、Agent 决策完全是 1:1 的真实实时渲染。这个 Demo 展示了：</p>
+    <ul>
+      <li>AI 能够理解复杂的、实时的多人互动动力学；</li>
+      <li>AI 可以在没有确定性游戏引擎的情况下，直接用大模型「仿真一个 3D 现实」；</li>
+      <li>这正是 OpenAI 年初提出的「World Simulator」的第一次高置信度展现。</li>
+    </ul>
+    <h5>产品方向</h5>
+    <p>先发布 Omni Flash（重在速度和部署效率），Pro 版本（重在极致画质）预计下个月发布。同时：Gemini 3.5 Flash 已经被打包，作为默认模型驱动 AI Mode 搜索和 Google AI Studio。Google 的大模型矩阵已经完全形成了「Flash 走量，Pro 走质」的组合拳。</p>
+  </div>
+  <a class="lcard-link" href="https://mashable.com/article/gemini-omni-flash-ai-video-generation-google-io-2026" target="_blank">→ Mashable 深度设计</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">🎬</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/Creatify_AI/status/2056431644056441007" target="_blank">Creatify Agent · 广告创意多 Agent 编排系统 📹</a></div>
+    <div class="lcard-who">Creatify AI · @Creatify_AI ♥1,486 · 2026-05-19 · 📹 有视频</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">Video Agent</span><span class="tag tag-vid">📹</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「Introducing Creatify Agent. The world's first multi-agent orchestrator that makes viral ads without AI slop.」从单个 brief 出发，多个 Agent 并行协作，生成剧本、选择风格、剪辑、A/B 变体，交付可以直接上架投放的视频/图片广告。X 上 ♥1,486，RT323，是本周末互动最高的 startup 新品发布。</div>
+  <a class="lcard-link" href="https://x.com/Creatify_AI/status/2056431644056441007" target="_blank">→ X 原帖（含展示视频）</a>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">📹</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/odysseyml/status/2056427523668668643" target="_blank">Odyssey · Agora-1，多人共享的多 Agent 世界模型 📹</a></div>
+    <div class="lcard-who">Odyssey ML · @odysseyml ♥914 · 2026-05-19 · 📹 有视频</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-model">世界模型</span><span class="tag tag-vid">📹</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「Multiple participants — human or AI — can now interact inside the same world simulation, all in real-time. Try our playable research preview today, with Agora-1 simulating a multiplayer GoldenEye deathmatch!」首个在物理机制上，让多个人类和 AI 并行在同一个实时世界模型里交互的系统。X 上优秀反应（♥914）。</div>
+  <a class="lcard-link" href="https://x.com/odysseyml/status/2056427523668668643" target="_blank">→ X 原帖（含可玩 preview 链接）</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="section" id="kols">
+<div class="sec-head"><div class="sec-title">💬 KOL 核心观点</div><div class="sec-desc">22 个账号全量扫描，Karpathy ♥148K 爆帖，sama e15 等深度分析</div></div>
+<hr class="sec-rule">
+<div class="kol-grid">
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">AK</div>
+    <div><div class="kn">Andrej Karpathy</div><div class="kha">@karpathy · 现任 Anthropic 预训练研究员</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 148,426</div><div class="kd">05-19</div></div>
+  </div>
+  <div class="kp">「Personal update: I've joined Anthropic. I think the next few years at the frontier of LLMs will be extremely important and I want to be closer to the action.」</div>
+  <div class="ka">AI 史上最重要的人才加盟之一。Karpathy 去了 Anthropic 预训练团队（向 Nick Joseph 汇报）。他的使命是：[组建新团队，写代码让 Claude 自动优化和加速预训练本身]。这是「AI 做研究，AI 自我提升」的递归方向。他没有选择回 OpenAI，也没有去 Google，说明他认可 Anthropic 作为「纯净 AI lab」的研究品味。这件事在 HN（200+ 评论，item?id=48195873）和北美整个 VC 圈引发大震荡，被认为是 Anthropic 商业霸主化的最强背书。</div>
+  <a class="kcard-link" href="https://x.com/karpathy/status/2056753169888334312" target="_blank">→ X 原帖 · <a href="https://letsdatascience.com/blog/karpathy-joins-anthropic-pretraining-team-may-19-2026" target="_blank" style="color:var(--blue)">LDS 深度文章</a></a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">SA</div>
+    <div><div class="kn">Sam Altman</div><div class="kha">@sama · OpenAI CEO</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 17,152</div><div class="kd">05-20</div></div>
+  </div>
+  <div class="kp">「if this tweet gets 1 like, tibo will reset codex rate limits」</div>
+  <div class="ka">用一个关于 rate limit 的梗获得了超高互动。真实信号面：OpenAI 本期有多条高分帖：♥8,663「three things we are excited about: AGI accelerating research...」，正式在公开文案里使用「AGI」代替「AI」，说明内部对模型能力估价非常高；♥5,492「customers are increasingly asking us for certainty on capacity. as models get better, we expect that they become more useful for longer-horizon tasks」——企业客户在要求「容量 SLA」，OpenAI 必须像 AWS 提供 Reserved Instance 一样提供容量包，这是企业级部署的新商业模式成熟信号。</div>
+  <a class="kcard-link" href="https://x.com/sama/status/2056804900017947046" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">LK</div>
+    <div><div class="kn">Logan Kilpatrick</div><div class="kha">@OfficialLoganK · Google AI Studio 负责人</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 7,396</div><div class="kd">05-19</div></div>
+  </div>
+  <div class="kp">「Welcome to Gemini 3.5 Flash, our most powerful model to date. It pushes the frontier of intelligence per compute.」</div>
+  <div class="ka">Logan 本期 4 条高分帖全都是 I/O 官方发布，合计 ♥19,609。最重要的除了 Gemini 3.5 Flash，还有 ♥5,974 宣布 Gemini Omni（全模块视频/图像/音视频统一理解）和 ♥4,055「Today we are starting to roll out the biggest upgrade to the Google Search box in over 25 years」——Search AI Mode 时代正式到来。这四条帖子几乎构成了 Google I/O 在 X 上的官方最大分发节点。同时：他透露 Gemini 3.5 Flash 已驱动 Antigravity 2.0，且用量额度下周会有多次 3x 扩容（♥1,428），说明开发者反应极好。</div>
+  <a class="kcard-link" href="https://x.com/OfficialLoganK/status/2056792266514329914" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">AN</div>
+    <div><div class="kn">Andrew Ng</div><div class="kha">@AndrewYNg · DeepLearning.AI 负责人</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 11,397</div><div class="kd">05-22</div></div>
+  </div>
+  <div class="kp">「The new White House policy requiring green card applicants to apply from outside the US is a capricious attack on legal immigration. It will hurt families, leave us with fewer doctors, teachers and scientists, and hurt American competitiveness in AI.」</div>
+  <div class="ka">Andrew Ng 站在国家高度，痛斥白宫绿卡新政。这不是技术帖，但获得了上万 likes 的强大技术界共鸣。白宫要求 H-1B 或 绿卡申请人必须先出境，对在美大厂和高校的非美籍技术研究人员（特别是中印背景）是个极大打击。如果这些顶级人才流失或选择不去美国，美国大模型的绝对研究领先地位（依靠从全球吸纳人才筑起）会比预期更快坍塌。这是 2026 年技术圈感受最强烈的政策黑天鹅之一。</div>
+  <a class="kcard-link" href="https://x.com/AndrewYNg/status/2057907324380217821" target="_blank">→ X 原帖</a>
+</div>
+
+<!-- 补充信号 -->
+<div class="kcard" style="grid-column:1/-1;background:var(--s2);border:1px solid var(--bd2)">
+  <div style="font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">本期补充信号 · 开发者讨论 + HN + 论文</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:6px">📊 OpenAI Erdős 数学突破的行业反应</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">OpenAI 通用模型解决 1946 年 Paul Erdős 平面单位距离问题。行业反应：① 数学家 Thomas Bloom（主理 Erdos Problems 网站，此前公开批评过 OpenAI 的伪数学声称）本次在 The Guardian 报道里主动验证其正确性，称「这是 AI 第一次独立在最高级的组合数学子问题里，推翻了人类 80 年来的默认设计（方格），画出了更科学的构型，突破并证明了新上限」；② @emollick（♥3,163）用「人类专家工作折算」评估其 compute 开销：认为 AI 消耗了约 1.2~120 小时的人类专家智力算力。这绝非 autocomplete 逻辑，而是真正的 reasoning。</div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--blue);margin-bottom:6px">🇨🇳 中国 AI · Kimi PH 霸榜</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">本期中国 AI 对标：Kimi K2.6 在 Product Hunt 4 月榜上登顶「Open-source SOTA for long-horizon coding and agent swarms」。Qwen 3.6 MoE 本地运行在 MacBook 的流行。北美技术圈开始形成共识：中国模型在 coding/harness 任务上的性价比已经没有对手，甚至开始输出全球。在 I/O 2026 后续的讨论中，许多欧洲和北美 indie 开发者在推荐「如果付不起 Claude/OpenAI API 高额的并发费用，换用 Qwen 或 Kimi 是完全合理的生产替代」。</div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;color:var(--green);margin-bottom:6px">💻 HN 讨论：Karpathy Joining Anthropic</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.7">HN（item?id=48195873）本期是 Karpathy 人才变动的大讨论：「Karpathy joining Anthropic means pretraining loops are the next battleground for automation」——讨论认为，普通的 Agent 只在 inference 层做文章，但真要把 Agent 能力推到下一代，需要把「Agent 本身教模型自己预训练和设计 ablation」的机制做出来。Karpathy 在 OpenAI 做过 GPT-3 下的大规模训练，也是 Tesla 的 FSD training 集群总构架师。由于他是斯洛伐克人，有移民背景，白宫绿卡新政和他的个人移动路径，在 HN 被并论为「Capricious migration rule hurts AGI progress」。<br><br>→ <a href="https://news.ycombinator.com/item?id=48195873" target="_blank" style="color:var(--blue)">HN: Karpathy joins Anthropic</a></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="section" id="funding">
+<div class="sec-head"><div class="sec-title">💰 融资动态</div><div class="sec-desc">本期以 I/O 产品信号和大厂合作信号为主</div></div>
+<hr class="sec-rule">
+<div class="fund-list">
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co">Isomorphic Labs · AI 药物发现平台</div><div class="fcard-sub">Google DeepMind 分拆 · CEO Demis Hassabis · 伦敦</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$2.1B</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Series B</span><span class="sigtag">★★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">领投</div><div class="ffield-v">Thrive Capital</div></div>
+    <div class="ffield"><div class="ffield-l">参投</div><div class="ffield-v">Alphabet · GV · MGX · Temasek · CapitalG · 英国主权基金</div></div>
+    <div class="ffield"><div class="ffield-l">技术亮点</div><div class="ffield-v">IsoDDE：统一 AI 药物设计系统，声称在多模态（小分子、抗体、生物制剂）上超越 AlphaFold3</div></div>
+    <div class="fcard-why">生命科学 AI 领域有史最小组（数人分拆）拿出的最大融资金额。IsoDDE 能够跳出「结构预测」（AlphaFold3）本身、直接模拟和「自适应生成抗体/靶点结合的高活性候选分子」，是 AI 药物发现的重要断代事件。Thrive Capital 连续两次领投，MGX + Temasek 参投，说明这是一个「国家主权级」的生命科学算力军备竞赛。</div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑤ 技术前沿 -->
+<div class="section" id="tech">
+<div class="sec-head"><div class="sec-title">🔬 技术与学术前沿</div></div>
+<hr class="sec-rule">
+<div class="tech-list">
+
+<div class="tcard2">
+  <div class="tcat">数学 AI 突破</div>
+  <div class="t2t">OpenAI Erdős planar unit distance 问题 disproof 的技术意义：为什么它比一般的 GPT 答题令人信服得多</div>
+  <div class="t2b">Paul Erdős 在 1946 年提出：平面放 n 个点，最多能形成多少对距离为 1 的点对。顶级数学家一直以为最优极限是 $n^{4/3}$，构型等价于方格（square grids）。OpenAI 模型发现了完全不同的图形组合，其连接对数直接打破了这一传统假设。Thomas Bloom 评：「This is the first time AI has autonomously disproved a central human mathematical belief in high-level combinatorics.」</div>
+  <div class="t2i">通用推理模型（不是拼凑公式的数学专项系统）通过推理找出反例——这被认为最接近「AI 做出科学新发现」的行为。它的算力消耗（Mollick 分析为 1.2-120 小时专家工作等价，♥3,163）也开始被看作有竞争力的研发成本。</div>
+  <a class="t2c-link" href="https://techcrunch.com/2026/05/20/openai-claims-it-solved-an-80-year-old-math-problem-for-real-this-time" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ TechCrunch 报道</a>
+</div>
+
+</div>
+</div>
+
+<!-- ⑥ 深度阅读 -->
+<div class="section" id="reads">
+<div class="sec-head"><div class="sec-title">📚 深度阅读</div></div>
+<hr class="sec-rule">
+<div class="read-list">
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src media">核心分析</div>
+      <div class="rcard-title"><a href="https://letsdatascience.com/blog/karpathy-joins-anthropic-pretraining-team-may-19-2026" target="_blank">Andrej Karpathy Joined Anthropic: The Pre-training Team Hire of the Decade — Let's Data Science</a></div>
+    </div>
+    <div class="rcard-date">Let's Data Science · 05-19</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rcard-short">LDS 对 Karpathy 加入 Anthropic 最深度的多维度分析。为什么他是「全人类少数几个拥有 frontier-scale 训练常识的人之一」，这一招募为何标志着 Anthropic 开始朝「用 AI 自动编写模型训练实验」的目标进发。</div>
+    <div class="rcard-pts">
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>职业生涯的三次杠杆选择</strong>：GPT 时代的 OpenAI → Tesla Autopilot 神经网络总架构师 → 独立 Eureka Labs → Anthropic 预训练研究员。每一次他都是去那个「AI 进展杠杆最大」的物理原点。</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>用 Claude 自动化预训练</strong>：Nick Joseph 下辖的预训练团队，目标不是产品或推理优化，是设计 AI 自我写实验、分析 loss、决定超参数、自我训练的闭环系统。</span></div>
+      <div class="rcard-pt"><span class="rcard-bull">▸</span><span><strong>为什么 AGI 不远了的信仰信号</strong>：以 Karpathy 拥有数十万粉丝的可怕影响力，他在 2026 年选择结束独立状态，发推用「I want to be closer to the action」表达「极其重要的几年」，说明他在核心层预判了非线性的能力跳跃。</span></div>
+    </div>
+    <button class="expand" onclick="toggleDetail(this)">展开详细版内容 ↓</button>
+    <div class="rcard-detail">
+      <h4>「The Hire of the Decade」— 为什么 Karpathy 是独特的</h4>
+      <p>在 AI 圈，有两类顶级人才：写算法论文的研究者，以及真实领导过一万块 GPU 在几个月内跑完 pre-training run 并处理所有机器崩溃、数据流瓶颈、超参数漂移的「实战将军」。</p>
+      <p>Karpathy 两者都是。他在 OpenAI 训练了早期 GPT 系统，在 Tesla 领导了全美最大的自动驾驶神经网络训练集群（包含一万多块 A100）的工程实现。他的加入补齐了 Anthropic 在「极限规模训练工程」上的最后一个短板。</p>
+      <h4>「用 AI 训练 AI」的递归方向（LDS 分析）</h4>
+      <blockquote>「The explicit framing of using Claude to accelerate pre-training research suggests Anthropic is betting that recursive self-improvement — where models can design, run, and analyze their own training experiments — is the next capability checkpoint. An automated training research loop would decrease latency of base-model progress by an order of magnitude.」</blockquote>
+      <p>翻译：「明确指出的'用 Claude 来加速预训练研究'框架表明，Anthropic 正把赌注押在'递归自我改进'（模型可以自己设计、运行并分析自己的训练实验）上作为下一个能力关口。一个自动化的训练研究闭环，将把基础模型开发的迭代耗时降低一个数量级。」</p>
+    </div>
+    <a class="rcard-link" href="https://letsdatascience.com/blog/karpathy-joins-anthropic-pretraining-team-may-19-2026" target="_blank">→ Let's Data Science 完整分析</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 007 期 · 2026-05-19~22 · 周三刊<br>
+  数据源：X OAuth1（22 KOL）· Axios · CNBC · Let's Data Science · TechCrunch · The Guardian · Times of India
+</div>
+</div></div></div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function filterL(btn,cat){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('#launchList .lcard').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat.includes(cat))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script></body></html>
