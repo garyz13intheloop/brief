@@ -9,11 +9,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65;min-height:100vh}
 a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
-
 .layout{display:flex;min-height:100vh}
 .sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
 .main{margin-left:220px;flex:1;min-width:0}
-
 .sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
 .sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
 .sb-sub{font-size:11px;color:var(--t3);margin-top:3px}
@@ -24,55 +22,37 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
 .sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .sb-divider{border:none;border-top:1px solid var(--bd);margin:6px 0}
-
-.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-title{font-size:16px;font-weight:700}
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
 .topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
 .search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
 .search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
 .search input::placeholder{color:var(--t4)}
-
-.content{padding:24px 28px}
-
-/* Issue grid */
-.issues-header{margin-bottom:20px}
-.ih-title{font-size:20px;font-weight:700;margin-bottom:4px}
+.content{padding:22px 24px}
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px}
+.issues-header{margin-bottom:16px}
+.ih-title{font-size:18px;font-weight:700;margin-bottom:4px}
 .ih-desc{font-size:12px;color:var(--t3)}
-
-.issue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:36px}
-.issue-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:18px;cursor:pointer;transition:all .15s;text-decoration:none;display:block}
+.issue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:32px}
+.issue-card{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;cursor:pointer;transition:all .15s;text-decoration:none;display:block}
 .issue-card:hover{border-color:var(--gold2);transform:translateY(-2px)}
 .issue-card.latest{border-color:rgba(201,168,76,.4);background:linear-gradient(135deg,rgba(201,168,76,.06),var(--s1))}
 .ic-tag{font-size:10px;font-weight:600;color:var(--gold);background:var(--gold3);padding:2px 8px;border-radius:3px;display:inline-block;margin-bottom:10px;letter-spacing:.05em}
 .ic-tag.hist{color:var(--t3);background:var(--s2)}
 .ic-period{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--t1)}
-.ic-date{font-size:11px;color:var(--t3);margin-bottom:12px}
-.ic-signals{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.ic-sig{font-size:12px;color:var(--t2);display:flex;align-items:flex-start;gap:6px;line-height:1.55}
+.ic-date{font-size:11px;color:var(--t3);margin-bottom:10px}
+.ic-signals{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.ic-sig{font-size:11.5px;color:var(--t2);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
 .ic-bull{color:var(--gold);font-size:11px;flex-shrink:0;margin-top:1px}
 .ic-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--bd);padding-top:10px;margin-top:4px}
 .ic-sources{font-size:10px;color:var(--t4)}
 .ic-read{font-size:11px;color:var(--blue);font-weight:600}
-
-/* Stats */
-.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px}
-.stat{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center}
-.stat-n{font-size:22px;font-weight:800;color:var(--gold)}
-.stat-l{font-size:10px;color:var(--t3);margin-top:3px;letter-spacing:.03em}
-
-/* Hot topics across all issues */
-.hot-topics{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:18px;margin-bottom:28px}
-.ht-title{font-size:14px;font-weight:700;margin-bottom:12px}
-.ht-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.ht-item{background:var(--s2);border-radius:8px;padding:10px 12px}
-.ht-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;display:inline-block;margin-bottom:6px}
-.ht-hot{background:rgba(224,82,82,.12);color:var(--red)}.ht-trend{background:rgba(201,168,76,.12);color:var(--gold)}.ht-tech{background:rgba(155,127,232,.12);color:var(--purple)}
-.ht-name{font-size:12.5px;font-weight:600;margin-bottom:4px}
-.ht-desc{font-size:11.5px;color:var(--t2);line-height:1.55}
-
-.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:24px;line-height:1.8}
+.footer{text-align:center;padding:24px 0 40px;color:var(--t4);font-size:11px;border-top:1px solid var(--bd);margin-top:20px;line-height:1.8}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
-@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.issue-grid{grid-template-columns:1fr}.ht-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.sidebar{display:none}.main{margin-left:0}.issue-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -82,29 +62,32 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 <nav class="sidebar">
   <div class="sb-logo">
     <div class="sb-brand">CREEKSTONE</div>
-    <div class="sb-sub">Intelligence · 5月刊</div>
+    <div class="sb-sub">Intelligence · 5~6月刊</div>
   </div>
   <div class="sb-nav">
-    <div class="sb-section">本月期刊</div>
     <a class="sb-item active" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>期刊总览</a>
-    <a class="sb-item" href="brief_010.html"><span class="sb-dot" style="background:var(--red)"></span>第010期 · 05-25~27 🔥</a>
-    <a class="sb-item" href="brief_009.html"><span class="sb-dot" style="background:var(--green)"></span>第009期 · 05-24~25</a>
-    <a class="sb-item" href="brief_008.html"><span class="sb-dot" style="background:#5B8FE8"></span>第008期 · 05-22~24</a>
-    <a class="sb-item" href="brief_007.html"><span class="sb-dot" style="background:#9B7FE8"></span>第007期 · 05-19~22</a>
+    <div class="sb-section">6月刊 · 最新5期</div>
+    <a class="sb-item" href="brief_015.html"><span class="sb-dot" style="background:#E05252"></span>第015期 · 06-05~08 🔥</a>
+    <a class="sb-item" href="brief_014.html"><span class="sb-dot" style="background:#52C47A"></span>第014期 · 06-03~05</a>
+    <a class="sb-item" href="brief_013.html"><span class="sb-dot" style="background:#5B8FE8"></span>第013期 · 06-01~03</a>
+    <a class="sb-item" href="brief_012.html"><span class="sb-dot" style="background:#9B7FE8"></span>第012期 · 05-29~06-01</a>
+    <a class="sb-item" href="brief_011.html"><span class="sb-dot" style="background:#C9A84C"></span>第011期 · 05-27~29</a>
+    <hr class="sb-divider">
+    <div class="sb-section">5月刊</div>
+    <a class="sb-item" href="brief_010.html"><span class="sb-dot" style="background:#666"></span>第010期 · 05-25~27</a>
+    <a class="sb-item" href="brief_009.html"><span class="sb-dot" style="background:#666"></span>第009期 · 05-22~24</a>
+    <a class="sb-item" href="brief_008.html"><span class="sb-dot" style="background:#666"></span>第008期 · 05-22~24</a>
+    <a class="sb-item" href="brief_007.html"><span class="sb-dot" style="background:#666"></span>第007期 · 05-19~22</a>
     <a class="sb-item" href="brief_006.html"><span class="sb-dot" style="background:#666"></span>第006期 · 05-17~19</a>
-    <a class="sb-item" href="brief_005.html"><span class="sb-dot" style="background:var(--green)"></span>第005期 · 05-15~17</a>
-    <a class="sb-item" href="brief_004.html"><span class="sb-dot" style="background:var(--blue)"></span>第004期 · 05-13~15</a>
-    <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:var(--purple)"></span>第003期 · 05-11~13</a>
+    <a class="sb-item" href="brief_005.html"><span class="sb-dot" style="background:#666"></span>第005期 · 05-15~17</a>
+    <a class="sb-item" href="brief_004.html"><span class="sb-dot" style="background:#666"></span>第004期 · 05-13~15</a>
+    <a class="sb-item" href="brief_003.html"><span class="sb-dot" style="background:#666"></span>第003期 · 05-11~13</a>
     <a class="sb-item" href="brief_002.html"><span class="sb-dot" style="background:#666"></span>第002期 · 05-08~10</a>
     <a class="sb-item" href="brief_001.html"><span class="sb-dot" style="background:#666"></span>第001期 · 05-05~07</a>
-    <a class="sb-item" href="brief_000.html"><span class="sb-dot" style="background:#666"></span>第000期 · 05-01~04</a>
     <hr class="sb-divider">
     <div class="sb-section">历史归档</div>
-    <a class="sb-item" href="brief_hist1.html"><span class="sb-dot" style="background:var(--t4)"></span>04-24~27</a>
-    <a class="sb-item" href="brief_hist2.html"><span class="sb-dot" style="background:var(--t4)"></span>04-18~22</a>
-    <hr class="sb-divider">
-    <div class="sb-section">工具</div>
-    <a class="sb-item" href="#" onclick="document.getElementById('searchInput').focus()"><span class="sb-dot" style="background:var(--t3)"></span>全库搜索</a>
+    <a class="sb-item" href="brief_hist1.html"><span class="sb-dot" style="background:#444"></span>04-24~27</a>
+    <a class="sb-item" href="brief_hist2.html"><span class="sb-dot" style="background:#444"></span>04-18~22</a>
   </div>
 </nav>
 
@@ -113,338 +96,230 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
   <div class="topbar">
     <div>
       <div class="topbar-title">Creekstone Intelligence</div>
-      <div class="topbar-sub">周一 / 周三 / 周五 · 双日报 · 北美 AI 趋势情报</div>
+      <div class="topbar-sub">周一 / 周三 / 周五 · 双日报 · 北美 AI 趋势情报 · 共 16 期</div>
     </div>
     <div class="search">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="searchInput" type="text" placeholder="搜索产品、人物、公司、趋势…">
+      <input id="searchInput" type="text" placeholder="搜索期刊…" oninput="doSearch(this.value)">
     </div>
   </div>
 
   <div class="content">
-
-    <!-- Stats -->
-    <div class="stats-row">
-      <div class="stat"><div class="stat-n">11</div><div class="stat-l">期刊数量</div></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">16</div><div class="stat-l">期刊总数</div></div>
       <div class="stat"><div class="stat-n">36</div><div class="stat-l">KOL 覆盖</div></div>
-      <div class="stat"><div class="stat-n">50+</div><div class="stat-l">产品发布</div></div>
-      <div class="stat"><div class="stat-n">30+</div><div class="stat-l">融资事件</div></div>
-      <div class="stat"><div class="stat-n">20+</div><div class="stat-l">深度阅读</div></div>
+      <div class="stat"><div class="stat-n">80+</div><div class="stat-l">产品发布</div></div>
+      <div class="stat"><div class="stat-n">40+</div><div class="stat-l">融资事件</div></div>
+      <div class="stat"><div class="stat-n">30+</div><div class="stat-l">深度阅读</div></div>
     </div>
 
-    <!-- Hot topics across all issues -->
-    <div class="hot-topics">
-      <div class="ht-title">🔥 本月持续追踪的核心主题</div>
-      <div class="ht-grid">
+    <!-- 6月刊 -->
+    <div class="issues-header">
+      <div class="ih-title">2026 年 6 月 · 最新 5 期</div>
+      <div class="ih-desc">每周一/三/五自动发布。最新内容含 Anthropic $65B 历史级融资、微软独立 7 模型、Devin $26B、Sysdig 首次 AI 真实攻击案例。</div>
+    </div>
+    <div class="issue-grid" id="issueGrid">
 
-        <div class="ht-item">
-          <span class="ht-tag ht-hot">Harness Wars</span>
-          <div class="ht-name">Harness 控制权争夺</div>
-          <div class="ht-desc">从 OpenClaw 封锁（04-04）→ All-In 讨论（04-10）→ Stratechery「Agents Over Bubbles」→ Claude Dreaming（05-06）→ LangSmith Engine（05-13）。谁控制 harness，谁控制 Agent 价值链。这是 2026 年 Q2 最核心的商业战争。</div>
+      <a href="brief_015.html" class="issue-card latest">
+        <span class="ic-tag">最新 · 第 015 期 · 周一</span>
+        <div class="ic-period">Sysdig 首例 AI 自主攻击 + AMD 暴涨 + ChatGPT 印度 10 亿张</div>
+        <div class="ic-date">2026-06-05 ~ 06-08</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">★</span>Sysdig 捕获全球首个 AI Agent 自主入侵：45 分钟完成 AWS 数据脱库</div>
+          <div class="ic-sig"><span class="ic-bull">★</span>@sama ♥10,159：ChatGPT Images 2.0 印度突破 10 亿张里程碑</div>
+          <div class="ic-sig"><span class="ic-bull">★</span>levelsio：13 个最值得在 AI 时代追随的实干派名单爆红</div>
+          <div class="ic-sig"><span class="ic-bull">★</span>Gary Marcus ♥12,675：泡沫 pops 预警 + Starbucks AI 库存下线</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">X×22 · Sysdig · WSJ · Bloomberg</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
 
-        <div class="ht-item">
-          <span class="ht-tag ht-hot">AI Safety Battle</span>
-          <div class="ht-name">AI 安全军备竞赛</div>
-          <div class="ht-desc">Anthropic Mythos → OpenAI Daybreak → Microsoft MDASH。三家同时押注 AI 网络安全，从「研究话题」变成「产品战场」。最终谁在这个垂直建立最强 harness，谁就拥有整个企业安全 Agent 市场。</div>
+      <a href="brief_014.html" class="issue-card">
+        <span class="ic-tag">第 014 期 · 周五</span>
+        <div class="ic-period">Cognition Devin $1B @ $26B + fchollet 盲松鼠理论 + Hassabis AGI 奇点</div>
+        <div class="ic-date">2026-06-03 ~ 06-05</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">▸</span>Cognition (Devin) 融资 $1B @ $26B：3 年暴涨 50x，卖劳动力不卖软件</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>fchollet ♥1,262：Coding Agent = 迷宫里的盲松鼠，约束比自由更重要</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>gregisenberg ♥4,589：旧金山 5 天之悟——硅谷全力押注行业专有 post-training</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Demis Hassabis：AGI 2030，医疗研发从 10 年压缩到 2 周</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">X×22 · TechCrunch · Let's Data Science</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
 
-        <div class="ht-item">
-          <span class="ht-tag ht-trend">AI M&A Wave</span>
-          <div class="ht-name">AI 并购浪潮启动</div>
-          <div class="ht-desc">Cursor × SpaceX $60B 期权（04-22）+ Long Lake $6.3B AI take-private（05-04）。Elad Gil 的「12 个月窗口」论题 + No Priors 播客同期发布。聪明钱开始获利了结，并购窗口打开。</div>
+      <a href="brief_013.html" class="issue-card">
+        <span class="ic-tag">第 013 期 · 周三</span>
+        <div class="ic-period">微软 Build 2026：7 in-house 模型 + MAI-Thinking-1 首推理模型</div>
+        <div class="ic-date">2026-06-01 ~ 06-03</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">▸</span>微软发布 7 个自研 AI 模型，含首个 reasoning 级 MAI-Thinking-1，正式去 OpenAI 化</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Marc Benioff（Salesforce）：「90% AI 创业公司是功能不是公司，会被模型直接消灭」</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>fchollet：AI 提效框架是错误的，真正的价值在于「做以前根本无法做的新事」</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>steipete ♥891：autoreview 是最高 impact skill——自动 PR 审查 + 回归分析</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">X×22 · CNBC · All-In · No Priors</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
 
-        <div class="ht-item">
-          <span class="ht-tag ht-tech">Software 3.0</span>
-          <div class="ht-name">Karpathy: Software 3.0 范式</div>
-          <div class="ht-desc">Karpathy 在 Sequoia AI Ascent 的演讲（04-24，博客 04-30 发布）：context window 是新程序，有些软件「应该停止存在为 app」，可验证性决定 AI 进展速度。这是理解 Agent 赛道的最重要思想框架之一。</div>
+      <a href="brief_012.html" class="issue-card">
+        <span class="ic-tag">第 012 期 · 周一</span>
+        <div class="ic-period">Anthropic $65B @ $965B 估值 + GitHub Copilot 用量计费大地震</div>
+        <div class="ic-date">2026-05-29 ~ 06-01</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">▸</span>Anthropic 完成历史最大单轮 $65B，投后 $965B 超越 OpenAI 成全球第一</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>GitHub Copilot 06-01 强制转用量计费，一个 session 烧掉整月配额，开发者炸锅</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Cognition Devin $1B @ $26B：自主交付型 Agent 拿走应用层最高估值溢价</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Sysdig 捕获首个 live AI 自主入侵：LLM Agent 45 分钟完成 AWS 数据脱库</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">X×22 · WSJ · Bloomberg · HN</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
 
-        <div class="ht-item">
-          <span class="ht-tag ht-trend">Jobs Debate</span>
-          <div class="ht-name">LeCun vs Dario 劳动市场论战</div>
-          <div class="ht-desc">LeCun（04-18，♥21K）→ Andrew Ng（05-12，♥3.7K）→ a16z 文章。「AI 不会消灭就业」叙事在主流媒体转向。NYT 同期刊出反 AI 就业焦虑文章。这个叙事转变将影响整个 AI 行业的估值逻辑和政策走向。</div>
+      <a href="brief_011.html" class="issue-card">
+        <span class="ic-tag">第 011 期 · 周五</span>
+        <div class="ic-period">Apollo $36B 算力债 + Starbucks AI 下线 + Daytona 850K 沙箱/天</div>
+        <div class="ic-date">2026-05-27 ~ 05-29</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">▸</span>Apollo + Blackstone $36B 算力债：AI 历史最大债务交易，算力竞争进入重资产金融化时代</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>星巴克 AI 库存程序运行 9 个月后下线：幻觉问题导致供应链断货，AI 业务 ROI 危机</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Daytona CEO 做客 Latent Space：Agent 每天 850K 次沙箱运行，月增 74%</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Gary Marcus ♥12,675：泡沫预警 Substack 全文 + Uber token 全年爆完未见 ROI</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">X×22 · Bloomberg · Reuters · Gary Marcus Substack</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
 
-        <div class="ht-item">
-          <span class="ht-tag ht-tech">Vertical Agent</span>
-          <div class="ht-name">垂直 Agent 爆发：医疗/法律/金融</div>
-          <div class="ht-desc">Sierra $950M @ $15B（05-08周）+ Aidoc $150M Goldman 领投（05-01）+ NeoCognition $40M seed + YC W26（8+ 医疗 Agent 公司，6+ 法律 Agent 公司）。垂直 Agent 头部公司溢价形成，Sarah Guo 的「post-training 浪潮」预测正在兑现。</div>
-        </div>
-
-      </div>
     </div>
 
-    <!-- Issue grid: Current month -->
+    <!-- 5月刊 -->
     <div class="issues-header">
       <div class="ih-title">2026 年 5 月 · 期刊目录</div>
-      <div class="ih-desc">每期覆盖两天，周一/周三/周五发布。点击进入完整期刊。</div>
+      <div class="ih-desc">涵盖 Karpathy 加入 Anthropic、Google I/O 2026 全复盘、OpenAI Erdős 80 年数学突破、Anthropic 历史首超 OpenAI 企业端。</div>
     </div>
-    <div class="issue-grid">
+    <div class="issue-grid" id="mayGrid">
 
-      <a href="brief_010.html" class="issue-card latest">
-        <span class="ic-tag">最新 · 第 010 期 · 周三 · 自动生成</span>
-        <div class="ic-period">自动扫描：05-25 ~ 05-27</div>
+      <a href="brief_010.html" class="issue-card">
+        <span class="ic-tag">第 010 期 · 周三</span>
+        <div class="ic-period">Demis Hassabis 奇点山脚 + All-In Anthropic $65B 财务深挖</div>
         <div class="ic-date">2026-05-25 ~ 05-27</div>
         <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>@levelsio：My friend's private office / coworking in Lisbon got burglared at night…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@OfficialLoganK：We just launched the ability to build native Android apps directly in Google AI Studio for free!…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@steipete：Folks: when you write skills, ask your agent to be token efficient, relax grammer. I see too many skills that…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@gregisenberg：I just got back from SF and I FEEL INSPIRED.…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@rowancheung：Google DeepMind CEO Demis Hassabis says we’re in the ‘foothills of the singularity’…</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Demis：AGI 2030 + 医疗 AI 压缩新药研发 10 年至 2 周 + 眼镜是 killer form factor</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>All-In Gavin Baker：Anthropic Q2 利润 $559M，OpenAI 盈亏平衡需要 $125B 营收</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Google AI Studio 浏览器端生成 native Android App，彻底取消 SDK 门槛</div>
         </div>
-        <div class="ic-footer">
-          <span class="ic-sources">X×22 · Web Search · GitHub Actions</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
+        <div class="ic-footer"><span class="ic-sources">X×22 · All-In · WSJ · TechCrunch</span><span class="ic-read">阅读全文 →</span></div>
       </a>
 
       <a href="brief_009.html" class="issue-card">
-        <span class="ic-tag">第 009 期 · 周一 · 自动生成</span>
-        <div class="ic-period">自动扫描：05-24 ~ 05-25</div>
-        <div class="ic-date">2026-05-24 ~ 05-25</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>@GaryMarcus：If enough other companies report the same, the bubble pops. 🫧…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@steipete：Folks: when you write skills, ask your agent to be token efficient, relax grammer. I see too many skills that…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@levelsio：the best 13 ppl to follow in AI: @DanielLockyer = teaches LLMs…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@steipete：I always wanted a GitHub dashboard: See my repos, open Issues/PRs…</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>@levelsio：I got a message on @X from the 🇪🇺 EU today!…</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">X×16 · Web Search · GitHub Actions</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
-            <a href="brief_008.html" class="issue-card">
-        <span class="ic-tag">第 008 期 · 周六</span>
-        <div class="ic-period">Gemini Omni 全模态 + steipete 工具栈 + AndrewYNg 人才政策</div>
+        <span class="ic-tag">第 009 期 · 周六</span>
+        <div class="ic-period">Gemini Omni 全模态解析 + steipete 三分工具栈 + levelsio 创作者崛起</div>
         <div class="ic-date">2026-05-22 ~ 05-24</div>
         <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">★</span>@emollick：Gemini Omni「真正全模态，不是模态转换，是统一理解」</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>steipete ♥3,197：cmux + Codex Mac App/Cursor/Codex CLI 三分工具栈</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>OpenAI 容量确定性承诺商业模式信号：企业端 SLA 即将到来</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>@AndrewYNg 绿卡政策 + 哈佛成绩限制：美国 AI 人才通道系统性收窄</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>emollick ♥2,787：Gemini Omni 真正全模态（统一理解），不只是管道转换</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>steipete ♥3,197：cmux + Codex Mac App / Cursor / Codex CLI 三分工具栈最优实践</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>levelsio：非技术创作者因 AI 开始超越技术人员，审美 > 代码能力</div>
         </div>
-        <div class="ic-footer">
-          <span class="ic-sources">X×20 · Mashable · TechCrunch · HN · Reddit</span>
-          <span class="ic-read">阅读全文 →</span>
+        <div class="ic-footer"><span class="ic-sources">X×20 · Mashable · TechCrunch</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
+
+      <a href="brief_008.html" class="issue-card">
+        <span class="ic-tag">第 008 期 · 周三</span>
+        <div class="ic-period">Karpathy 加入 Anthropic ♥148K + Google I/O 完整复盘</div>
+        <div class="ic-date">2026-05-19 ~ 05-22</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">▸</span>Karpathy 加入 Anthropic 预训练团队：递归自我改进方向，AI 做 AI 训练</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Google I/O：Gemini 3.5 Flash + Gemini Omni + Antigravity 2.0 + Google Search 25 年最大升级</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>OpenAI 通用模型解决 Erdős 80 年平面单位距离问题，「AI 首次自主解决数学领域核心开放问题」</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">Axios · CNBC · TechCrunch · Guardian</span><span class="ic-read">阅读全文 →</span></div>
       </a>
 
       <a href="brief_007.html" class="issue-card">
         <span class="ic-tag">第 007 期 · 周三</span>
-        <div class="ic-period">Karpathy 加入 Anthropic ♥148K + Google I/O 完整复盘 + OpenAI Erdős 突破</div>
-        <div class="ic-date">2026-05-19 ~ 05-22</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">★</span>Karpathy ♥148,426 加入 Anthropic 预训练团队：用 Claude 自动化 AI 训练，递归自我改进</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>Google I/O：Gemini 3.5 Flash（新默认）+ Gemini Omni（世界模型）+ Search 25 年最大升级</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>OpenAI 通用模型解决 Erdős 80 年数学难题：「AI 首次自主解决数学领域核心开放问题」</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>AndrewYNg ♥11,397 批评白宫绿卡政策：AI 人才政策成为竞争力新变量</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">X×22 · Axios · CNBC · TechCrunch · Guardian · Times of India</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
-            <a href="brief_006.html" class="issue-card">
-        <span class="ic-tag">第 006 期 · 周三 · Google I/O 专辑</span>
-        <div class="ic-period">Google I/O 2026：Gemini Intelligence + Android XR + Googlebooks</div>
+        <div class="ic-period">泡沫 pops 反叙事 + steipete $1.3M token 花费曝光</div>
         <div class="ic-date">2026-05-17 ~ 05-19</div>
         <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">★</span>Gemini Intelligence：Gemini 进入 Android OS 层，跨 App 感知 + 自主执行，挑战 OpenAI SuperApp</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>Android XR 智能眼镜（Gemini 2.5 Pro）+ Googlebooks（Chromebook 终结）</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>「AI OS War」格局清晰：OpenAI vs Google vs Anthropic 三条不同路线</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>Genspark $385M Series B 扩展，$200M ARR，Genspark Claw「AI 员工」发布</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Gary Marcus ♥12,675：Uber / 星巴克 / 微软失效案例汇聚，「泡沫正在破裂」</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>steipete ♥7,479：OpenAI 30 天内花了 $1.3M token，公司付费揭秘开销量级</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>fchollet ♥1,778：代码量 10x 但净生产力几乎没涨，AI 生产力悖论</div>
         </div>
-        <div class="ic-footer">
-          <span class="ic-sources">TNW · Android Authority · io.google/2026 · BusinessWire</span>
-          <span class="ic-read">阅读全文 →</span>
+        <div class="ic-footer"><span class="ic-sources">X×22 · VentureBeat · HN</span><span class="ic-read">阅读全文 →</span></div>
+      </a>
+
+      <a href="brief_006.html" class="issue-card">
+        <span class="ic-tag">第 006 期 · 周三 · I/O 专辑</span>
+        <div class="ic-period">Google I/O 2026 开幕 + Gemini Intelligence OS 层 + Antigravity 2.0</div>
+        <div class="ic-date">2026-05-17 ~ 05-19</div>
+        <div class="ic-signals">
+          <div class="ic-sig"><span class="ic-bull">▸</span>Gemini Intelligence：Gemini 进入 Android OS 层，跨 App 感知自主执行</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Googlebooks（Chromebook 终结）+ Android XR 眼镜 + Google Search 25 年最大升级</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>AI OS War 格局清晰：OpenAI SuperApp vs Google OS vs Anthropic Managed Agents</div>
         </div>
+        <div class="ic-footer"><span class="ic-sources">TNW · Android Authority · io.google/2026</span><span class="ic-read">阅读全文 →</span></div>
       </a>
 
       <a href="brief_005.html" class="issue-card">
         <span class="ic-tag">第 005 期 · 周一</span>
-        <div class="ic-period">Google I/O 前夜：Gemini Spark 曝光 + Anthropic 75% 代码 AI 生成</div>
+        <div class="ic-period">Google I/O 前夜：Gemini Spark + Anthropic 75% AI 代码 + 企业采用率 50%</div>
         <div class="ic-date">2026-05-15 ~ 05-17</div>
         <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>Gemini Spark 预披露：「Always-on AI 助手」整合至 Gmail/Calendar/OS，I/O 前最大泄露</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Anthropic 内部 75% 代码由 Claude Code 生成，同时仍在大规模招聘工程师</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>TestingCatalog：Gemini Spark 曝光，常驻 OS 层 AI 助手</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Anthropic 内部 75% 代码由 Claude 生成，同时仍在大规模招聘工程师</div>
           <div class="ic-sig"><span class="ic-bull">▸</span>企业 AI 采用率跨过 50% 里程碑（Ramp AI Index）</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>AI 辅助黑客升级为「工业规模威胁」，CAISI 预部署评估协议正式生效</div>
         </div>
-        <div class="ic-footer">
-          <span class="ic-sources">Champaign Magazine · VentureBeat · TestingCatalog · Reddit</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
+        <div class="ic-footer"><span class="ic-sources">TestingCatalog · VentureBeat · Reddit</span><span class="ic-read">阅读全文 →</span></div>
       </a>
 
       <a href="brief_004.html" class="issue-card">
         <span class="ic-tag">第 004 期 · 周五</span>
-        <div class="ic-period">Anthropic 超越 OpenAI 企业端 + Isomorphic Labs $2.1B + Gates Foundation $200M</div>
+        <div class="ic-period">Anthropic 历史首超 OpenAI 企业端 + Isomorphic Labs $2.1B</div>
         <div class="ic-date">2026-05-13 ~ 05-15</div>
         <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>Ramp AI Index：Claude 34.4% 首次超越 ChatGPT 32.3%（企业付费用户），一年前还是 8% vs 32%</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Isomorphic Labs $2.1B Series B：欧洲 AI 生命科学史上最大融资，IsoDDE 超越 AlphaFold3</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Anthropic × Gates Foundation $200M：「公益 AI 基础设施」战略，4 年期全球健康/教育项目</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>CAISI 完成五大厂预部署评估协议，AI 监管里程碑</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Ramp AI Index：Claude 34.4% 首次超 ChatGPT 32.3%，一年内从 8% 跳到 34%</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Isomorphic Labs $2.1B：AI 药物设计，Demis Hassabis 领导，欧洲最大 AI 生命科学融资</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>OpenAI Codex 进入手机 + 30 天免费，对标 Claude Code</div>
         </div>
-        <div class="ic-footer">
-          <span class="ic-sources">Business Insider · VentureBeat · Reuters · Isomorphic Labs · CNN</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
+        <div class="ic-footer"><span class="ic-sources">VentureBeat · Business Insider · Reuters</span><span class="ic-read">阅读全文 →</span></div>
       </a>
 
-            <a href="brief_003.html" class="issue-card">
-        <span class="ic-tag">第 003 期 · 周三</span>
-        <div class="ic-period">OpenAI Daybreak + Microsoft MDASH + Thinking Machines</div>
+      <a href="brief_003.html" class="issue-card">
+        <span class="ic-tag">第 003 期 · 周三 · 标杆期</span>
+        <div class="ic-period">OpenAI Daybreak + Microsoft MDASH + Thinking Machines Lab 实时模型</div>
         <div class="ic-date">2026-05-11 ~ 05-13</div>
         <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">★</span>OpenAI Daybreak + Microsoft MDASH：AI 安全军备竞赛同周爆发</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>Cursor × SpaceX $60B + Long Lake $6.3B：并购时代来临</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>LeCun+Ng vs Dario：「AI 不消灭就业」在主流媒体翻转</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>Karpathy ♥16,726：「HTML 输出」技巧引爆工程师社区</div>
-          <div class="ic-sig"><span class="ic-bull">★</span>Sierra $950M @ $15B，垂直 Agent 头部估值锚点确立</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>OpenAI Daybreak + Microsoft MDASH：AI 安全军备竞赛同周爆发，MDASH 发现 16 个 Windows 0-day</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Thinking Machines Lab 实时模型：Mira Murati 首秀，swyx「brutally framemogged GDM and OAI」</div>
+          <div class="ic-sig"><span class="ic-bull">▸</span>Sierra $950M @ $15B：垂直 Agent 赛道最大单轮</div>
         </div>
-        <div class="ic-footer">
-          <span class="ic-sources">X×36 · 12 产品 · 12 KOL · 6 融资 · 7 深读</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
-      <a href="brief_002.html" class="issue-card">
-        <span class="ic-tag">第 002 期 · 周三</span>
-        <div class="ic-period">Karpathy + Daybreak 预热 + LangSmith Engine + Shopify River</div>
-        <div class="ic-date">2026-05-08 ~ 05-10</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>@sama 密集预热新产品，OpenAI 上市前话题管理全速</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>LangSmith Engine 预发布：「用 Agent 调试 Agent」</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Shopify River：强制公开频道 = 加速企业 Agent 文化传播</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Aidoc $150M Goldman 领投 + Long Lake $6.3B take-private</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Poolside Laguna M.1/XS.2：专用 agentic coding 模型，SWE-Bench 72.5%</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">X×28 · 3 产品 · 4 KOL · 2 融资 · 2 深读</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
-      <a href="brief_001.html" class="issue-card">
-        <span class="ic-tag">第 001 期 · 周一</span>
-        <div class="ic-period">Google Cloud Next '26 + Anthropic Dreaming + Ineffable Intelligence $1.1B</div>
-        <div class="ic-date">2026-05-05 ~ 05-07</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>Google Cloud Next '26：260 项发布，$750M 生态基金，Agentic Enterprise 全面押注</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Anthropic Claude Dreaming：Harvey 测试 6x 完成率提升</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>David Silver（AlphaGo）的 Ineffable Intelligence：$1.1B seed，欧洲最大，体验式 AI</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Broadridge（金融基础设施）Agent 上生产：30% Day-1 成本降低</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Elad Gil：「Long Lake = 全球首个 AI 驱动的上市公司私有化」</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">Google Blog · CNBC · TechCrunch · Bain & Co · Poolside · ICLR 2026</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
-      <a href="brief_000.html" class="issue-card">
-        <span class="ic-tag">第 000 期 · 上周五</span>
-        <div class="ic-period">Anthropic Mythos 全球恐慌 + Cursor × SpaceX + CB Insights Q1 2026</div>
-        <div class="ic-date">2026-05-01 ~ 05-04</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>NYT「全球警报」：Mythos 已被未授权用户访问，全球银行和政府紧急响应</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Cursor × SpaceX $10B 合作 + $60B 收购期权，AI 史上最大潜在并购</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>CB Insights：Q1 2026 AI 融资 $226B（+216% QoQ），AI 占全球 VC 的 80%</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Ineffable Intelligence 从 stealth 出来：David Silver，$1.1B seed，$5.1B 估值</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Yohei Nakajima：Anthropic 公益法人结构 + $30B ARR 的内在矛盾</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">NYT · CNBC · Fortune · CB Insights · Dark Reading</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
+        <div class="ic-footer"><span class="ic-sources">X×36 · 12 产品 · 12 KOL · 7 深读</span><span class="ic-read">阅读全文 →</span></div>
       </a>
 
     </div>
 
-    <!-- Archive -->
+    <!-- 历史归档 -->
     <div class="issues-header">
-      <div class="ih-title">2026 年 4 月 · 归档期刊</div>
-      <div class="ih-desc">历史期刊，覆盖 Sequoia AI Ascent、Claude Opus 4.7 发布、OpenClaw 封锁事件。</div>
+      <div class="ih-title">历史归档</div>
     </div>
     <div class="issue-grid">
-
-      <a href="brief_hist1.html" class="issue-card">
-        <span class="ic-tag hist">历史 · 04-24~27</span>
-        <div class="ic-period">Sequoia AI Ascent + Karpathy Software 3.0 + Claude Opus 4.7 采用</div>
-        <div class="ic-date">2026-04-24 ~ 04-27</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>Karpathy Sequoia AI Ascent 演讲：Software 3.0，Agentic Engineering，可验证性框架，锯齿状智能</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Demis Hassabis：「AI removes the bottleneck to scientific progress」</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Sequoia「2026: This Is AGI」：长周期 Agent 功能意义上已是 AGI</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Claude Opus 4.7 全面 GA：SWE-Bench 87.6%，能力层级切换</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>NeoCognition $40M seed + Sierra $950M @ $15B</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">Karpathy Blog · Sequoia YouTube · Anthropic 官方 · Bloomberg</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
-      <a href="brief_hist2.html" class="issue-card">
-        <span class="ic-tag hist">历史 · 04-18~22</span>
-        <div class="ic-period">OpenClaw 封锁 + LeCun vs Dario + Harness Engineering + steipete 订阅真相</div>
-        <div class="ic-date">2026-04-18 ~ 04-22</div>
-        <div class="ic-signals">
-          <div class="ic-sig"><span class="ic-bull">▸</span>Anthropic 封锁 OpenClaw（04-04 起效）：Harness 控制权争夺正式进入商业战争</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>LeCun ♥21K：「Dario is wrong，AI CEO 们不是劳动经济学家」</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>steipete ♥2,218：「AI 订阅补贴的是你的代码数据，不是你的使用权」</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>Latent Space：Ryan Lopopolo「1B tokens/天 = borderline negligent if you don't」</div>
-          <div class="ic-sig"><span class="ic-bull">▸</span>hwchase17：「Memory will be the great lock-in」（被后来多方引用）</div>
-        </div>
-        <div class="ic-footer">
-          <span class="ic-sources">VentureBeat · TechCrunch · TNW · Latent Space · All-In</span>
-          <span class="ic-read">阅读全文 →</span>
-        </div>
-      </a>
-
+      <a href="brief_002.html" class="issue-card"><span class="ic-tag hist">第 002 期</span><div class="ic-period">Karpathy HTML 技巧 + LangSmith Engine</div><div class="ic-date">2026-05-08 ~ 05-10</div><div class="ic-footer"><span class="ic-sources">X×28</span><span class="ic-read">阅读 →</span></div></a>
+      <a href="brief_001.html" class="issue-card"><span class="ic-tag hist">第 001 期</span><div class="ic-period">Google Cloud Next '26 + Anthropic Dreaming</div><div class="ic-date">2026-05-05 ~ 05-07</div><div class="ic-footer"><span class="ic-sources">Google Blog · CNBC</span><span class="ic-read">阅读 →</span></div></a>
+      <a href="brief_000.html" class="issue-card"><span class="ic-tag hist">第 000 期</span><div class="ic-period">Anthropic Mythos 全球恐慌 + Cursor × SpaceX</div><div class="ic-date">2026-05-01 ~ 05-04</div><div class="ic-footer"><span class="ic-sources">NYT · Fortune</span><span class="ic-read">阅读 →</span></div></a>
+      <a href="brief_hist1.html" class="issue-card"><span class="ic-tag hist">历史 04-24~27</span><div class="ic-period">Sequoia AI Ascent + Karpathy Software 3.0</div><div class="ic-date">2026-04-24 ~ 04-27</div><div class="ic-footer"><span class="ic-sources">Karpathy Blog</span><span class="ic-read">阅读 →</span></div></a>
+      <a href="brief_hist2.html" class="issue-card"><span class="ic-tag hist">历史 04-18~22</span><div class="ic-period">OpenClaw 封锁 + LeCun vs Dario + Harness Engineering</div><div class="ic-date">2026-04-18 ~ 04-22</div><div class="ic-footer"><span class="ic-sources">VentureBeat · Latent Space</span><span class="ic-read">阅读 →</span></div></a>
     </div>
 
     <div class="footer">
-      Creekstone Intelligence Brief · 2026 年 5 月刊<br>
-      发布频率：周一 / 周三 / 周五 · 每期覆盖过去 48 小时<br>
-      数据源：X OAuth1（36 KOL）· 播客 · Newsletter · 机构文章 · 媒体报道 · GitHub Trending · 融资数据库
+      Creekstone Intelligence Brief · 共 16 期 · 2026 年 5~6 月<br>
+      发布频率：周一 / 周三 / 周五 · GitHub Actions 自动化 + 手工深度加固<br>
+      🌐 https://garyz13intheloop.github.io/brief/
     </div>
   </div>
 </div>
 </div>
+
 <script>
-document.getElementById('searchInput').addEventListener('input', function(e) {
-  const q = e.target.value.toLowerCase().trim();
-  if (!q) return;
-  // Search across briefs - redirect to most recent
-  const terms = {
-    'daybreak': 'brief_003.html', 'mdash': 'brief_003.html', 'microsoft': 'brief_003.html',
-    'dreaming': 'brief_003.html', 'harvey': 'brief_003.html',
-    'sierra': 'brief_003.html', 'cursor': 'brief_000.html',
-    'karpathy': 'brief_hist1.html', 'software 3.0': 'brief_hist1.html',
-    'openclaw': 'brief_hist2.html', 'lecun': 'brief_hist2.html',
-    'google cloud': 'brief_001.html', 'sequoia': 'brief_hist1.html',
-    'ineffable': 'brief_000.html', 'poolside': 'brief_002.html',
-    'langsmith': 'brief_002.html', 'anthropic': 'brief_003.html',
-    'openai': 'brief_003.html', 'sama': 'brief_002.html',
-  };
-  for (const [term, url] of Object.entries(terms)) {
-    if (q.includes(term)) {
-      window.location.href = url;
-      return;
-    }
-  }
-});
+function doSearch(q) {
+  const query = q.trim().toLowerCase();
+  document.querySelectorAll('.issue-card').forEach(c => {
+    c.style.display = (!query || c.textContent.toLowerCase().includes(query)) ? '' : 'none';
+  });
+}
 </script>
 </body>
 </html>
-
-<!-- last-build: 2026-05-14 13:15:59 -->
-
-<!-- auto-publish test: 2026-05-19T18:00:53.342119 -->
