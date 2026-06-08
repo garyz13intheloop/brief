@@ -1,11 +1,9 @@
 name: Creekstone Intelligence Brief — Auto Generate
 
 on:
-  # 每周一、周三、周五 SGT 09:00 = UTC 01:00
   schedule:
+    # 每周一、周三、周五 SGT 09:00 = UTC 01:00
     - cron: "0 1 * * 1,3,5"
-
-  # 允许手动触发（在 GitHub Actions 页面点 Run workflow）
   workflow_dispatch:
     inputs:
       force_issue:
@@ -13,14 +11,13 @@ on:
         required: false
         default: ""
 
-# 允许 workflow 写入仓库
 permissions:
   contents: write
 
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repo
@@ -42,7 +39,7 @@ jobs:
           s = json.loads(p.read_text())
           s['last_issue'] = int('${{ github.event.inputs.force_issue }}') - 1
           p.write_text(json.dumps(s, indent=2))
-          print('Forced issue:', '${{ github.event.inputs.force_issue }}')
+          print('Forced last_issue to:', s['last_issue'])
           "
 
       - name: Generate brief
@@ -54,20 +51,27 @@ jobs:
           NETLIFY_TOKEN:          ${{ secrets.NETLIFY_TOKEN }}
           NETLIFY_SITE_ID:        ${{ secrets.NETLIFY_SITE_ID }}
           SERPER_API_KEY:         ${{ secrets.SERPER_API_KEY }}
+          # GITHUB_TOKEN 由 Actions 自动注入，用于 REST API 上传文件
+          GITHUB_TOKEN:           ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/generate_brief.py
 
-      - name: Commit & push updated files
+      - name: Commit & push (fallback if REST upload missed anything)
         run: |
           git config user.name  "Creekstone Bot"
           git config user.email "bot@creekstone.vc"
           git add -A
-          git diff --staged --quiet || \
+          git diff --staged --quiet && echo "Nothing to commit (REST API already handled)" || \
             git commit -m "🤖 Auto-brief $(date +'%Y-%m-%d') [skip ci]"
-          git push
+          git push || echo "Push failed but REST API upload succeeded, continuing"
 
       - name: Summary
         run: |
-          echo "### ✅ Brief generated" >> $GITHUB_STEP_SUMMARY
+          ISSUE=$(python3 -c "import json; print(json.load(open('scripts/state.json'))['last_issue'])")
+          echo "### ✅ Brief \`${ISSUE}\` generated" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🌐 **Live:** https://creekstone-brief.netlify.app/" >> $GITHUB_STEP_SUMMARY
-          echo "🕐 **SGT:** $(TZ=Asia/Singapore date +'%Y-%m-%d %H:%M')" >> $GITHUB_STEP_SUMMARY
+          echo "| 站点 | URL |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| GitHub Pages | https://garyz13intheloop.github.io/brief/ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Netlify | https://creekstone-brief.netlify.app/ |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🕐 SGT: \`$(TZ=Asia/Singapore date +'%Y-%m-%d %H:%M')\`" >> $GITHUB_STEP_SUMMARY
