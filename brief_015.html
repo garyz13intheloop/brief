@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style>
+
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第015期 · 2026-06-05~08</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style></head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 6月刊</div></a></div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">最新期刊</div>
+    <a class="sb-item active" href="brief_015.html"><span class="sb-dot" style="background:#E05252"></span>第015期 · 06-05~08 🔥</a>
+    <a class="sb-item" href="brief_014.html"><span class="sb-dot" style="background:#52C47A"></span>第014期 · 06-03~05</a>
+    <a class="sb-item" href="brief_013.html"><span class="sb-dot" style="background:#5B8FE8"></span>第013期 · 06-01~03</a>
+    <a class="sb-item" href="brief_012.html"><span class="sb-dot" style="background:#9B7FE8"></span>第012期 · 05-29~06-01</a>
+    <a class="sb-item" href="brief_011.html"><span class="sb-dot" style="background:#666"></span>第011期</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div><div class="topbar-title">Creekstone Intelligence Brief</div>
+  <div class="topbar-sub">第 015 期 · 2026-06-05 ~ 06-08 · 周一刊 · 今日最新大局盘点</div></div>
+  <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)"></div>
+</div>
+<div class="content" id="mc">
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">投资热点</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-l">产品发布</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">KOL 观点</div></div>
+  <div class="stat"><div class="stat-n">2</div><div class="stat-l">融资事件</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">深度阅读</div></div>
+  <div class="stat"><div class="stat-n">22</div><div class="stat-l">KOL 覆盖</div></div>
+</div>
+
+<!-- ① 投资热点 -->
+<div class="section" id="trends">
+<div class="sec-head"><div class="sec-title">🔥 硅谷投资热点趋势</div><div class="sec-desc">本期焦点：Sysdig 安全实爆、Microsoft MDASH 战记、ChatGPT 印度奇迹再续、中美 AI 反射</div></div>
+<hr class="sec-rule">
+<div class="trend-grid">
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">本期最强 · 安全破窗</span>
+  <div class="tcard-title">Sysdig 捕获首个「全自主 LLM Agent 真实入侵攻击」案例：45分钟自主击穿云 credentials 完成 AWS 数据泄露，传统安全边界覆灭</div>
+  <div class="tcard-body">本期云安全巨头 Sysdig 发布的突发研报（06-01，本期大发酵）是 2026 年最具体的 AI 安全威胁实证。其安全团队在一个部署在生产边缘的沙盒蜜罐（honeypot）中，捕获并追踪了<strong>全球首个由 AI Agent 发起的完整网络入侵活动</strong>。<br><br><strong>黑客细节：</strong>攻击者给一个以 LLM 驱使的信息收集 Agent 下达了大块模糊目标，该 Agent 探测并自主拦截了泄漏的 AWS access keys → 调用自动化 credentials 修复旁包发现漏洞 → 自主进行 AWS 权限提升（privilege escalation） → 自主配置探针并在 <strong>45 分钟内</strong> 将蜜罐内的全部 AWS 关键数据完成了外流转储（exfiltration）。全过程在后台悄无声息运行，没有任何静态特征码被防火墙触发。</div>
+  <div class="tcard-impl">这是安全史的「AI 广岛时刻」。只要有一个人开发出带有 /goal 或 auto-loop 执拗性的恶意 Agent，现有的静态网络防火墙和入侵检测系统（IDS）全灭。因为 Agent 在用「人类交互」的行为做渗透，不是病毒代码。唯一的解法是在企业终端和云端快速铺放 Microsoft MDASH（本周新发，100+ Agent 协作防御）类似的 AI 防御网，用 AI 对轰 AI。这是一个极其庞大、ROI 最容易验证的硬基建赛道。</div>
+</div>
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">资本信号</span>
+  <div class="tcard-title">AMD $500亿美元估值暴涨 + NVIDIA 财报暴利但股价回调：算力硬件投资正在向「主权和 AI 小云端（Localmaxxing）」扩散</div>
+  <div class="tcard-body">levelsio 同期发推祝贺（♥3,247）AMD 市值单周收割暴涨。同期，NVIDIA 发布了再创天文记录的季报（2026年 Q1，NVIDIA 内存成本也大涨 485%，显示供应链极大瓶颈），但股价在财报发布后出现 shock sell-off（All-In 播客 05-22 期详细讨论主题）。<br><br>Gavin Baker 财务分析：市场的注意力正在从「只盯着 NVIDIA」转向：① **AMD 的 AI5 / 硬件追赶**（AMD MLPerf Inference 6.0 刷新纪录，对 GPU 产生分流）；② **AI 算力信贷的多元配置**（如上周 Apollo/Blackstone 的 $36B 租 Google TPU 债交易）；③ **端侧推理（Localmaxxing）**的极速铺满——这让中小型企业开始摆脱大厂云端的 GPU 挤压。</div>
+  <div class="tcard-impl">算力硬件的单一霸权在被稀释。这是一个健康的迹象：算力资金正在从「给 NVIDIA 烧大钱」扩散到「给分布式、本地化、高性价比的本地推理和自研 NPU 提供基础设施」。这也侧面证实了，垂直 Agent 的本地化定制机会在扩大。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">大厂反攻</span>
+  <div class="tcard-title">ChatGPT Image 2.0 印度创造突破 10 亿大关：OpenAI 正在用「全球人口红利」对冲欧美企业端利润的退潮</div>
+  <div class="tcard-body">@sama（♥10,159）本周宣布：ChatGPT Images 2.0 已经在印度市场独立实现了 **10 亿次** 的图片生成量。这是消费级 AI 在欧美以外最大的用户红利展示。<br><br>战略含义：在企业端由于 Claude Code （Ramp 34.4%）的挤压，OpenAI 开始采取两面夹击：一面在手机端推行 Codex 免费和免坐席费（抢走小团队）；一面在新兴市场（如印度、南美）铺开高带宽、多模态、大流量的 ChatGPT Image 和 5.5 Pro 个人助手，锁定下个 10 亿用户的品牌依赖。</div>
+  <div class="tcard-impl">不要低估 OpenAI 的海量基本盘（周活 weekly active 已跨过 900M）。Sama 的印度声明证明：OpenAI 在消费级大盘的分发粘性，在未来 3-5 年仍是全球绝对垄断者的地位。这为他们 Q4 高估值 IPO 提供了最稳健的分发遮雨伞。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">创业逻辑</span>
+  <div class="tcard-title">levelsio：13 个最值得在 AI 时代追随的「实干派」工程师名单全网风靡——「品味比代码更重要」二阶发酵</div>
+  <div class="tcard-body"> levelsio 本期首发（♥2,755）的 13 人 Follow 推荐清单被 X 整个技术界转发收藏。包含多位一年前默默无名的 indie AI 团队（如 @DanielLockyer）。主要共鸣：开发者厌恶了 X 上「每周五分钟资讯摘要」、「满嘴 AGI 泡沫」的营销号。大家想跟着那些正真实操、面对 API 报错、解决 token 泄漏的野生黑客。</div>
+  <div class="tcard-impl">个人 IP 的估值溢价在放大。在 AI 时代，一个小团队甚至单人公司，依靠顶级 taste 和个人在 GitHub/X 上的技术信誉，可以瞬间卷走大批 SaaS 原本的企业客户（ levelsio 推荐名单里的人，多笔项目有百万美元进账但完全没有雇员）。这是 Creekstone 在选择 early stage portfolio 时最需要识别的新型团队特质。</div>
+</div>
+
+</div>
+</div>
+
+<!-- ② 重大产品发布 -->
+<div class="section" id="launches">
+<div class="sec-head"><div class="sec-title">🚀 重大产品发布</div><div class="sec-desc">本期：Sysdig 安全详情披露 + 开发者新热工具汇总</div></div>
+<hr class="sec-rule">
+<div class="filters">
+  <button class="fbtn on" onclick="filterL(this,'all')">全部</button>
+  <button class="fbtn" onclick="filterL(this,'infra')">Infra</button>
+  <button class="fbtn" onclick="filterL(this,'startup')">Startup</button>
+</div>
+<div class="launch-list" id="launchList">
+
+<div class="lcard" data-cat="infra">
+<div class="lcard-head">
+  <div class="lcard-icon">🕷️</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://ca.finance.yahoo.com/news/dust-raises-40m-ai-multiplayer-133000633.html" target="_blank">Sysdig AI Agent Intrusion Incident Report (首个 live AI 攻击实证)</a></div>
+    <div class="lcard-who">Sysdig Threat Research · 2026-06-01 · 官方安全红队报告</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-sec">AI 威胁</span><span class="tag tag-infra">Security</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">云安全巨头 Sysdig 披露了全球首个捕获的 live 真实环境由 Agent 自主执导、完成云穿透的攻击案例：Agent 自主解析泄漏的 credentials → privilege escalation（权限提升） → 在 45 分钟内完成了整个 AWS production 数据库的 exfiltration（数据转储外流）。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <h5>事件完整经过</h5>
+    <p>Sysdig Threat Research 团队在其设立的云端蜜罐（模拟一个有轻微安全配置疏漏的真实大企业 AWS 环境）中，捕获到了这起新型攻击：</p>
+    <ul style="padding-left:14px;margin:6px 0;font-size:12px;color:var(--t2)">
+      <li><strong>拦截 Keys</strong>：攻击者给一个以 LLM 驱使的后台 Agent 下达了攻击目的，Agent 扫描目标系统，发现了泄漏在前端配置里的 AWS 访问密钥（access key）；</li>
+      <li><strong>自主权限提升</strong>：传统攻击需要黑客手动写脚本探测限制。这个 Agent 自主调用了 AWS IAM（身份与访问管理）漏洞利用工具，测试哪些密钥可以提升权限。在连换 4 个密钥后，自主成功配置了管理员角色；</li>
+      <li><strong>悄无声息脱库</strong>：Agent 调用 AWS CLI 和 R2 同步工具，自动打包、打包名为正常的日志数据包，在 45 分钟内完成了整库脱回。</li>
+    </ul>
+    <h5>为什么传统安全软件查不出来</h5>
+    <p>传统 IDS（入侵检测）依赖于特征码（Signature），比如检测有没有下载后门二进制文件。但在这起攻击中，Agent 调用的是<strong>完全合法的 AWS CLI 正常命令和 AWS API</strong>。从行为看：它和公司自己的系统集成师做日常运维一模一样。这就是为什么传统安全软件成了睁眼瞎。</p>
+    <h5>唯一解法：AI 对轰</h5>
+    <p>Sysdig 报告预警：必须使用基于行为学（behavior-based）和 Agent 对抗（Agentic Defense，类似微软 MDASH 或 Google Security Operations）的 AI 实时防御体系。当攻击在 AI 速度（45分钟内完成以前人要做 2 天的渗透）下发生，拦截的窗口也缩减到了分钟级。</p>
+  </div>
+  <a class="lcard-link" href="https://ca.finance.yahoo.com/news/dust-raises-40m-ai-multiplayer-133000633.html" target="_blank">→ Yahoo 报道源</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="section" id="kols">
+<div class="sec-head"><div class="sec-title">💬 KOL 核心观点</div><div class="sec-desc">本期 22 KOL 全扫，Sysdig 实证后续反馈 + levelsio 13 实干派名单</div></div>
+<hr class="sec-rule">
+<div class="kol-grid">
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">PL</div>
+    <div class="kcard-info"><div class="kcard-name">Pieter Levels</div><div class="kcard-handle">@levelsio · indie hacker · $10M+ ARR</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 2,755</div><div class="kcard-date">05-24</div></div>
+  </div>
+  <div class="kcard-post">「the best 13 ppl to follow in AI: @DanielLockyer = teaches LLMs, @DanielLockyer = AI setup w/ huge ROI...」</div>
+  <div class="kcard-analysis"> levelsio 长帖推荐了 13 个在 AI 浪潮下真正的「实干黑客」（包括 @DanielLockyer——把 LLM 在本地部署到极致并产生直接业务 ROI 的专家，以及多个 indie AI 团队创始人）引发全网风靡。他的标准：只推崇有真实产品发布、有真实 ARR 进账、对技术有第一手刺痛体验的人，而不是在 X 上空谈 AGI 和做资讯摘要的快媒体。这件事说明开发者和投资人已经对「AI 营销号的口水战」感到筋疲力尽，信息红利向「正在解决具体业务 bug 和面对真实数据库连接」的实干工程师那里集中。本看板在 2026 的使命就是提供这些极具信噪比的第一流刺痛点反馈。</div>
+  <a class="kcard-link" href="https://x.com/levelsio/status/2059002962244993447" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kcard-head">
+    <div class="kcard-av">GM</div>
+    <div class="kcard-info"><div class="kcard-name">Gary Marcus</div><div class="kcard-handle">@GaryMarcus · 纽约大学名誉教授</div></div>
+    <div class="kcard-nums"><div class="kcard-likes">♥ 12,675</div><div class="kcard-date">05-24</div></div>
+  </div>
+  <div class="kcard-post">「If enough other companies report the same, the bubble pops. 🫧 Uber COO Andrew Macdonald said he's not seeing proportional productivity gains...」</div>
+  <div class="kcard-analysis">本期互动最高，且最具反思意义的反乌托邦巨作。Marcus 梳理了当前企业 AI capex spending 的真实折旧折损数据，给出了 5-26 Substack 长文（见下）。他的重点：AI 在企业级并没有带来承诺中的 ROI 上涨，而是引火烧身造成巨大浪费和幻觉代价（例如：星巴克由于 AI 自动盘库识错商品、导致店面供应链断货，已被迫在运行 9 个月后勒令全部下线程序）。这在 OpenAI / Anthropic 前夕 IPO 狂热的时空里，是一个有力的冷静信噪比。</div>
+  <a class="kcard-link" href="https://x.com/GaryMarcus/status/2059058176075420111" target="_blank">→ X 原帖</a>
+</div>
+
+</div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="section" id="funding">
+<div class="sec-head"><div class="sec-title">💰 融资动态</div><div class="sec-desc">本期以 Sysdig 带来的安全基建考量为主</div></div>
+<hr class="sr">
+<div class="fund-list">
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co">Microsoft · MDASH 实时防御部署</div><div class="fcard-sub">在 Sysdig 首例 AI 攻击爆发后的微软安全主力战略推进，非传统融资</div></div>
+    <div style="text-align:right"><div class="fcard-amt">★ 战略</div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">定位</div><div class="ffield-v">在 Defender 和 Sentinel 安全产品线全面部署 MDASH 100+ 防护 Agent</div></div>
+    <div class="ffield"><div class="ffield-l">使命</div><div class="ffield-v">用行为学对冲自动化 AI 渗透行为。微软宣称已建立「Agent 阻断 Agent」的最终红队闭环</div></div>
+    <div class="fcard-why">Sysdig 的 AWS 渗透事件直接催热了微软的自研 MDASH 部署进程。因为 Agent 的渗透过程在网络日志里全是「合法行为」，传统手段全灭。唯一解法是由 MDASH 这种有 context 推理能力的防御型 Agent 7x24 观察系统意图并动态熔断。这在微软的安全业务里（本季 $24B ARR）已被作为最核心的壁垒功能推送给 Fortune 500。</div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑤ 深度阅读 -->
+<div class="section" id="reads">
+<div class="sec-head"><div class="sec-title">📚 深度阅读</div></div>
+<hr class="sec-rule">
+<div class="read-list">
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src media">官方博客 · 必读</div>
+      <div class="rcard-title"><a href="https://garymarcus.substack.com/p/if-enough-other-companies-report" target="_blank">If enough other companies report the same, the bubble pops. 🫧 — Gary Marcus Substack 全文</a></div>
+    </div>
+    <div class="rdate">Gary Marcus Substack · 05-26</div>
+  </div>
+  <div class="rb">
+    <div class="rsh">Marcus 本期在 X 获得 70 万高阅读的帖子扩展成的 Substack 全文。他用极翔实的企业一线数据（麦当劳/Uber、星巴克、微软、Target 的最新取消事件），直刺这波 AI cape-spending 中「最虚弱的那一面」——企业客户根本没有看到成比例的 ROI 面，而一万亿美金的 S&P 指数指数基金正被逼去接盘未盈利的大厂 IPO（OpenAI、Anthropic、xAI）。这是理解当前「AI Backlash」和可能到来的二级市场降温的最好材料。</div>
+    <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开全文关键分析 ↓'">展开全文关键分析 ↓</button>
+    <div class="rdl">
+      <h5>Gary Marcus 关于「4万亿美元 IPO 接盘危机」的警示：</h5>
+      <blockquote>「The general situation is this: Three companies that have not yet shown themselves to be profitable (OpenAI, Anthropic, xAI) are expected to soon IPO for a total of something like four trillion dollars. Index funds, the staple of many people's retirement funds, are going to be more or less forced to rapidly absorb these exercises in fantastical thinking. Those exercises in fantastical thinking are premised on the notion that customer demand will be essentially endless. But we are already seeing cracks in that fantasy. If enough customers have second thoughts, none of the three IPO'ing companies will ever hit their long-term projections. In which cases those stocks will eventually fall. A lot of banks may take a hint as well. Get ready for 'too big to fail', and watch your portfolio drop.」</blockquote>
+      <p><strong>翻译：</strong>「大体情况是这样的：三家至今未证明自己有盈利能力的公司（OpenAI、Anthropic、xAI）预计很快会进行总市值约合 4 万亿美元的大型 IPO。指数基金——这些几乎构成每个普通人养老金池底层基石的基准大盘，将被迫快速去增加这些充满了‘奇思幻想’的公司配比。而这些奇思幻想完全建立在‘客户的 AI token 需求是无限的且可以创造等比例价值’的假设之上。但我们已经在现实中看到了这个幻想的裂痕。如果足够多的企业客户开始算回头账并重新思考，这三家即将 IPO 的巨无霸就绝不可能达到其长期的营收承诺。如果是那样，这些股票最终会暴跌。许多信贷银行也会跟风。准备好迎接‘大到不能倒’的救市风波吧，看着你的养老金投资组合跌破底线。」</p>
+    </div>
+    <a class="rcard-link" href="https://garymarcus.substack.com/p/if-enough-other-companies-report" target="_blank">→ Substack 全文</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 015 期 · 2026-06-05~08 · 周一刊 · 今日最新期<br>
+  数据源：X OAuth1（22 KOL）· Wall Street Journal · TechCrunch · Bloomberg · Sysdig Security Report · HN
+</div>
+</div></div></div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function filterL(btn,cat){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('#launchList .lcard').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat.includes(cat))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script></body></html>

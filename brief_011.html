@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第011期 · 2026-05-27~29</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 6月刊</div></a></div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">最新期刊</div>
+    <a class="sb-item" href="brief_015.html"><span class="sb-dot" style="background:#E05252"></span>第015期 · 06-05~08</a>
+    <a class="sb-item" href="brief_014.html"><span class="sb-dot" style="background:#52C47A"></span>第014期 · 06-03~05</a>
+    <a class="sb-item" href="brief_013.html"><span class="sb-dot" style="background:#5B8FE8"></span>第013期 · 06-01~03</a>
+    <a class="sb-item" href="brief_012.html"><span class="sb-dot" style="background:#9B7FE8"></span>第012期 · 05-29~06-01</a>
+    <a class="sb-item active" href="brief_011.html"><span class="sb-dot" style="background:#C9A84C"></span>第011期 · 05-27~29 🔥</a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">历史归档</div>
+    <a class="sb-item" href="brief_010.html"><span class="sb-dot" style="background:#666"></span>第010期</a>
+    <a class="sb-item" href="brief_009.html"><span class="sb-dot" style="background:#666"></span>第009期</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div><div class="topbar-title">Creekstone Intelligence Brief</div>
+  <div class="topbar-sub">第 011 期 · 2026-05-27 ~ 05-29 · X 22 KOL 全量扫描 · 算力债与物联 AI 核心分析</div></div>
+  <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)"></div>
+</div>
+<div class="content" id="mc">
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">投资热点</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-l">产品发布</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">KOL 观点</div></div>
+  <div class="stat"><div class="stat-n">1</div><div class="stat-l">融资事件</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">深度阅读</div></div>
+  <div class="stat"><div class="stat-n">22</div><div class="stat-l">KOL 覆盖</div></div>
+</div>
+
+<!-- ① 投资热点 -->
+<div class="section" id="trends">
+<div class="sec-head"><div class="sec-title">🔥 硅谷投资热点趋势</div><div class="sec-desc">本期焦点：Apollo $36B 算力债、星巴克 AI 下线、Daytona 采访、AI 落地大反思</div></div>
+<hr class="sec-rule">
+<div class="trend-grid">
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">本期最强 · 算力金融化</span>
+  <div class="tcard-title">Apollo + Blackstone $36B 算力债：AI 历史上最大债务交易，将重资产「信贷模型」引入一级大模型竞争</div>
+  <div class="tcard-body">2026-05-28，Bloomberg 独家爆料：私募巨头 Apollo Global Management 与黑石（Blackstone）正在为 Anthropic 组建一笔高达 <strong>$360 亿美元</strong>的私人 credit（私有债）交易，用于租用专门部署在纽约、德州和印第安纳数据中心的 Google 自研 TPU。这笔交易由 Broadcom（与 Google 共同开发 TPU 的芯片巨头）提供底层付款信贷担保（backstop）。<br><br>这是 AGI 时代最大规模的纯债融资。分析者指出：「这是 AI 资本市场的一个根本拐点。当融资金额到了几百亿美金，用股权稀释去买 GPU/TPU 已经不再现实，大模型研发正式成为了类似于‘电厂或铁路’的重资产基础设施（Infrastructure Finance）投资。」</div>
+  <div class="tcard-impl">对于早期科技投资机构：这代表「算力阶级」的彻底板结。头部几家大厂正在用金融债务工具筑起普通公司永远无法触碰的重资产壁垒。这反向证明：早期垂直 Agent 初创公司去涉足基础大模型研发是自杀行为，核心必须在应用层。</div>
+</div>
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">反思潮</span>
+  <div class="tcard-title">星巴克 AI 自动库存程序被勒令下线：部署 9 个月后被取消，因精度无法到达业务容忍阈值</div>
+  <div class="tcard-body">Reuters（05-21 晚发布，本期深度发酵）爆料：星巴克总部已经紧急叫停并下线了在全美部分试点门店运行了 9 个月的「AI 自动库存统计程序」（负责用摄像头和后台数据盘点每日商品和配料多寡）。<ctrl45>：该 AI 系统在多次日常盘点中出现严重的「数量数错、标识产品错误（把 A 品牌牛奶认成 B 品牌牛奶）」导致供应链出现脱节。星巴克发言人向 Reuters 证实，该项目已无限期终止，重新由店员人工盘点。<br><br>这触发了 Gary Marcus 的 bubble 暴论（♥12,675）：「如果你在 2022 年告诉企业 AI 有高达 95% 的试点失败率，他们是不会信的。现在这些大厂的幻觉和精度问题，真正开始转化为大企业的 Capex 浪费。」</div>
+  <div class="tcard-impl">物理、物流、或任何「零容忍幻觉」的垂直行业，是 AI 部署最难攻克的堡垒。投资垂直 Agent 不能只看 demo 的华丽程度。要重点检查：① 它的 fail-safe（降级转人工）机制在业务中的平滑度；② 是否有可物理闭环的双重校验。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-trend">基础架构</span>
+  <div class="tcard-title">Daytona CEO 做客 Latent Space「Giving Agents Computers」：算力沙箱量月度 74% 增长，Agent 需要的是 CPU 级沙箱</div>
+  <div class="tcard-body">Developer tools 圈本周最火的播客（05-21）。Daytona 联合创始人兼 CEO Ivan Burazin 拆解新概念：<strong>「物理 AI 和软件 Agent 的主机化（Agent-Native Compute）」</strong>。核心数据：Daytona 在过去几个月内，来自 Agent 的沙箱请求（sandbox runs）月环比增长 <strong>74%</strong>，单一头部客户每天在 Daytona 平台跑 <strong>850,000 次</strong>自动 debug 和测试沙箱。<br><br>Ivan 提出：Agent 开发不需要 localhost。你合上笔记本，Agent 还在跑，它需要的是云端高速创建（60ms 内启动）、高度隔离（防止 Agent 运行恶性代码毁掉系统）、弹性伸缩到数万个 CPU 的真正的主机层。</div>
+  <div class="tcard-impl">「AI Agent 的运行环境」是当前最被资本看好的 infra 子赛道之一。以前大家用 docker、用 VM 容器，但 Agent 的多步骤任务对沙箱的冷启动时间（Daytona 做到 60ms）、网络权限控制有了全新的安全要求。推荐全方向布局。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">KOL 讨论</span>
+  <div class="tcard-title">levelsio ♥2,755：公开 13 个最值得在 AI 时代追随的「实干派」意见领袖清单</div>
+  <div class="tcard-body">独立黑客 Pieter Levels 本周一发布爆帖（♥2,755），给出了他心中在 AI 浪潮下真正的「實干派」13人清单（其中排首位的是 @DanielLockyer——把 LLM 在本地部署到极致并产生直接业务 ROI 的专家，以及多个 indie AI 团队创始人）。他的标准：只推崇有真实产品发布、有真实 ARR 进账、对技术有第一手刺痛体验的人，而不是在 X 上空谈 AGI 和做资讯摘要的新闻人。</div>
+  <div class="tcard-impl">levelsio 提炼的核心：AI 的热度在分化，第一阶段的空谈期结束了，现在有价值的信息、和值得听的人，都在「正在解决具体业务 bug 和面对真实数据库连接」的工程师里。简报的定位是捕捉这些实干派的刺痛反馈，保持极高信噪比。</div>
+</div>
+
+</div>
+</div>
+
+<!-- ② 重大产品发布 -->
+<div class="section" id="launches">
+<div class="sec-head"><div class="sec-title">🚀 重大产品发布</div><div class="sec-desc">本期以 Google I/O 技术细节 + 开发者工具爆发为主</div></div>
+<hr class="sec-rule">
+<div class="filters">
+  <button class="fbtn on" onclick="filterL(this,'all')">全部</button>
+  <button class="fbtn" onclick="filterL(this,'google')">Google</button>
+  <button class="fbtn" onclick="filterL(this,'startup')">Startup</button>
+  <button class="fbtn" onclick="filterL(this,'tool')">工具</button>
+</div>
+<div class="launch-list" id="launchList">
+
+<div class="lcard" data-cat="google">
+<div class="lcard-head">
+  <div class="lcard-icon">🏗️</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://android-developers.googleblog.com/2026/05/build-android-apps-google-ai-studio.html" target="_blank">Google AI Studio · 网页端 native Android App 自动构建工具</a></div>
+    <div class="lcard-who">Google · 2026-05-19 发布 · 本期开发者深度反馈</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">Coding Agent</span><span class="tag tag-ent">Android</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">I/O 大会最新发布落地的细节探究：网页端的 Google AI Studio 允许用户在没有 IDE、没有本地 SDK 或 JDK、没有 adb 连接的艰难情况下，直接在网页内通过单个 Prompt 输出带 Jetpack Compose 的原生 Kotlin App，并且可以在内置的网页端 Emulator 里随时调试、通过 USB 直连手机安装，一键打包导出。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <h5>开发门槛的毁灭级拉平</h5>
+    <p>Android 开发者博客官方写道：</p>
+    <blockquote>「A text prompt generates a working Kotlin app built with Jetpack Compose, with support for offline use, hardware sensors (GPS, Bluetooth, NFC), and Gemini integration. What used to take weeks of SDK setup before writing the first line of code, now takes minutes on a browser.」</blockquote>
+    <h5>三个真实演示用例（来自 Google I/O 会场实测）</h5>
+    <p>① <strong>Pixel Watch 飞仪「六联仪」App</strong>：Prompt「Build an airplane 6-pack instrument app for Pixel Watch. Use watch's sensors to power them.」（生成了一个用手表陀螺仪和气压计直接驱动仪表的原件，在手表上跑通）；</p>
+    <p>② <strong>折叠屏哈密琴（Harmonlum）App</strong>：Prompt「Build for Pixel Fold, which plays music based on fold hinge angle and touch.」（利用折叠屏的闭合角度传感器，改变发声音高，双屏交互）；</p>
+    <p>③ <strong>Android 吉他伴奏 App</strong>：双 Tab 结构（指板 & 曲库），自带 AI 伴奏生成功能（底层直接调用 Gemini Lyria 3 网页端生成 30 秒的伴奏音乐，在手机上运行）。</p>
+  </div>
+</div>
+</div>
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">💻</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://x.com/steipete/status/2058381186884411473" target="_blank">CodexBar GitHub Dashboard 更新</a></div>
+    <div class="lcard-who">@steipete · ♥1,952 · 2026-05-20</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-infra">Agent 工具</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">「I always wanted a GitHub dashboard: See my repos, open Issues/PRs, what version I released last, how many commits since then, and ask Codex to automate release notes or PR merges with one click. So I built it into CodexBar.」steipete 带来了这个高级开发者刚需：一个无缝连通 Codex 进程、GitHub 项目、Issues 的桌面控制面板。</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="section" id="kols">
+<div class="sec-head"><div class="sec-title">💬 KOL 核心观点</div><div class="sec-desc">本期 22 KOL 全扫，Marcus 12K 爆帖反思 AI 资本错配，fchollet 生产力再定义</div></div>
+<hr class="sec-rule">
+<div class="kol-grid">
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">GM</div>
+    <div><div class="kn">Gary Marcus</div><div class="kha">@GaryMarcus · 纽约大学名誉教授</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 12,675</div><div class="kd">05-24</div></div>
+  </div>
+  <div class="kp">「If enough other companies report the same, the bubble pops. 🫧 Uber COO Andrew Macdonald said he's not seeing proportional productivity gains from increasing AI costs. Starbucks shut down AI inventory. Microsoft dropped Claude Code...」</div>
+  <div class="ka">引发了本周范围内全网最震动的 AI back-lash。Marcus 的论证链很完整：企业不是无限资金池。他们买 AI，底牌是要看到「降本增效」（减员、提效）。但在经历了 1-2 年部署后，最真实的财务和业务一作在反馈：① <strong>成本不受控</strong>（Uber 一下子烧光全年 API 额度，未见商业转化）；② <strong>精度不过关</strong>（星巴克 AI 盘件，常识性认错牛奶或数错数量，导致运营事故必须降级回人工）。这些刺痛点正在让大公司的财务部门（CFO）捂紧钱包。这是导致接下来 AI 巨兽 IPO 时市场可能冷遇的重要微观隐患。</div>
+  <a class="kcard-link" href="https://x.com/GaryMarcus/status/2059058176075420111" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">SP</div>
+    <div><div class="kn">steipete</div><div class="kha">@steipete · OpenClaw 联创 · OpenAI</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 4,774</div><div class="kd">05-23</div></div>
+  </div>
+  <div class="kp">「Folks: when you write skills, ask your agent to be token efficient, relax grammar. I see too many skills that spend 500 tokens formatting a markdown table when a csv string is 10x cheaper and agents understand it same.」</div>
+  <div class="ka">这个建议非常有价值，它触碰了「Agent 开发如何真的控制生产成本」这一极其现实的主题。steipete 在 OpenAI 亲历了超大用量的 token 消耗（他上期刚吐槽自己的 $1.3M 账单），他的这个建议是：写 skill（给 Agent 的指令和规范）时，不要强求排版和语法，用最野生的「CSV 字符串」代替「精美的 markdown 表格」，token 消耗可以小 10 倍，而 Agent 的理解完全一样。另一个帖子（♥1,047）：「OpenClaw's dependency purge continues. Replaced Sharp/Jimp with photon, a small WebAssembly...」代表了 OpenClaw 正在极尽全力精简软件依赖、走向本地轻量化的动作。</div>
+  <a class="kcard-link" href="https://x.com/steipete/status/2058917897590673525" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kh">
+    <div class="kav">EM</div>
+    <div><div class="kn">Ethan Mollick</div><div class="kha">@emollick · 沃顿商学院教授</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 1,474</div><div class="kd">05-23</div></div>
+  </div>
+  <div class="kp">「As more people come to recognize the tells of AI, which mostly happens as you start to work with AI a lot, the novelty wears off. We need to focus on what AI actually does better, not just that it can do it.」</div>
+  <div class="ka">一个深刻的社会心理观察。Mollick 的论断：随着人们长时间使用 AI，AI 独有的那种「废话、机器腔、四平八稳的无价值段落」正变得极容易被人类大脑下意识排斥（AI Fatigue）。这就逼着 AI 产品设计转向：如果你的工具只产生这些没有审美和独特观点的 textual slop，它会被迅速遗弃。价值正在向那些能直接输出「精确决策/具体修改/直接执行」的 Agent 系统集中。</div>
+  <a class="kcard-link" href="https://x.com/emollick/status/2058675767727325397" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kcard">
+  <div class="kh">
+    <div class="kav">GI</div>
+    <div><div class="kn">gregisenberg</div><div class="kha">@gregisenberg · AI 创业者</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 1,252</div><div class="kd">05-23</div></div>
+  </div>
+  <div class="kp">「How to build a vertical AI agent cash-flowing startup: find painful workflow in a boring industry → talk to 10 customers → define verifiable outcomes → let agents do the work.」</div>
+  <div class="ka">Isenberg 在他的这组 47 分钟创业课程推文里给出了非常可执行的「AI 代理公司（Managed Service）」实战指南。第一步，去找那些「极无聊、极其抗拒新技术但人工最贵」的传统行业（如：牙医诊所排班、地方房地产合规、卡车保险审核），定义 80% 可自动化且能在末端完美核验成果的 workflows，用 Hermes / Codex 搭建这套流程，然后卖「服务成果」，而不是卖「软件 seat 账号」。这是目前最靠谱的早期 AI 应用起家方向，Creekstone portfolio 的多项布局都在验证这个逻辑。</div>
+  <a class="kcard-link" href="https://x.com/gregisenberg/status/2058923630960988300" target="_blank">→ X 原帖</a>
+</div>
+
+</div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="section" id="funding">
+<div class="sec-head"><div class="sec-title">💰 融资动态</div><div class="sec-desc">本期聚焦算力债和前沿巨头资本，极高规格资金汇聚</div></div>
+<hr class="sr">
+<div class="fund-list">
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co">Apollo + Blackstone / Anthropic · 算力金融债</div><div class="fcard-sub">AI 历史上规模最大的单一债务融资组合 · Broadcom 进行信贷担保</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$36B</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Debt / Credit</span><span class="sigtag">★★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">信贷提供方</div><div class="ffield-v">Apollo Global Management + Blackstone（共同组建）</div></div>
+    <div class="ffield"><div class="ffield-l">用途</div><div class="ffield-v">购买 Google 自研 TPU 芯片，租用给 Anthropic 四个超级算力中心</div></div>
+    <div class="ffield"><div class="ffield-l">担保方</div><div class="ffield-v">Broadcom（博通，提供主要的信贷支付兜底担保）</div></div>
+    <div class="ffield"><div class="ffield-l">宣布日期</div><div class="ffield-v">2026-05-28（Bloomberg 独家爆料）</div></div>
+    <div class="fcard-why">在 AI 历史上，这标志着「轻资产股权竞争时代」的终结，大模型竞争正式进入了「重资产信贷（Infrastructure Finance）」时代。类似建电厂、建跨国铁路——你只有股权融资根本无法填补几百亿美元的算力账单，必须用金融债信用打包方式，由 Broadcom 提供担保，将主权和二级基金的债卷（private credit）引流进算力部署。头部大厂的护城河正在变成纯资本和信贷壁垒，中小模型公司已经被隔离在门外。</div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑤ 深度阅读 -->
+<div class="section" id="reads">
+<div class="sec-head"><div class="sec-title">📚 深度阅读</div></div>
+<hr class="sec-rule">
+<div class="read-list">
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src blog">大V博客 · 必读</div>
+      <div class="rcard-title"><a href="https://garymarcus.substack.com/p/if-enough-other-companies-report" target="_blank">If enough other companies report the same, the bubble pops. 🫧 — Gary Marcus</a></div>
+    </div>
+    <div class="rdate">Gary Marcus Substack · 05-26</div>
+  </div>
+  <div class="rb">
+    <div class="rsh">Marcus 本期在 X 获得 70 万高阅读的帖子扩展成的 Substack 全文。他用极翔实的企业一线数据（麦当劳/Uber、星巴克、微软、Target 的最新取消事件），直刺这波 AI cape-spending 中「最虚弱的那一面」——企业客户根本没有看到成比例的 ROI 面，而一万亿美金的 S&P 指数指数基金正被逼去接盘未盈利的大厂 IPO（OpenAI、Anthropic、xAI）。这是理解当前「AI Backlash」和可能到来的二级市场降温的最好材料。</div>
+    <div class="rpts">
+      <div class="rpt"><span class="rbl">▸</span><span><strong>Uber 的刺痛（真实原文引用）</strong>：「Uber COO Macdonald said he is not seeing proportional productivity gains from increasing AI costs. Uber blew through its AI budget in just months, and they don't feel it is working.」</span></div>
+      <div class="rpt"><span class="rbl">▸</span><span><strong>微软在割肉</strong>：连微软内部都在因 Claude 的惊人并发 token 开销无以为继，开始取消对于普通开发组的外部模型商业授权，转而强行推自己的 in-house 廉价小模型（MAI-Thinking-1，将在 Build 大会发布）。</span></div>
+      <div class="rpt"><span class="rbl">▸</span><span><strong>星巴克的自动库存灾难</strong>：由于频繁识错牛奶品牌和数错原料数量，直接导致供应链和店面断货。星巴克忍无可忍，在部署 9 个月后，于本周宣布彻底下线这套昂贵项目的 API 运行。</span></div>
+    </div>
+    <button class="exp" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开全文精简翻译 ↓'">展开全文精简翻译 ↓</button>
+    <div class="rdl">
+      <h5>Gary Marcus 关于「4万亿美元 IPO 接盘危机」的警示：</h5>
+      <blockquote>「The general situation is this: Three companies that have not yet shown themselves to be profitable (OpenAI, Anthropic, xAI) are expected to soon IPO for a total of something like four trillion dollars. Index funds, the staple of many people's retirement funds, are going to be more or less forced to rapidly absorb these exercises in fantastical thinking. Those exercises in fantastical thinking are premised on the notion that customer demand will be essentially endless. But we are already seeing cracks in that fantasy. If enough customers have second thoughts, none of the three IPO'ing companies will ever hit their long-term projections. In which cases those stocks will eventually fall. A lot of banks may take a hint as well. Get ready for 'too big to fail', and watch your portfolio drop.」</blockquote>
+      <p><strong>翻译：</strong>「大体情况是这样的：三家至今未证明自己有盈利能力的公司（OpenAI、Anthropic、xAI）预计很快会进行总市值约合 4 万亿美元的大型 IPO。指数基金——这些几乎构成每个普通人养老金池底层基石的基准大盘，将被迫快速去吸收这些充满了‘奇思幻想’的公司。而这些奇思幻想完全建立在‘客户的 AI token 需求是无限的且可以创造等比例价值’的假设之上。但我们已经在现实中看到了这个幻想的裂痕。如果足够多的企业客户开始算回头账并重新思考，这三家即将 IPO 的巨无霸就绝不可能达到其长期的营收承诺。如果是那样，这些股票最终会暴跌。许多信贷银行也会跟风。准备好迎接‘大到不能倒’的救市风波吧，看着你的养老金投资组合跌破底线。」</p>
+    </div>
+    <a href="https://garymarcus.substack.com/p/if-enough-other-companies-report" target="_blank" style="font-size:11px;color:var(--blue);display:block;margin-top:6px">→ Substack 全文</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 011 期 · 2026-05-27~29 · 周五刊<br>
+  数据源：X OAuth1（22 KOL）· Bloomberg · Reuters · TechCrunch · Gary Marcus Substack · Daytona Latent Space
+</div>
+</div></div></div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function filterL(btn,cat){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('#launchList .lcard').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat.includes(cat))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script></body></html>

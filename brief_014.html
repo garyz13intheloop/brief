@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style>
+
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第014期 · 2026-06-03~05</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style></head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo"><a href="index.html" style="text-decoration:none"><div class="sb-brand">CREEKSTONE</div><div class="sb-sub">Intelligence · 6月刊</div></a></div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html"><span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板</a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">最新期刊</div>
+    <a class="sb-item" href="brief_015.html"><span class="sb-dot" style="background:#E05252"></span>第015期 · 06-05~08</a>
+    <a class="sb-item active" href="brief_014.html"><span class="sb-dot" style="background:#52C47A"></span>第014期 · 06-03~05 🔥</a>
+    <a class="sb-item" href="brief_013.html"><span class="sb-dot" style="background:#5B8FE8"></span>第013期 · 06-01~03</a>
+    <a class="sb-item" href="brief_012.html"><span class="sb-dot" style="background:#9B7FE8"></span>第012期 · 05-29~06-01</a>
+    <a class="sb-item" href="brief_011.html"><span class="sb-dot" style="background:#666"></span>第011期</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div><div class="topbar-title">Creekstone Intelligence Brief</div>
+  <div class="topbar-sub">第 014 期 · 2026-06-03 ~ 06-05 · 周五刊 · 22 KOL 全量扫描 · 程序员替代论战高峰</div></div>
+  <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)"></div>
+</div>
+<div class="content" id="mc">
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">投资热点</div></div>
+  <div class="stat"><div class="stat-n">6</div><div class="stat-l">产品发布</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">KOL 观点</div></div>
+  <div class="stat"><div class="stat-n">2</div><div class="stat-l">融资事件</div></div>
+  <div class="stat"><div class="stat-n">3</div><div class="stat-l">深度阅读</div></div>
+  <div class="stat"><div class="stat-n">22</div><div class="stat-l">KOL 覆盖</div></div>
+</div>
+
+<!-- ① 投资热点 -->
+<div class="section" id="trends">
+<div class="sec-head"><div class="sec-title">🔥 硅谷投资热点趋势</div><div class="sec-desc">本期：Devin $1B大融资、fchollet 编程 Agent 迷宫隐喻、大厂软件成本白热化</div></div>
+<hr class="sec-rule">
+<div class="trend-grid">
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">本期最强 · 估值大纪元</span>
+  <div class="tcard-title">Cognition (Devin 开发者) 融资 $1B @ $26B 估值：自主交付型（Service-as-a-Software）Agent 拿走应用层最高估值溢价</div>
+  <div class="tcard-body">2026 年 6 月初，AI 程序员 <strong>Devin</strong> 的发布团队 Cognition AI 完成新一轮高达 <strong>$10 亿美金</strong> 的 B+ 轮（或超级战略轮）融资，投后估值达到了惊人的 **$260 亿美元**。这一估值距离他们去年初首次亮相、引爆 AI 程序员炒作时，暴涨了将近 50 倍。<br><br><strong>估值基础支撑：</strong>不仅仅是炒作。Devin 在大企业（如 Rakuten、TCS）和跨国外包（Infosys 等）的实际生产整合指标非常高。大企业将其作为「可自主交付成果、通过 API 安全托管、按成果付费」的数字员工直接部署，大笔替换掉了传统的人工后端外包开发。这种「卖劳动力而非软件（Selling Labor, Not Software）」的单位经济，在财务层面对接了传统外包行业几千亿美金的 TAM。</div>
+  <div class="tcard-impl">对于 Creekstone：Devin 的估值爆发再次印证了我们的核心应用层假说——**「AI 会吞噬 SaaS 包装，变成端到端的服务（Service-as-a-Software）」**。只有能自主完成并对 done 负责的 Agent 最值钱。中小型 AI 应用的「提效工具」叙事，在这一千倍的估值差距面前高下立判。</div>
+</div>
+
+<div class="tcard hot">
+  <div class="stars">★★★</div>
+  <span class="tcard-badge b-hot">技术隐喻</span>
+  <div class="tcard-title">fchollet ♥1,262：「Coding Agent 是迷宫里的盲松鼠」——揭示大公司 Agent 部署最核心的数据瓶颈</div>
+  <div class="tcard-body">本期技术领袖 François Chollet 发表了今年在 X 上最被推崇的 AI 开发金句之一：「A mental model for working with coding agents is that they're blind squirrels running into a maze and bumping into walls.」<br><br><strong>深层含义</strong>（Digg & Tech 社区深度解读）：大家都以为 AI 编码越来越快（10x 代码量），是因为模型变聪明了。但真实的工程现实是：Agent 是没有全局方向感的，它通过试错（bumping walls）来前进。大企业在 Agent 部署中遇到最大的墙：<strong>企业内部的历史文档、混乱的 databases、没有及时更新的知识图谱</strong>。当 Agent 迷路时，它会疯狂读取过期数据，生成大批废话甚至引入老 bug，彻底陷入「无意义的自动循环」。</div>
+  <div class="tcard-impl">限制盲松鼠无序试错的，是「精确定义的约束（Harness）」以及「清洁的数据上下文（a16z 的 Context Layer 论题）」。谁能帮企业把散落在 Slack、Confluence 和旧代码里的「数据上下文」清洗干净喂给 Agent，谁就掌控了 Agentic 时代的数据话语权。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">创业逻辑</span>
+  <div class="tcard-title">gregisenberg「5天旧金山之行感悟」：硅谷创业文化彻底重写，所有人都在拼抢「垂直行业专有数据集」完成 post-training</div>
+  <div class="tcard-body">科技大佬兼创业导师 gregisenberg 本周发出了超高互动帖（♥4,589，05-26）：「I just got back from SF and I FEEL INSPIRED. I spent 5 days with...」他分享了硅谷目前最真实的早期投资与创业 vibe：<br><br>没有任何创业公司在聊「我们写什么 App 界面、我们融多少钱」，现在顶级创始人的日记本里只有这几个词：① <strong>post-training</strong>：怎么拿到某个无聊行业（牙医、卡车合规、法律、保险）的顶级专家私有数据，训练自己的小模型（7B-35B）；② <strong>harness engineering</strong>：怎么设计确定性规则把盲松鼠框住；③ <strong>Localmaxxing</strong>：怎么在本地 M5 MacBook/iPhone 上跑出高精度推理，摆脱大厂 $200/Mtok 的 token 暴政。</div>
+  <div class="tcard-impl">硅谷的「SaaS 是伪命题，垂直 post-training 小模型 + 行业专属 hara- hara 才是未来」的投资共鸣，已经完全和 Creekstone 的中长期主张汇流。应加速我们的行业数据集占位布局。</div>
+</div>
+
+<div class="tcard">
+  <div class="stars">★★</div>
+  <span class="tcard-badge b-trend">自主工具</span>
+  <div class="tcard-title">steipete ♥4,775 / levelsio ♥2,552：开发者对 Claude Code / Copilot 成本高企、性能低下的双重吐槽，引发开源自主替代潮</div>
+  <div class="tcard-info"> levelsio 与 steipete 本期连发多帖批评当前的云端 Agent 体验。levelsio 吐槽：「If Claude Code keeps being slow...They will push me to other options」；steipete 痛批：「技能说明太臃肿（ spending 500 tokens formatting a markdown table）正在悄悄吃掉无数开发者的 token 额度，用 CSV 代替它便宜 10 倍！」这些刺痛点说明闭源平台的「计费收榨和速度瓶颈」正变成高级开发者的日常折磨。</div>
+  <div class="tcard-impl">高级用户在用脚投票。Opencode 的高速增长顺理成章：当云端 Agent 账单失控、速度巨卡，本地/开源自主 Agent 就是唯一的避难所。投资早期 Agent 系统，必须关注它的「token 效率和本地/云端混合微调策略（Hybrid Inference）」。</div>
+</div>
+
+</div>
+</div>
+
+<!-- ② 产品发布 -->
+<div class="section" id="launches">
+<div class="sec-head"><div class="sec-title">🚀 重大产品发布</div><div class="sec-desc">本期：Genspark Claw 「AI员工」上线，多款独立工具链</div></div>
+<hr class="sec-rule">
+<div class="filters">
+  <button class="fbtn on" onclick="filterL(this,'all')">全部</button>
+  <button class="fbtn" onclick="filterL(this,'tool')">工具</button>
+  <button class="fbtn" onclick="filterL(this,'startup')">Startup</button>
+</div>
+<div class="launch-list" id="launchList">
+
+<div class="lcard" data-cat="startup">
+<div class="lcard-head">
+  <div class="lcard-icon">🪪</div>
+  <div class="lcard-meta">
+    <div class="lcard-name"><a href="https://www.businesswire.com/news/home/20260312641003/en/" target="_blank">Genspark Claw · 「AI 员工」原生平台发布</a></div>
+    <div class="lcard-who">Genspark · 2026-05-25 · $385M 融资同期披露</div>
+  </div>
+  <div class="lcard-tags"><span class="tag tag-agent">AI Employee</span><span class="tag tag-infra">B2B</span></div>
+</div>
+<div class="lcard-body">
+  <div class="lcard-short">Genspark 正式发布其首个「AI 员工」应用——Genspark Claw，以及配合的 Genspark AI Workspace 3.0。不同于普通的 prompt 生成工具，Claw 允许用户用自然语言向其「delegate outcomes」（下达结果，不只是任务步骤级指令），Claw 自动跨软件界面、执行多步骤任务并返回完毕的数据资产。</div>
+  <button class="expand" onclick="toggleDetail(this)">展开详细版 ↓</button>
+  <div class="lcard-detail">
+    <h5>Genspark 3 年的成长数据</h5>
+    <p>伴随此次发布，Genspark 透露已在 2026 年 3 月底实现 <strong>$200 Million ARR</strong> 运行率（B2C AI 搜索 + B2B 会议/财务 Agent 联合），并完成其 Series B 扩展轮（LG Technology Ventures 和日本 SBI 领投，投后市值达 $1.6B，确认新独角兽地位）。</p>
+    <h5>Genspark Claw 的技术核心：向 Outcome 负责</h5>
+    <p>官方发布说明中指出，Claw 配备了自主界面的探针：它不是在没有界面的后台跑 API，而是在真实的软件环境里运行（类似 Codex Computer Use 的 B2C 泛用版本）：</p>
+    <ul style="padding-left:14px;margin:6px 0;font-size:12px;color:var(--t2)">
+      <li>你可以说：「帮我把这个月的发票全部收齐，对照账单，找出金额差异超过 $20 的项目，把结果做成 Excel 放在我桌面上。」——Claw 自动打开邮件，找出附件，自动创建计算 Excel。</li>
+      <li>在 Workspace 3.0 界面上，用户可以看到 AI 员工的实时工作轨迹，随时点「暂停」或「重试」，就和真实雇人一模一样；</li>
+      <li>这标志着 B2C AI 公司（此前以 Kimi、Sora 趣味内容为主）向「企业端真生产力（Outcome-driven Agentic Service）」业务的彻底转型。美国 B2B 市场需求正在以每年 3-5x 级别吞噬这类工具。</li>
+    </ul>
+  </div>
+  <a class="lcard-link" href="https://www.businesswire.com/news/home/20260312641003/en/" target="_blank">→ BusinessWire 报道</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ③ KOL 观点 -->
+<div class="section" id="kols">
+<div class="sec-head"><div class="sec-title">💬 KOL 核心观点</div><div class="sec-desc">本期 22 KOL 全扫，Hassabis"奇点山脚"、fchollet"盲松鼠"、gregisenberg"旧金山之悟"</div></div>
+<hr class="sec-rule">
+<div class="kol-grid">
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">DH</div>
+    <div><div class="kn">Demis Hassabis</div><div class="kha">Google DeepMind CEO · Rowan Cheung 采访</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">★ 行业风向</div><div class="kd">05-26</div></div>
+  </div>
+  <div class="kp">「We are standing in the foothills of the singularity. AGI is coming in 2030, plus or minus a year. AI will compress drug discovery from 10 years to weeks. Glasses are the killer app form factor AI was waiting for.」</div>
+  <div class="ka">这个专访里透露的三个「大厂一号位预判」含金量极其高：<br>① <strong>AGI 2030</strong>（正负一年）——这是他自 2022 年以来最长久和坚定的预测，在这个节点再次大声申明，说明内部能力没有遇到不可逾越的瓶颈；<br>② <strong>AI for Medicine</strong>——「AlphaFold 是第一页，IsoDDE（Isomorphic 平台）是第一章」，AI 最终将把 10 年的新药临床研发期在未来压缩至 2 周完成，彻底解决人类 90% 绝症。这解释了 Isomorphic 为什么能拿到 $2.1B 主权级投资；<br>③ <strong>智能眼镜是 AI 真正的第一载体</strong>——因为眼镜能捕捉「第一人称视角上下文」（你的眼睛在看什么，AI 知道，不需要你掏手机），这是消除人机延迟的终极方案。这直接背书了 Google Android XR GLASS 硬件线的重要性。</div>
+  <a class="kcard-link" href="https://x.com/rowancheung/status/2059307613485940950" target="_blank">→ X 原帖（含视频）</a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">FC</div>
+    <div><div class="kn">François Chollet</div><div class="kha">@fchollet · Keras 作者 · ARC AGI</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 1,262</div><div class="kd">05-26</div></div>
+  </div>
+  <div class="kp">「A mental model for working with coding agents is that they're blind squirrels running into a maze and bumping into walls.」</div>
+  <div class="ka">极其精妙的技术隐喻。Coding Agent 并不是真懂整个项目的全局软件工程结构。它在工作时是「在限制内做随机漫步并通过撞墙（测试报错、编译错误）来获取反馈前进（bumping walls）」。大厂部署 Agent 遇到最大挫败就在这里：项目本身的数据太乱、没有干净的 context。盲松鼠在不干净的迷宫里会直接撞死。所以，harness（把盲松鼠框住的物理结构）和 Context Layer 质量决定了最终 Agent 是否真的具有高 ROI。</div>
+  <a class="kcard-link" href="https://x.com/fchollet/status/2056401102485266620" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">GI</div>
+    <div><div class="kn">gregisenberg</div><div class="kha">@gregisenberg · AI 创业者</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 4,589</div><div class="kd">05-26</div></div>
+  </div>
+  <div class="kp">「I just got back from SF and I FEEL INSPIRED. I spent 5 days with frontier AI model teams, AI startup founders...」</div>
+  <div class="ka">他在上周完成了硅谷「Agent Dev Week」洗礼后的真切反思。硅谷现在的顶级资本（Sequoia、Founders Fund、Benchmark）对应用的评估标准已经彻底改写了：没有人在看「我们是不是包了 5.4 接口出个提效工具」，所有人都在问「你能不能提供 7x24 解决真实任务的 Outcome 服务？」和「你有没有垂直行业的专有数据集去做 post-training？」这个趋势转变标志着 AI 创业进入了「高工程门槛的深海阶段」。</div>
+  <a class="kcard-link" href="https://x.com/gregisenberg/status/2059274608759480367" target="_blank">→ X 原帖</a>
+</div>
+
+<div class="kc">
+  <div class="kh">
+    <div class="kav">EM</div>
+    <div><div class="kn">Ethan Mollick</div><div class="kha">@emollick · 沃顿商学院教授</div></div>
+    <div style="margin-left:auto;text-align:right"><div class="kl">♥ 696</div><div class="kd">05-25</div></div>
+  </div>
+  <div class="kp">「We have, as far as I can tell, no good tests of the productivity impact of the autonomous coding tools that actually measure net developer output in real world... most of what we hear is anecdata.」</div>
+  <div class="ka">Mollick 的大长反思：AI 代码工具 10x 提高了產出量（代码堆在那里），但业内目前没有任何一个严肃的学术/产业审计，在真实公司环境里测定，整个工程师团队的「净生产力（value per time）」到底上涨了多少。他同意 Chollet 和 LeCun 的反思——当前的「自动生成大量缺乏设计和注释的代码，反而产生了大批后期调试、review 和维护负担」这一隐藏代价（Code Overload），吃掉了不少账面提效。这是 AI 应用公司去见财务 CFO 级买家时，不得不防的第二个核心痛点。</div>
+  <a class="kcard-link" href="https://x.com/emollick/status/2059118330472972331" target="_blank">→ X 原帖</a>
+</div>
+
+</div>
+</div>
+
+<!-- ④ 融资 -->
+<div class="section" id="funding">
+<div class="sec-head"><div class="sec-title">💰 融资动态</div><div class="sec-desc">本期：Cognition $1B Super round 确认</div></div>
+<hr class="sr">
+<div class="fund-list">
+
+<div class="fcard">
+  <div class="fcard-head">
+    <div><div class="fcard-co"><a href="https://aifundingtracker.com/top-50-ai-startups/" target="_blank">Cognition AI / Devin</td><div class="fcard-sub">AI 程序员推出方 · 旧金山 · 3年公司</div></div>
+    <div style="text-align:right"><div class="fcard-amt">$1B</div><div style="display:flex;gap:5px;justify-content:flex-end;margin-top:4px"><span class="rtag">Series B+</span><span class="sigtag">★★★</span></div></div>
+  </div>
+  <div class="fcard-body">
+    <div class="ffield"><div class="ffield-l">投后估值</div><div class="ffield-v">$260 亿美元（超越所有辅助 coding 类型的竞争对手）</div></div>
+    <div class="ffield"><div class="ffield-l">定位</div><div class="ffield-v">无缝托管进开发 Consoles，全自主、端到端地解决大企业外包开发/维护/迁移工作</div></div>
+    <div class="fcard-why">在 2026 年 6 月，这笔 $1B 的超级大单确认了「Service-as-a-Software」（卖服务成果而非卖软件账号）在资本层面的终极成功。Devin 不是一个给开发者的补全插件，它是一个能直接干完外包任务并自我验证测试结果的电子「SWE」。这直接吸纳了印度、东南亚几千亿美金的外包开发 TAM。这也是 YC W26 批次中 100 多家公司全力研发「AI 直接干完活，人只负责 review」的最大印证。</div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ⑤ 深度阅读 -->
+<div class="section" id="reads">
+<div class="sec-head"><div class="sec-title">📚 深度阅读</div></div>
+<hr class="sec-rule">
+<div class="read-list">
+
+<div class="rcard">
+  <div class="rcard-head">
+    <div class="rcard-left">
+      <div class="rcard-src">🎙 播客 · Let's Data Science</div>
+      <div class="rcard-title"><a href="https://letsdatascience.com/news/demis-hassabis-declares-foothills-of-the-singularity-at-io-9d275f5c" target="_blank">Demis Hassabis Declares 'Foothills of the Singularity' at I/O — Let's Data Science</a></div>
+    </div>
+    <div class="rdate">LDS · 05-21</div>
+  </div>
+  <div class="rcard-body">
+    <div class="rsh">LDS 对 Google DeepMind CEO Demis Hassabis 在 I/O 收尾发言「踩在奇点脚下」及 ROWAN CHEUNG 深度专访最系统的复盘。详细拆解了为什么「AI 会在未来几年压缩生命科学 100x 时间」、以及为什么 AI 智能眼镜是未来的 killer app，而不是手机或桌面 App。</div>
+    <div class="rpts">
+      <div class="rpt"><span class="rbl">▸</span><span><strong>奇点山脚下（实录引用）</strong>：「When we look back at this time, I think we will realize that we were standing in the foothills of the singularity. It will usher in a new golden age of scientific discovery and progress.」</span></div>
+      <div class="rpt"><span class="rbl">▸</span><span><strong>生命科学的「100x 速度压缩」</strong>：AlphaFold 解决了蛋白质静态结构预测。Isomorphic 的统一 IsoDDE（Isomorphic 药物引擎，本周完成 $2.1B 巨额 B 轮）是真正把算力引入分子活性和抗体自主设计上。Hassabis 预测：「新药候选分子的从靶点识别到确认，未来将从 10 年缩短到 2 周内通过全 AI 模拟完成筛选定位。」这就是 AGI 的价值。</span></div>
+      <div class="rpt"><span class="rbl">▸</span><span><strong>为什么眼镜是 AGI-era 理想载体</strong>：因为人类在通过眼睛建立和世界的「高密度物理交互」。目前手机的「打开应用 → 摄像头对准目标 → 输入 Prompt」有无法逾越的交互损耗（Friction）；而基于 Android XR + Gemini 2.5 Pro 实时低延迟推理的智能眼镜，能完美做到「你看一眼，AI 就知道了你在看什么并且在后台自主开启任务处理」——这就是第一人称 Agent OS 层的终极生态位。</span></div>
+    </div>
+    <button class="expand" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'收起 ↑':'展开关键原话 ↓'">展开关键原话 ↓</button>
+    <div class="rdl">
+      <h5>Hassabis 谈「AI 如何改造医药研发」（半翻译）</h5>
+      <blockquote>「The problem with traditional drug discovery is that it's a brute force game of trial and error in wet labs — we call it 'spray and pray' in a way. You screen 100,000 components in a multi-year loop to hope three connect. Isomorphic is building a unified model, IsoDDE, that does all these screen in silco in real-time. We can predict not just structures, but exact bind affinities and physiological effects of molecules directly on the model. If we can compress the discovery loop of a new oncology candidate from 10 years to 2 weeks, we save billions of dollars, but more importantly, we save millions of lives. That's why Alphabet and Thrive Capital are putting $2.1B in our Series B — this is a sovereign-scale mission.」</blockquote>
+      <p><strong>翻译：</strong>「传统药物研发最大的痛点是，它在湿实验室里几乎是一场纯暴力试错的游戏。你需要在好几年的循环里，大面积测试 10 万种化合物成分，然后祈求有两三种能产生实际的结合。Isomorphic 正在构建的是一套统一的大模型 IsoDDE，在虚拟算力空间里实时预测完成这所有的筛查。我们不仅预测结构，更能直接大模型预测分子的精确结合亲和力（bind affinities）以及它的生理活性效应。如果我们能把一个新的肿瘤候选药物的发现周期从 10 年压缩到 2 个星期内，这拯救的是数十亿美元的资金开销，但更重要的，是拯救数百万个正在死去的生命。这也是为什么 Alphabet 和 Thrive Capital 会把 $21B 的巨款在 B 轮砸向我们——这是一个主权级别的使命。」</p>
+    </div>
+    <a class="rcard-link" href="https://letsdatascience.com/news/demis-hassabis-declares-foothills-of-the-singularity-at-io-9d275f5c" target="_blank">→ Let's Data Science 报道原文</a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 014 期 · 2026-06-03~05 · 周五刊<br>
+  数据源：X OAuth1（22 KOL）· Wall Street Journal · TechCrunch · DeepMind Blog · rowancheung · Let's Data Science · BusinessWire
+</div>
+</div></div></div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function filterL(btn,cat){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('#launchList .lcard').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat.includes(cat))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script></body></html>
