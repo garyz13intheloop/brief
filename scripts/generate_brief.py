@@ -135,8 +135,9 @@ def web_search_hn(query, num=5):
     """HN Algolia Search API（免费，无需 key）"""
     try:
         encoded = urllib.parse.quote(query)
-        url = f"https://hn.algolia.com/api/v1/search?query={encoded}&tags=story&numericFilters=created_at_i>%d&hitsPerPage={num}" % \
-              int((datetime.now() - timedelta(days=7)).timestamp())
+        cutoff_ts = int((datetime.now() - timedelta(days=7)).timestamp())
+        url = (f"https://hn.algolia.com/api/v1/search?query={encoded}"
+               f"&tags=story&numericFilters=created_at_i%3E{cutoff_ts}&hitsPerPage={num}")
         data = json.loads(http_get(url, timeout=10))
         return [
             {
@@ -243,8 +244,14 @@ def fetch_podcasts(window_hours=72):
 
 # ── X KOL 扫描 ────────────────────────────────────────────────────────────────
 def load_creds():
-    return {k: os.environ[k].strip() for k in
-            ['X_API_KEY','X_API_SECRET','X_ACCESS_TOKEN','X_ACCESS_TOKEN_SECRET']}
+    """从环境变量读 X API 凭证，统一用不带 X_ 前缀的 key 供 OAuth 签名使用"""
+    mapping = {
+        'API_KEY':              'X_API_KEY',
+        'API_SECRET':           'X_API_SECRET',
+        'ACCESS_TOKEN':         'X_ACCESS_TOKEN',
+        'ACCESS_TOKEN_SECRET':  'X_ACCESS_TOKEN_SECRET',
+    }
+    return {short: os.environ[env_key].strip() for short, env_key in mapping.items()}
 
 def scan_kols(creds, start_time, end_time):
     all_tweets = []
@@ -628,7 +635,8 @@ def gh_upload_file(token, repo, filepath, local_path, message):
         if e.code != 404:
             print(f"    gh GET {filepath}: HTTP {e.code}")
     except Exception as e:
-        print(f"    gh GET {filepath}: {e}")
+        # 本地代理或网络问题，不影响 GitHub Actions 运行
+        print(f"    gh GET {filepath}: {e} (will try PUT anyway)")
 
     with open(local_path, "rb") as f:
         content_b64 = base64.b64encode(f.read()).decode()
@@ -660,14 +668,17 @@ def publish_github(token, issue_num):
         if not local_path.exists():
             print(f"    skip {repo_path} (not found)")
             continue
-        commit = gh_upload_file(
-            token, REPO, repo_path, str(local_path),
-            f"🤖 Auto-brief {repo_path} issue={issue_num:03d}"
-        )
-        if commit:
-            print(f"    ✓ {repo_path} → commit {commit}")
-            ok += 1
-        time.sleep(1)  # 避免 GitHub API rate limit
+        try:
+            commit = gh_upload_file(
+                token, REPO, repo_path, str(local_path),
+                f"🤖 Auto-brief {repo_path} issue={issue_num:03d}"
+            )
+            if commit:
+                print(f"    ✓ {repo_path} → commit {commit}")
+                ok += 1
+        except Exception as e:
+            print(f"    ✗ {repo_path}: {e}")
+        time.sleep(1)
     print(f"    GitHub: {ok}/{len(files_to_upload)} files uploaded")
     return ok > 0
 
