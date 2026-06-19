@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第021期 · 06-17~06-19</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo">
+    <a href="index.html" style="text-decoration:none">
+      <div class="sb-brand">CREEKSTONE</div>
+      <div class="sb-sub">Intelligence · 自动 + 手工</div>
+    </a>
+  </div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html">
+      <span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板
+    </a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">近期期刊</div>
+    <a class="sb-item active" href="brief_021.html"><span class="sb-dot" style="background:#E05252"></span>第021期 🔥</a>
+    <a class="sb-item" href="brief_020.html"><span class="sb-dot" style="background:#52C47A"></span>第020期</a>
+    <a class="sb-item" href="brief_019.html"><span class="sb-dot" style="background:#5B8FE8"></span>第019期</a>
+    <a class="sb-item" href="brief_018.html"><span class="sb-dot" style="background:#9B7FE8"></span>第018期</a>
+    <a class="sb-item" href="brief_017.html"><span class="sb-dot" style="background:#C9A84C"></span>第017期</a>
+    <a class="sb-item" href="brief_016.html"><span class="sb-dot" style="background:#888"></span>第016期</a>
+    <a class="sb-item" href="brief_015.html"><span class="sb-dot" style="background:#888"></span>第015期</a>
+    <a class="sb-item" href="brief_014.html"><span class="sb-dot" style="background:#888"></span>第014期</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Creekstone Intelligence Brief</div>
+    <div class="topbar-sub">第 021 期 · 06-17~06-19 · 周五 · 83 KOL 信号 · 12 Web 信号 · 自动生成框架</div>
+  </div>
+  <div class="search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)">
+  </div>
+</div>
+<div class="content" id="mc">
+
+<div style="background:rgba(92,163,120,.08);border:1px solid rgba(92,163,120,.25);border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:var(--t2);display:flex;align-items:center;gap:10px">
+  <span style="color:#52C47A;font-size:16px">⚡</span>
+  <span>自动生成框架 · 2026-06-19 14:22 SGT · 数据来源：X OAuth1 (29 KOL) + Serper + HN API + Substack API ·
+  <strong style="color:var(--gold)">如需深度加固请联系 Gary</strong></span>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">83</div><div class="stat-l">KOL 信号</div></div>
+  <div class="stat"><div class="stat-n">13</div><div class="stat-l">高热帖(♥500+)</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">发布信号</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">融资信号</div></div>
+  <div class="stat"><div class="stat-n">2</div><div class="stat-l">播客更新</div></div>
+  <div class="stat"><div class="stat-n">12</div><div class="stat-l">HN 热帖</div></div>
+</div>
+
+<div class="section" id="trends">
+  <div class="sec-head">
+    <div class="sec-title">🔥 本期高热 KOL 信号</div>
+    <div class="sec-desc">X OAuth1 扫描 29 个账号，按互动量降序，Top 4</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="trend-grid">
+  <div class="tcard hot">
+    <div class="stars">♥8,886</div>
+    <span class="tcard-badge b-hot">@sama · 本期最强信号</span>
+    <div class="tcard-title">noam is one of the people I have most wanted to work with since the very beginning of openai.
+
+only took 10 years.
+
+i th</div>
+    <div class="tcard-body">ink it will be worth the wait! https://t.co/Hj2fjCywjv</div>
+    <div class="tcard-impl"><a href="https://x.com/sama/status/2067427421083652131" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard hot">
+    <div class="stars">♥7,926</div>
+    <span class="tcard-badge b-trend">@sama · 高热讨论</span>
+    <div class="tcard-title">We offer no explanation as to why Noams are so good at AI; we attribute their success, as all else, to divine benevolenc</div>
+    <div class="tcard-body">e. https://t.co/QQ93UCF4ok</div>
+    <div class="tcard-impl"><a href="https://x.com/sama/status/2067427678529974740" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard">
+    <div class="stars">♥2,641</div>
+    <span class="tcard-badge b-trend">@fchollet · 高热讨论</span>
+    <div class="tcard-title">The hardest problems are rarely solved by adding more complexity to the solution -- they are solved by reframing the que</div>
+    <div class="tcard-body">stion until a simpler, clearer answer reveals itself.</div>
+    <div class="tcard-impl"><a href="https://x.com/fchollet/status/2067293637357064561" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard">
+    <div class="stars">♥2,965</div>
+    <span class="tcard-badge b-trend">@steipete · 高热讨论</span>
+    <div class="tcard-title">sci-fi vibes intensify https://t.co/4Y4iakN3vv</div>
+    <div class="tcard-body">—</div>
+    <div class="tcard-impl"><a href="https://x.com/steipete/status/2067431311317352809" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div></div>
+</div>
+
+<div class="section" id="launches">
+  <div class="sec-head">
+    <div class="sec-title">🚀 产品发布 · Web 信号</div>
+    <div class="sec-desc">Serper Search 自动抓取 · 需人工确认重要性 · 如信号为空说明搜索限额用完</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="launch-list" id="launchList"><div style="padding:12px;color:var(--t3);font-size:12px">本期 Web 抓取未发现明确产品发布，请手动补充</div></div>
+</div>
+
+<div class="section" id="kols">
+  <div class="sec-head">
+    <div class="sec-title">💬 KOL 推文全列表</div>
+    <div class="sec-desc">29 个账号全量扫描 · 按互动量降序</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="kol-grid">
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 2,940</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">I don't know if it's obvious information or not but if you talk to random people in San Francisco the general thing they say is that software is commoditized cause so easy to make anything with AI fast (like how I cancelled all my SaaS subscriptions and just vibe coded a</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2067662326082498899" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,352</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">For all the people that say that you can’t build an important business unless you raise venture capital 
+
+Midjourney is bootstrapped https://t.co/F9YU6UGaEC</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2067575735703818665" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,399</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">I don't know if it's placebo but using Fable for those few days it felt it just never gave up on problems and kept trying crazy ways to get whatever you wanted done. Now back on Opus and it's kinda lazy, thinks things are too daunting and keeps asking if you sure</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2067694338931372196" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,314</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">Interestingly, Google no longer has a public frontier model. They have a very good flash model, but a very good flash model can't do frontier work without a good frontier orchestrator.
+
+I am sure this will change soon, but Gemini 3.1 Pro is very clearly lagging at this point.</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2067617541762031900" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,301</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">💰 As a now newly minted venture capital investor in true VC fashion we dropped by @a16z to find more deals 😃
+
+Andreessen Horowitz is one of the largest VC funds in the world managing about $90B in assets and founded by @pmarca and @bhorowitz in 2009
+
+In 2022, a16z published the https://t.co/t0xDUotJtj https://t.co/4OJg</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2067448690336465114" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">DR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@DrJimFan</div>
+        <div class="kcard-handle">KOL · X · 2026-06-17</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 701</div>
+        <div class="kcard-date">2026-06-17</div>
+      </div>
+    </div>
+    <div class="kcard-post">I made Physical AutoResearch sound simple (conceptually), but it took a village to pull off and lots of design thinking into the robot /loopcraft. The hardest part is everything we need to setup *before* pressing Enter. Here's a behind-the-scene tour:
+
+1. Safety harness
+
+Letting https://t.co/P7sfwHf7wo https://t.co/M3R</div>
+    <a class="kcard-link" href="https://x.com/DrJimFan/status/2067283904986517866" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 850</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">Holy shit America took stroopwafels and made them pre-workouts? https://t.co/bufMD1DSff</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2067730243817783595" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 702</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">There is a ton of money riding on the hope that the exponential curve the Big Three Labs are on will end soon
+
+If that happens, small and open models become viable, businesses get time to react, costs drop &amp;amp; the world gets weirder more slowly.
+
+But that isn’t happening so far.</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2067408783156879788" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">OF</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@OfficialLoganK</div>
+        <div class="kcard-handle">KOL · X · 2026-06-19</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 687</div>
+        <div class="kcard-date">2026-06-19</div>
+      </div>
+    </div>
+    <div class="kcard-post">feels like we are entering the super app era</div>
+    <a class="kcard-link" href="https://x.com/OfficialLoganK/status/2067811321354281072" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GA</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@GaryMarcus</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 470</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">Accenture, $ACN, heavily involved in AI consulting, is down nearly 20% after AI fails to magically transform their business.</div>
+    <a class="kcard-link" href="https://x.com/GaryMarcus/status/2067661379755278760" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">SW</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@swyx</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 399</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">my notes from the @midjourney medical launch
+
+- @Scobleizer compared this to the original iPhone and Tesla launches (that he was also front row for)
+- find you a man who looks at you like @bryan_johnson was 😍 ing for @DavidSHolz 
+- see @iScienceLuvr tweet linked for Nature paper https://t.co/Z6MObCsDwN https://t.co/qzq</div>
+    <a class="kcard-link" href="https://x.com/swyx/status/2067468331918242127" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 443</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">The thesis for someone acquiring $SNAP, fixing 4 things, and making billions.
+
+The whole company trades at a $7.8B market cap. They did $5.9B in revenue last year, they have $2.9B in cash, they just turned free cash flow positive, and 474 million people open the app every single https://t.co/cU1IOBxP6B</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2067617815037686191" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-17</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 401</div>
+        <div class="kcard-date">2026-06-17</div>
+      </div>
+    </div>
+    <div class="kcard-post">Big issue with AI strategies at big companies which realized the importance of AI last year (which is only a small subset, most are still not moving fast) is that, in the best case, they developed their strategy in late 2025, before the agentic revolution
+
+Things changed since... https://t.co/hlFqsAZglj</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2067344183870836985" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-18</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 447</div>
+        <div class="kcard-date">2026-06-18</div>
+      </div>
+    </div>
+    <div class="kcard-post">You won't believe the things the rest of the world already solved but Europeans still have to go through in 2026 https://t.co/T2k1X8UIQp</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2067719335733322158" target="_blank">→ X 原帖</a>
+  </div></div>
+</div>
+
+<div class="section" id="funding">
+  <div class="sec-head">
+    <div class="sec-title">💰 融资动态 · Web 信号</div>
+    <div class="sec-desc">Serper Search 自动抓取</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="fund-list"><div style="padding:12px;color:var(--t3);font-size:12px">本期未检测到明确融资信号</div></div>
+</div>
+
+<div class="section" id="tech">
+  <div class="sec-head">
+    <div class="sec-title">🔬 技术前沿 · Web + HN</div>
+    <div class="sec-desc">Serper + Hacker News Algolia API 联合抓取</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="tech-list">
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/DietrichGebert/ponytail" target="_blank">Ponytail – make your AI agent think like the laziest senior dev in the room</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://github.com/DietrichGebert/ponytail" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://blog.goodman.dev/blog/octopus-agent-architecture/" target="_blank">The octopus architecture for AI agents</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://blog.goodman.dev/blog/octopus-agent-architecture/" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://deepmind.google/blog/securing-the-future-of-ai-agents/" target="_blank">Securing the Future of AI Agents</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://deepmind.google/blog/securing-the-future-of-ai-agents/" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://www.bloomberg.com/news/articles/2026-06-17/estonia-to-grant-ai-bots-legal-rights-with-personal-id-numbers" target="_blank">Estonia assigns personal ID numbers to AI agents to grant them "authorizations"</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://www.bloomberg.com/news/articles/2026-06-17/estonia-to-grant-ai-bots-legal-rights-with-personal-id-numbers" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://danlevy.net/llm-evals-are-broken/" target="_blank">LLM benchmarks are answering someone else's question</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://danlevy.net/llm-evals-are-broken/" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://language1.app/" target="_blank">Show HN: Language1 – Benchmarking LLM comprehension of vague prompts via Taboo</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short">Hi HN,&lt;p&gt;I built Language1 (&lt;a href="https:&amp;#x2F;&amp;#x2F;language1.app" rel="nofollow"&gt;https:&amp;#x2F;&amp;#x2F;language1.app&lt;/a&gt;), a word game where you play &amp;quot;reverse Taboo&amp;quot; against an LLM.&lt;p&g</div>
+      <a class="lcard-link" href="https://language1.app/" target="_blank">→ 阅读原文</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="section" id="reads">
+  <div class="sec-head">
+    <div class="sec-title">📚 播客 · 最新更新</div>
+    <div class="sec-desc">Latent Space · Import AI · Dwarkesh · Substack API 直连</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="read-list">
+  <div class="rcard">
+    <div class="rcard-head">
+      <div class="rcard-left">
+        <div class="rcard-src">🎙 播客 · Latent Space</div>
+        <div class="rcard-title"><a href="https://www.latent.space/p/anj" target="_blank">The Professor of Outputmaxxing — Anjney Midha, AMP</a></div>
+      </div>
+      <div class="rdate">2026-06-18</div>
+    </div>
+    <div class="rb">
+      <div class="rsh">We talk about how this legendary investor went from humble beginnings in Singapore to leading rounds in Anthropic, Mistral, Black Forest Labs, and Periodic Labs... and the AMP secret master plan!</div>
+      <a class="rcard-link" href="https://www.latent.space/p/anj" target="_blank">→ 播客原文</a>
+    </div>
+  </div>
+  <div class="rcard">
+    <div class="rcard-head">
+      <div class="rcard-left">
+        <div class="rcard-src">🎙 播客 · Latent Space</div>
+        <div class="rcard-title"><a href="https://www.latent.space/p/radical-ai" target="_blank">🔬 The Self-Driving Lab — Joseph Krause, Radical AI </a></div>
+      </div>
+      <div class="rdate">2026-06-17</div>
+    </div>
+    <div class="rb">
+      <div class="rsh">Radical AI's Joseph Krause on why the moat in materials is the lab, not the model</div>
+      <a class="rcard-link" href="https://www.latent.space/p/radical-ai" target="_blank">→ 播客原文</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 021 期 · 06-17~06-19 · 周五<br>
+  ⚡ GitHub Actions 自动框架 · X×29 KOL · Serper · HN · Substack<br>
+  🌐 https://garyz13intheloop.github.io/brief/ · https://creekstone-brief.netlify.app/
+</div>
+</div>
+</div>
+</div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script>
+</body>
+</html>
