@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第024期 · 06-24~06-26</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo">
+    <a href="index.html" style="text-decoration:none">
+      <div class="sb-brand">CREEKSTONE</div>
+      <div class="sb-sub">Intelligence · 自动 + 手工</div>
+    </a>
+  </div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html">
+      <span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板
+    </a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">近期期刊</div>
+    <a class="sb-item active" href="brief_024.html"><span class="sb-dot" style="background:#E05252"></span>第024期 🔥</a>
+    <a class="sb-item" href="brief_023.html"><span class="sb-dot" style="background:#52C47A"></span>第023期</a>
+    <a class="sb-item" href="brief_022.html"><span class="sb-dot" style="background:#5B8FE8"></span>第022期</a>
+    <a class="sb-item" href="brief_021.html"><span class="sb-dot" style="background:#9B7FE8"></span>第021期</a>
+    <a class="sb-item" href="brief_020.html"><span class="sb-dot" style="background:#C9A84C"></span>第020期</a>
+    <a class="sb-item" href="brief_019.html"><span class="sb-dot" style="background:#888"></span>第019期</a>
+    <a class="sb-item" href="brief_018.html"><span class="sb-dot" style="background:#888"></span>第018期</a>
+    <a class="sb-item" href="brief_017.html"><span class="sb-dot" style="background:#888"></span>第017期</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Creekstone Intelligence Brief</div>
+    <div class="topbar-sub">第 024 期 · 06-24~06-26 · 周五 · 88 KOL 信号 · 11 Web 信号 · 自动生成框架</div>
+  </div>
+  <div class="search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)">
+  </div>
+</div>
+<div class="content" id="mc">
+
+<div style="background:rgba(92,163,120,.08);border:1px solid rgba(92,163,120,.25);border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:var(--t2);display:flex;align-items:center;gap:10px">
+  <span style="color:#52C47A;font-size:16px">⚡</span>
+  <span>自动生成框架 · 2026-06-26 13:10 SGT · 数据来源：X OAuth1 (29 KOL) + Serper + HN API + Substack API ·
+  <strong style="color:var(--gold)">如需深度加固请联系 Gary</strong></span>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">88</div><div class="stat-l">KOL 信号</div></div>
+  <div class="stat"><div class="stat-n">25</div><div class="stat-l">高热帖(♥500+)</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">发布信号</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">融资信号</div></div>
+  <div class="stat"><div class="stat-n">1</div><div class="stat-l">播客更新</div></div>
+  <div class="stat"><div class="stat-n">11</div><div class="stat-l">HN 热帖</div></div>
+</div>
+
+<div class="section" id="trends">
+  <div class="sec-head">
+    <div class="sec-title">🔥 本期高热 KOL 信号</div>
+    <div class="sec-desc">X OAuth1 扫描 29 个账号，按互动量降序，Top 4</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="trend-grid">
+  <div class="tcard hot">
+    <div class="stars">♥9,010</div>
+    <span class="tcard-badge b-hot">@steipete · 本期最强信号</span>
+    <div class="tcard-title">Google fired the guy that made the google workspace cli, because he made the google workspace cli.
+
+Lucky me, Google can</div>
+    <div class="tcard-body">'t fire me. https://t.co/o15a6lOxec https://t.co/COuHqv5u6J</div>
+    <div class="tcard-impl"><a href="https://x.com/steipete/status/2069594195522941059" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard hot">
+    <div class="stars">♥2,994</div>
+    <span class="tcard-badge b-trend">@OfficialLoganK · 高热讨论</span>
+    <div class="tcard-title">Gemma 4... intelligence for everyone on device! https://t.co/74UgJM6FAN</div>
+    <div class="tcard-body">—</div>
+    <div class="tcard-impl"><a href="https://x.com/OfficialLoganK/status/2070181261772210449" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard">
+    <div class="stars">♥2,343</div>
+    <span class="tcard-badge b-trend">@fchollet · 高热讨论</span>
+    <div class="tcard-title">The best way to understand a complex system is via edge cases and failure modes, because they define the contour of the </div>
+    <div class="tcard-body">system.</div>
+    <div class="tcard-impl"><a href="https://x.com/fchollet/status/2069808712890585191" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard">
+    <div class="stars">♥2,287</div>
+    <span class="tcard-badge b-trend">@satyanadella · 高热讨论</span>
+    <div class="tcard-title">Today we’re bringing skills to Copilot for Excel, giving teams a new way to scale their expertise across every workbook.</div>
+    <div class="tcard-body"> https://t.co/DfD1nfPEO3</div>
+    <div class="tcard-impl"><a href="https://x.com/satyanadella/status/2070180313654063255" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div></div>
+</div>
+
+<div class="section" id="launches">
+  <div class="sec-head">
+    <div class="sec-title">🚀 产品发布 · Web 信号</div>
+    <div class="sec-desc">Serper Search 自动抓取 · 需人工确认重要性 · 如信号为空说明搜索限额用完</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="launch-list" id="launchList"><div style="padding:12px;color:var(--t3);font-size:12px">本期 Web 抓取未发现明确产品发布，请手动补充</div></div>
+</div>
+
+<div class="section" id="kols">
+  <div class="sec-head">
+    <div class="sec-title">💬 KOL 推文全列表</div>
+    <div class="sec-desc">29 个账号全量扫描 · 按互动量降序</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="kol-grid">
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 2,403</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">A fun exercise is exporting your 5+ year of chat logs and putting it in Claude Code to do psychoanalysis of yourself</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2070219230398632123" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,348</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">The capability overhang from the models we have today is big enough that large-scale change to work and society over the next 5+ years is now inevitable even if AI development stops.
+
+(And there is no real sign that AI development is slowing down, it appears to be accelerating)</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2069978495690707147" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">FC</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@fchollet</div>
+        <div class="kcard-handle">KOL · X · 2026-06-24</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,287</div>
+        <div class="kcard-date">2026-06-24</div>
+      </div>
+    </div>
+    <div class="kcard-post">The most complex phenomena arise from scalable recombination of very simple rules. Whether it's galaxies, chips, or neural networks, if you find the right primitive building blocks, the complexity takes care of itself.</div>
+    <a class="kcard-link" href="https://x.com/fchollet/status/2069842045779517644" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-24</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,461</div>
+        <div class="kcard-date">2026-06-24</div>
+      </div>
+    </div>
+    <div class="kcard-post">Someone knows something https://t.co/Q2s96tYr2c</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2069844855681847691" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">FC</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@fchollet</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,050</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">The true measure of a software engineer isn't their ability to write clever code. It's their ability to ruthlessly protect the codebase from unnecessary cleverness.</div>
+    <a class="kcard-link" href="https://x.com/fchollet/status/2070270168362872982" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">FC</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@fchollet</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 960</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">When the cost of execution drops, the value of taste, strategy, and architectural vision skyrockets. Previously, you were spending most of your cognitive budget on the micro. Now you are free to focus on the macro.</div>
+    <a class="kcard-link" href="https://x.com/fchollet/status/2070191976134435032" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GA</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@GaryMarcus</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 899</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">People are not getting how significant this news – The White House delaying GPT 5.6 – is.
+
+Here’s the context and a suggestion.
+
+Both @pmarca and @DavidSacks did everything in their power to keep the White House from meaningfully regulate AI.
+
+About a month ago, sparked by https://t.co/v2anzRjYfI</div>
+    <a class="kcard-link" href="https://x.com/GaryMarcus/status/2070257533076582550" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-26</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 966</div>
+        <div class="kcard-date">2026-06-26</div>
+      </div>
+    </div>
+    <div class="kcard-post">It all starts to makes sense when you realize degrowthers are literally opposed to life
+
+They honestly think humans are bad and humanity has to end
+
+It is the most dangerous mindset around right now and it's centered in Europe, but they don't realize they're in the grasp of it https://t.co/NoISHxB6DV</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2070325559943430452" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 869</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">The 6 MOST valuable skills to learn in the AGENTIC era and how to learn them (clearly explained in 29 minutes) https://t.co/G68mRbAkSv</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2070196350877135130" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">VK</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@vkhosla</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 959</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">I am betting on this winning the world model race with human like intuition emerging in this model. Uncanny the range of things it can do. Can it win a formula 1 race soon? https://t.co/Xv7dGCsdoc</div>
+    <a class="kcard-link" href="https://x.com/vkhosla/status/2070190800546435347" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 779</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">This is a fascinating and important set of data which shows us where things are going, using OpenAI as a canary in the coal mine.
+
+The chatbot era is over, and agentic systems are coming to tasks beyond engineering. And skills show promise as a way to standardize AI use in firms. https://t.co/XdzWOg35jb https://t.co/X1</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2070171580030656744" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-24</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 842</div>
+        <div class="kcard-date">2026-06-24</div>
+      </div>
+    </div>
+    <div class="kcard-post">The future of work is everyone having AI employees with their own accounts.
+
+Its own email. Its own Slack login. Its own seat on the team. With Claude Tag etc, the agent is someone you tag and not just something you prompt. 
+
+You delegate to it the way you'd delegate to a https://t.co/2hPAfKrUNR</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2069760146939498745" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">FC</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@fchollet</div>
+        <div class="kcard-handle">KOL · X · 2026-06-25</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 752</div>
+        <div class="kcard-date">2026-06-25</div>
+      </div>
+    </div>
+    <div class="kcard-post">Agentic coding forces you to design clean interfaces and document them well. An agent cannot read the implicit mental model shared by your engineering team, it can only read your API contracts and docstrings.</div>
+    <a class="kcard-link" href="https://x.com/fchollet/status/2070148984002469917" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-24</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 616</div>
+        <div class="kcard-date">2026-06-24</div>
+      </div>
+    </div>
+    <div class="kcard-post">A lot of people who say they never use AI are using AI, but secretly. https://t.co/JbH6WtGITu https://t.co/myZG2UrUtb</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2069920008293978489" target="_blank">→ X 原帖</a>
+  </div></div>
+</div>
+
+<div class="section" id="funding">
+  <div class="sec-head">
+    <div class="sec-title">💰 融资动态 · Web 信号</div>
+    <div class="sec-desc">Serper Search 自动抓取</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="fund-list"><div style="padding:12px;color:var(--t3);font-size:12px">本期未检测到明确融资信号</div></div>
+</div>
+
+<div class="section" id="tech">
+  <div class="sec-head">
+    <div class="sec-title">🔬 技术前沿 · Web + HN</div>
+    <div class="sec-desc">Serper + Hacker News Algolia API 联合抓取</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="tech-list">
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://blog.cloudflare.com/temporary-accounts/" target="_blank">Temporary Cloudflare accounts for AI agents</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://blog.cloudflare.com/temporary-accounts/" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://martinfowler.com/articles/reliable-llm-bayer.html" target="_blank">Building reliable agentic AI systems</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://martinfowler.com/articles/reliable-llm-bayer.html" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/NotASithLord/peerd" target="_blank">Show HN: peerd – AI agent harness that runs entirely in your browser</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short">Hey HN. &lt;a href="http:&amp;#x2F;&amp;#x2F;peerd.ai" rel="nofollow"&gt;http:&amp;#x2F;&amp;#x2F;peerd.ai&lt;/a&gt; is an AI agent harness that lives entirely in your browser as a web extension. You don’t have to install a sepa</div>
+      <a class="lcard-link" href="https://github.com/NotASithLord/peerd" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/context-labs/halo" target="_blank">Show HN: RLM-based local debugger for AI agent traces</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short">We built HALO (Hierarchal Agent Loop Optimizer), an open-source tool for debugging and optimizing AI agents using their execution traces.&lt;p&gt;It’s a loop. Run your agent, feed the traces to HALO, get th</div>
+      <a class="lcard-link" href="https://github.com/context-labs/halo" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://www.kaggle.com/datasets/manitejamaram/can-ai-hack-llm-ctf-benchmark" target="_blank">LLM-CTF benchmark – 2,639 real data points from NeurIPS and original runs</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://www.kaggle.com/datasets/manitejamaram/can-ai-hack-llm-ctf-benchmark" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://twitter.com/victormustar/status/2069688722409312332" target="_blank">Kebab Benchmark for LLMs</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://twitter.com/victormustar/status/2069688722409312332" target="_blank">→ 阅读原文</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="section" id="reads">
+  <div class="sec-head">
+    <div class="sec-title">📚 播客 · 最新更新</div>
+    <div class="sec-desc">Latent Space · Import AI · Dwarkesh · Substack API 直连</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="read-list">
+  <div class="rcard">
+    <div class="rcard-head">
+      <div class="rcard-left">
+        <div class="rcard-src">🎙 播客 · Latent Space</div>
+        <div class="rcard-title"><a href="https://www.latent.space/p/databricks" target="_blank">Why the Frontier Ecosystem must be Open — Matei Zaharia and Reynold Xin, Databricks</a></div>
+      </div>
+      <div class="rdate">2026-06-24</div>
+    </div>
+    <div class="rb">
+      <div class="rsh">In a rare double-interview, the Databricks technical leaders riff on what it will take for every company to build Agent Clouds</div>
+      <a class="rcard-link" href="https://www.latent.space/p/databricks" target="_blank">→ 播客原文</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 024 期 · 06-24~06-26 · 周五<br>
+  ⚡ GitHub Actions 自动框架 · X×29 KOL · Serper · HN · Substack<br>
+  🌐 https://garyz13intheloop.github.io/brief/ · https://creekstone-brief.netlify.app/
+</div>
+</div>
+</div>
+</div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script>
+</body>
+</html>
