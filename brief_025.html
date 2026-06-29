@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creekstone Intelligence · 第025期 · 06-27~06-29</title>
+<style>
+:root {
+  --bg:#0a0a0a; --s1:#111; --s2:#161616; --s3:#1c1c1c;
+  --bd:#242424; --bd2:#2e2e2e;
+  --t1:#ebebeb; --t2:#aaa; --t3:#666; --t4:#444;
+  --gold:#C9A84C; --gold2:#9B7A2F; --gold3:rgba(201,168,76,.1);
+  --red:#E05252; --green:#52C47A; --blue:#5B8FE8; --purple:#9B7FE8; --orange:#E08C52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:-apple-system,'SF Pro Text','Helvetica Neue',sans-serif;font-size:14px;line-height:1.65}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Layout ── */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--s1);border-right:1px solid var(--bd);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:200;flex-shrink:0}
+.main{margin-left:220px;flex:1;min-width:0}
+
+/* ── Sidebar ── */
+.sb-logo{padding:18px 16px 12px;border-bottom:1px solid var(--bd)}
+.sb-brand{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sb-issue{font-size:11px;color:var(--t3);margin-top:3px}
+.sb-sec{padding:12px 16px 4px;font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.08em;text-transform:uppercase}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;color:var(--t2);font-size:12.5px;border-left:2px solid transparent;transition:all .12s}
+.sb-item:hover{color:var(--t1);background:var(--s2)}
+.sb-item.active{color:var(--gold);border-left-color:var(--gold);background:var(--gold3)}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-count{margin-left:auto;font-size:10px;background:var(--s3);color:var(--t3);padding:1px 6px;border-radius:10px}
+.sb-divider{border:none;border-top:1px solid var(--bd);margin:8px 0}
+
+/* ── Topbar ── */
+.topbar{background:var(--s1);border-bottom:1px solid var(--bd);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{}
+.topbar-title{font-size:15px;font-weight:600;color:var(--t1)}
+.topbar-sub{font-size:11px;color:var(--t3);margin-top:1px}
+.search{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;width:260px}
+.search input{background:none;border:none;outline:none;color:var(--t1);font-size:12.5px;flex:1}
+.search input::placeholder{color:var(--t4)}
+
+/* ── Content ── */
+.content{padding:22px 28px;max-width:1060px}
+
+/* ── Stats ── */
+.stats{display:flex;gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.stat{flex:1;background:var(--s1);padding:12px 16px;text-align:center}
+.stat-n{font-size:20px;font-weight:800;color:var(--gold)}
+.stat-l{font-size:10px;color:var(--t3);margin-top:2px;letter-spacing:.03em}
+
+/* ── Section ── */
+.section{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-title{font-size:17px;font-weight:700}
+.sec-desc{font-size:12px;color:var(--t3)}
+.sec-rule{border:none;border-top:1px solid var(--bd);margin-bottom:18px}
+
+/* ── Trend cards ── */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:16px;position:relative;overflow:hidden}
+.tcard.hot{border-color:rgba(201,168,76,.35);background:linear-gradient(135deg,rgba(201,168,76,.06) 0%,var(--s1) 60%)}
+.tcard-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:8px}
+.b-hot{background:rgba(224,82,82,.12);color:var(--red)}
+.b-trend{background:rgba(201,168,76,.12);color:var(--gold)}
+.b-m&a{background:rgba(82,132,224,.12);color:var(--blue)}
+.b-debate{background:rgba(155,127,232,.12);color:var(--purple)}
+.tcard-title{font-size:13.5px;font-weight:700;line-height:1.4;margin-bottom:8px}
+.tcard-body{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tcard-impl{font-size:12px;color:var(--gold);background:rgba(201,168,76,.07);border-left:2px solid var(--gold2);padding:7px 10px;border-radius:0 5px 5px 0;line-height:1.55}
+.tcard-impl::before{content:"→ ";font-weight:700}
+.stars{position:absolute;top:14px;right:14px;color:var(--gold);font-size:11px;letter-spacing:.05em}
+
+/* ── Product launch cards ── */
+.launch-list{display:flex;flex-direction:column;gap:11px}
+.lcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.lcard-head{padding:13px 16px;display:flex;align-items:flex-start;gap:10px}
+.lcard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--s3)}
+.lcard-meta{flex:1;min-width:0}
+.lcard-name{font-size:14px;font-weight:700;line-height:1.3}
+.lcard-name a{color:var(--t1)}
+.lcard-name a:hover{color:var(--gold)}
+.lcard-who{font-size:11px;color:var(--t3);margin-top:2px}
+.lcard-tags{display:flex;gap:5px;align-items:center;margin-left:auto;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tag-sec{background:rgba(224,82,82,.1);color:#e07575}
+.tag-model{background:rgba(155,127,232,.1);color:var(--purple)}
+.tag-agent{background:rgba(82,196,122,.1);color:var(--green)}
+.tag-infra{background:rgba(91,143,232,.1);color:var(--blue)}
+.tag-ent{background:rgba(224,140,82,.1);color:var(--orange)}
+.tag-vid{background:rgba(201,168,76,.1);color:var(--gold)}
+.lcard-body{padding:0 16px 13px}
+.lcard-short{font-size:12.5px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+.lcard-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.lcard-detail.open{display:block}
+.expand{background:none;border:1px solid var(--bd2);color:var(--t3);font-size:10.5px;padding:3px 10px;border-radius:5px;cursor:pointer;transition:all .12s;margin-bottom:6px}
+.expand:hover{border-color:var(--gold);color:var(--gold)}
+.lcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── KOL grid ── */
+.kol-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.kcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:14px}
+.kcard-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.kcard-av{width:34px;height:34px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;border:1px solid var(--bd2)}
+.kcard-info{flex:1;min-width:0}
+.kcard-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kcard-handle{font-size:11px;color:var(--t3)}
+.kcard-nums{text-align:right;flex-shrink:0}
+.kcard-likes{font-size:13px;font-weight:700;color:var(--red)}
+.kcard-date{font-size:10px;color:var(--t4)}
+.kcard-post{font-size:12.5px;color:var(--t1);background:var(--s2);border-radius:7px;padding:9px 11px;margin-bottom:9px;font-style:italic;line-height:1.55;border-left:2px solid var(--bd2)}
+.kcard-analysis{font-size:12px;color:var(--t2);line-height:1.6}
+.kcard-link{font-size:11px;color:var(--blue);display:block;margin-top:7px}
+
+/* ── Funding ── */
+.fund-list{display:flex;flex-direction:column;gap:12px}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.fcard-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--bd)}
+.fcard-left{}
+.fcard-co{font-size:14px;font-weight:700}
+.fcard-co a{color:var(--t1)}
+.fcard-co a:hover{color:var(--gold)}
+.fcard-sub{font-size:11px;color:var(--t3);margin-top:2px}
+.fcard-right{text-align:right}
+.fcard-amt{font-size:20px;font-weight:800;color:var(--gold)}
+.fcard-tags{display:flex;gap:5px;justify-content:flex-end;margin-top:4px}
+.rtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold)}
+.sigtag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:rgba(224,82,82,.1);color:var(--red)}
+.fcard-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ffield{}
+.ffield-l{font-size:10px;font-weight:600;color:var(--t4);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.ffield-v{font-size:12.5px;color:var(--t1)}
+.fcard-why{grid-column:1/-1;background:var(--s2);border-radius:7px;padding:9px 12px;font-size:12.5px;color:var(--t2);line-height:1.65;border-left:2px solid var(--gold2)}
+.fcard-link{font-size:11px;color:var(--blue);display:inline-flex;align-items:center;gap:3px;margin-top:4px}
+
+/* ── Tech cards ── */
+.tech-list{display:flex;flex-direction:column;gap:11px}
+.tcard2{background:var(--s1);border:1px solid var(--bd);border-radius:11px;padding:15px 18px}
+.tcard2-head{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px}
+.tcat{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:rgba(155,127,232,.1);color:var(--purple);flex-shrink:0;margin-top:2px;white-space:nowrap}
+.tcard2-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.tcard2-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:9px}
+.tcard2-detail{font-size:12.5px;color:var(--t2);background:var(--s2);border-radius:7px;padding:9px 12px;line-height:1.65;border-left:2px solid var(--bd2);display:none}
+.tcard2-detail.open{display:block}
+.tcard2-impl{font-size:12px;color:var(--green);background:rgba(82,196,122,.07);border-left:2px solid var(--green);padding:7px 10px;border-radius:0 5px 5px 0;margin-top:8px;line-height:1.55}
+.tcard2-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:6px}
+
+/* ── Deep reads (newsletter/podcast/institutional) ── */
+.read-list{display:flex;flex-direction:column;gap:12px}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+.rcard-head{padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd)}
+.rcard-left{}
+.rcard-src{font-size:10px;font-weight:600;color:var(--orange);letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
+.rcard-src.inst{color:var(--blue)}
+.rcard-src.media{color:var(--green)}
+.rcard-src.blog{color:var(--purple)}
+.rcard-title{font-size:13.5px;font-weight:700;line-height:1.4}
+.rcard-title a{color:var(--t1)}
+.rcard-title a:hover{color:var(--gold)}
+.rcard-date{font-size:11px;color:var(--t3);flex-shrink:0;white-space:nowrap}
+.rcard-body{padding:12px 16px}
+.rcard-short{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.rcard-pts{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.rcard-pt{font-size:12.5px;color:var(--t2);display:flex;gap:8px;line-height:1.6}
+.rcard-bull{color:var(--gold);font-weight:700;flex-shrink:0}
+.rcard-detail{background:var(--s2);border-radius:8px;padding:12px 14px;display:none;border-left:2px solid var(--bd2)}
+.rcard-detail.open{display:block}
+.rcard-detail h4{font-size:12px;font-weight:600;color:var(--t1);margin:10px 0 5px;letter-spacing:.02em}
+.rcard-detail h4:first-child{margin-top:0}
+.rcard-detail p{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:6px}
+.rcard-detail blockquote{border-left:2px solid var(--gold2);padding-left:10px;margin:8px 0;font-style:italic;color:var(--t2);font-size:12px}
+.rcard-detail ul{padding-left:16px;margin:6px 0}
+.rcard-detail ul li{font-size:12.5px;color:var(--t2);line-height:1.65;margin-bottom:4px}
+.rcard-link{font-size:11px;color:var(--blue);display:inline-block;margin-top:8px}
+
+/* ── Filter bar ── */
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fbtn{font-size:11.5px;padding:4px 11px;border:1px solid var(--bd2);border-radius:20px;background:none;color:var(--t2);cursor:pointer;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:var(--s2);border-color:var(--gold);color:var(--gold)}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:2px}
+
+@media(max-width:800px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .trend-grid,.kol-grid{grid-template-columns:1fr}
+  .fcard-body{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sb-logo">
+    <a href="index.html" style="text-decoration:none">
+      <div class="sb-brand">CREEKSTONE</div>
+      <div class="sb-sub">Intelligence · 自动 + 手工</div>
+    </a>
+  </div>
+  <div style="padding:6px 0">
+    <a class="sb-item" href="index.html">
+      <span class="sb-dot" style="background:var(--gold)"></span>← 返回主看板
+    </a>
+    <hr style="border:none;border-top:1px solid var(--bd);margin:4px 0">
+    <div class="sb-sec">近期期刊</div>
+    <a class="sb-item active" href="brief_025.html"><span class="sb-dot" style="background:#E05252"></span>第025期 🔥</a>
+    <a class="sb-item" href="brief_024.html"><span class="sb-dot" style="background:#52C47A"></span>第024期</a>
+    <a class="sb-item" href="brief_023.html"><span class="sb-dot" style="background:#5B8FE8"></span>第023期</a>
+    <a class="sb-item" href="brief_022.html"><span class="sb-dot" style="background:#9B7FE8"></span>第022期</a>
+    <a class="sb-item" href="brief_021.html"><span class="sb-dot" style="background:#C9A84C"></span>第021期</a>
+    <a class="sb-item" href="brief_020.html"><span class="sb-dot" style="background:#888"></span>第020期</a>
+    <a class="sb-item" href="brief_019.html"><span class="sb-dot" style="background:#888"></span>第019期</a>
+    <a class="sb-item" href="brief_018.html"><span class="sb-dot" style="background:#888"></span>第018期</a>
+  </div>
+</nav>
+<div class="main">
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Creekstone Intelligence Brief</div>
+    <div class="topbar-sub">第 025 期 · 06-27~06-29 · 周一 · 61 KOL 信号 · 12 Web 信号 · 自动生成框架</div>
+  </div>
+  <div class="search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="si" type="text" placeholder="搜索…" oninput="doSearch(this.value)">
+  </div>
+</div>
+<div class="content" id="mc">
+
+<div style="background:rgba(92,163,120,.08);border:1px solid rgba(92,163,120,.25);border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:var(--t2);display:flex;align-items:center;gap:10px">
+  <span style="color:#52C47A;font-size:16px">⚡</span>
+  <span>自动生成框架 · 2026-06-29 13:53 SGT · 数据来源：X OAuth1 (29 KOL) + Serper + HN API + Substack API ·
+  <strong style="color:var(--gold)">如需深度加固请联系 Gary</strong></span>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">61</div><div class="stat-l">KOL 信号</div></div>
+  <div class="stat"><div class="stat-n">24</div><div class="stat-l">高热帖(♥500+)</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">发布信号</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">融资信号</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">播客更新</div></div>
+  <div class="stat"><div class="stat-n">12</div><div class="stat-l">HN 热帖</div></div>
+</div>
+
+<div class="section" id="trends">
+  <div class="sec-head">
+    <div class="sec-title">🔥 本期高热 KOL 信号</div>
+    <div class="sec-desc">X OAuth1 扫描 29 个账号，按互动量降序，Top 4</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="trend-grid">
+  <div class="tcard hot">
+    <div class="stars">♥7,255</div>
+    <span class="tcard-badge b-hot">@LinusEkenstam · 本期最强信号</span>
+    <div class="tcard-title">Anyone who tries to argue climate change with you, just pull up this. 
+
+Not about no AC’s no more. 
+
+This is about futur</div>
+    <div class="tcard-body">e generations being able to grow food in europe or not. https://t.co/VnQ7QVHpq4 https://t.co/CgzFN1KKzO</div>
+    <div class="tcard-impl"><a href="https://x.com/LinusEkenstam/status/2070955424505831821" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard hot">
+    <div class="stars">♥7,360</div>
+    <span class="tcard-badge b-trend">@levelsio · 高热讨论</span>
+    <div class="tcard-title">Congratulations Europe
+
+You did it
+
+You killed 1,000 people with your degrowth bs
+
+I hope you feel extremely proud now! </div>
+    <div class="tcard-body">https://t.co/sSGr3SXyLr</div>
+    <div class="tcard-impl"><a href="https://x.com/levelsio/status/2071257332198105442" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard">
+    <div class="stars">♥5,351</div>
+    <span class="tcard-badge b-trend">@levelsio · 高热讨论</span>
+    <div class="tcard-title">✨ I think I've been coding almost solely on my VPS with Claude Code for almost a year now
+
+All I can say it's just fanta</div>
+    <div class="tcard-body">stic:
+- no need to keep laptop open ever
+- no laptop battery drain
+- can switch to phone or any other device you like whenever you want to continue (like when https://t.co/ByObBoMWtD https://t.co/kVYZ</div>
+    <div class="tcard-impl"><a href="https://x.com/levelsio/status/2071162399864889705" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div>
+  <div class="tcard">
+    <div class="stars">♥3,050</div>
+    <span class="tcard-badge b-trend">@gregisenberg · 高热讨论</span>
+    <div class="tcard-title">A friend asked me how to actually build a company that runs on AI agents.
+
+I drew him 4 simple diagrams and this is what</div>
+    <div class="tcard-body"> I told him:
+
+For this to work, a few things have to be true.
+
+- The humans move up to strategy, taste, and judgment while agents handle the execution.
+
+- The https://t.co/kx9KIVC26c</div>
+    <div class="tcard-impl"><a href="https://x.com/gregisenberg/status/2070918939526205494" target="_blank" style="color:var(--blue)">→ X 原帖</a></div>
+  </div></div>
+</div>
+
+<div class="section" id="launches">
+  <div class="sec-head">
+    <div class="sec-title">🚀 产品发布 · Web 信号</div>
+    <div class="sec-desc">Serper Search 自动抓取 · 需人工确认重要性 · 如信号为空说明搜索限额用完</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="launch-list" id="launchList"><div style="padding:12px;color:var(--t3);font-size:12px">本期 Web 抓取未发现明确产品发布，请手动补充</div></div>
+</div>
+
+<div class="section" id="kols">
+  <div class="sec-head">
+    <div class="sec-title">💬 KOL 推文全列表</div>
+    <div class="sec-desc">29 个账号全量扫描 · 按互动量降序</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="kol-grid">
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-27</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 2,303</div>
+        <div class="kcard-date">2026-06-27</div>
+      </div>
+    </div>
+    <div class="kcard-post">https://t.co/jIDfB8Fysm https://t.co/BolzNwGiRp</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2070995127900729795" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 2,055</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">The only way to stand out in the AI age is by being incredibly creative 
+
+Like this Van Gogh shirt I just saw. 
+
+Weird but scroll stopping https://t.co/8fCl2iSbky</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2071241981754253372" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">ST</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@steipete</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,761</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">"History teaches us that access blockage rarely stops determined users." https://t.co/fsa6yuEjjs</div>
+    <a class="kcard-link" href="https://x.com/steipete/status/2071063588329193551" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,796</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">I made a dynamic chart to illustrate Bitcoin's 4-year cycles
+
+It keeps updating forever adding new cycles along the way
+
+The next cycle starts on October 31, 2026 so theoretically that should be the bottom
+
+https://t.co/YK5vR7JUYJ https://t.co/9A4r2DX8n8 https://t.co/uQVIxykAoN</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2071201776427053327" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">LE</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@levelsio</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 1,491</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">Crazy today I learnt I got most commits on GitHub in private repos along with @steipete 🤯 https://t.co/TOta5rLKbt</div>
+    <a class="kcard-link" href="https://x.com/levelsio/status/2071223354283958400" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 937</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">A good example of one of the ways in which the "good old days" were terrible:
+
+In the 1880s, the average US rural housewife had to haul water into the house 8-10 times a day, 36 tons of water a year. And also haul out ashes &amp;amp; waste. (From “The Rise and Fall of American Growth”). https://t.co/eKP4XMJVrz</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2071078017766502529" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">MA</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@mattturck</div>
+        <div class="kcard-handle">KOL · X · 2026-06-27</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 962</div>
+        <div class="kcard-date">2026-06-27</div>
+      </div>
+    </div>
+    <div class="kcard-post">Smart glasses and goggles, a history:
+
+Silicon Valley, 2013 (Google): “you really want this”
+Everyone: “no we don’t”
+
+Silicon Valley, 2016 (Microsoft): “ok but what if it’s for the enterprise”
+Enterprise: “maybe, but also, no”
+
+Silicon Valley, 2023 (Meta): “ok but what if they</div>
+    <a class="kcard-link" href="https://x.com/mattturck/status/2070972014945243622" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GR</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@gregisenberg</div>
+        <div class="kcard-handle">KOL · X · 2026-06-27</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 941</div>
+        <div class="kcard-date">2026-06-27</div>
+      </div>
+    </div>
+    <div class="kcard-post">The most valuable thing in the world is no longer oil, or land, or even money.
+
+It's access to the most powerful artificial intelligence.</div>
+    <a class="kcard-link" href="https://x.com/gregisenberg/status/2070848636322267328" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">FC</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@fchollet</div>
+        <div class="kcard-handle">KOL · X · 2026-06-27</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 840</div>
+        <div class="kcard-date">2026-06-27</div>
+      </div>
+    </div>
+    <div class="kcard-post">Only Art and Science raise humanity to the sublime. But the magic isn't in the output. It's in the process of creation and discovery, and the experience of feeling and understanding.</div>
+    <a class="kcard-link" href="https://x.com/fchollet/status/2070958512281415960" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">GA</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@GaryMarcus</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 766</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">Another case of what I call The Klarna Effect. https://t.co/NilwwiKfiT</div>
+    <a class="kcard-link" href="https://x.com/GaryMarcus/status/2071026100109734094" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">ST</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@steipete</div>
+        <div class="kcard-handle">KOL · X · 2026-06-27</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 925</div>
+        <div class="kcard-date">2026-06-27</div>
+      </div>
+    </div>
+    <div class="kcard-post">We getting Apple Car after all https://t.co/53qxFyVGRW</div>
+    <a class="kcard-link" href="https://x.com/steipete/status/2071017970953052160" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 818</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">GLM-5.2 is good but it is not GPT-5.5/Opus 4.8, and even further from Mythos. Yet it is solid &amp;amp; it demonstrates that the open models continue to chase the frontier
+
+What is happening is that open weights crossed into GPT-5.2 territory &amp;amp; capabilities at that point are considerable</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2071284966139568440" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-27</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 769</div>
+        <div class="kcard-date">2026-06-27</div>
+      </div>
+    </div>
+    <div class="kcard-post">A thing I am noticing is the number of folks who believe AI is “real” is larger, but now there is a growing division between people who know that we are on an exponential &amp;amp; those whose mental model is that we are at a sort of steady state. The difference leads to misunderstanding</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2070949202335551600" target="_blank">→ X 原帖</a>
+  </div>
+  <div class="kcard">
+    <div class="kcard-head">
+      <div class="kcard-av">EM</div>
+      <div class="kcard-info">
+        <div class="kcard-name">@emollick</div>
+        <div class="kcard-handle">KOL · X · 2026-06-28</div>
+      </div>
+      <div class="kcard-nums">
+        <div class="kcard-likes">♥ 814</div>
+        <div class="kcard-date">2026-06-28</div>
+      </div>
+    </div>
+    <div class="kcard-post">Is Gemini 3.5 Pro being export controlled? Because if not...</div>
+    <a class="kcard-link" href="https://x.com/emollick/status/2071078492830060780" target="_blank">→ X 原帖</a>
+  </div></div>
+</div>
+
+<div class="section" id="funding">
+  <div class="sec-head">
+    <div class="sec-title">💰 融资动态 · Web 信号</div>
+    <div class="sec-desc">Serper Search 自动抓取</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="fund-list"><div style="padding:12px;color:var(--t3);font-size:12px">本期未检测到明确融资信号</div></div>
+</div>
+
+<div class="section" id="tech">
+  <div class="sec-head">
+    <div class="sec-title">🔬 技术前沿 · Web + HN</div>
+    <div class="sec-desc">Serper + Hacker News Algolia API 联合抓取</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="tech-list">
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/NotASithLord/peerd" target="_blank">Show HN: peerd – AI agent harness that runs entirely in your browser</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short">Hey HN. &lt;a href="http:&amp;#x2F;&amp;#x2F;peerd.ai" rel="nofollow"&gt;http:&amp;#x2F;&amp;#x2F;peerd.ai&lt;/a&gt; is an AI agent harness that lives entirely in your browser as a web extension. You don’t have to install a sepa</div>
+      <a class="lcard-link" href="https://github.com/NotASithLord/peerd" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://www.agent-kits.com" target="_blank">AgentKits – 60 production-ready AI agent blueprints with guardrails</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://www.agent-kits.com" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/context-labs/halo" target="_blank">Show HN: RLM-based local debugger for AI agent traces</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short">We built HALO (Hierarchal Agent Loop Optimizer), an open-source tool for debugging and optimizing AI agents using their execution traces.&lt;p&gt;It’s a loop. Run your agent, feed the traces to HALO, get th</div>
+      <a class="lcard-link" href="https://github.com/context-labs/halo" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/0xroylee/ponytrail" target="_blank">I built Ponytrail, a local audit trail for AI coding-agent edits</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://github.com/0xroylee/ponytrail" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://github.com/digailab/PCB-Bench" target="_blank">PCB-Bench: Benchmarking LLMs for PCB Placement and Routing (ICLR 2026)</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://github.com/digailab/PCB-Bench" target="_blank">→ 阅读原文</a>
+    </div>
+  </div>
+  <div class="lcard" data-cat="web">
+    <div class="lcard-head">
+      <div class="lcard-icon">🔗</div>
+      <div class="lcard-meta">
+        <div class="lcard-name"><a href="https://www.kaggle.com/datasets/manitejamaram/can-ai-hack-llm-ctf-benchmark" target="_blank">LLM-CTF benchmark – 2,639 real data points from NeurIPS and original runs</a></div>
+        <div class="lcard-who">Hacker News</div>
+      </div>
+    </div>
+    <div class="lcard-body">
+      <div class="lcard-short"></div>
+      <a class="lcard-link" href="https://www.kaggle.com/datasets/manitejamaram/can-ai-hack-llm-ctf-benchmark" target="_blank">→ 阅读原文</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="section" id="reads">
+  <div class="sec-head">
+    <div class="sec-title">📚 播客 · 最新更新</div>
+    <div class="sec-desc">Latent Space · Import AI · Dwarkesh · Substack API 直连</div>
+  </div>
+  <hr class="sec-rule">
+  <div class="read-list"><div style="padding:12px;color:var(--t3);font-size:12px">本期时间窗内暂无新播客发布</div></div>
+</div>
+
+<div class="footer">
+  Creekstone Intelligence Brief · 第 025 期 · 06-27~06-29 · 周一<br>
+  ⚡ GitHub Actions 自动框架 · X×29 KOL · Serper · HN · Substack<br>
+  🌐 https://garyz13intheloop.github.io/brief/ · https://creekstone-brief.netlify.app/
+</div>
+</div>
+</div>
+</div>
+<script>
+function doSearch(q){document.querySelectorAll('.lcard,.kcard,.fcard,.tcard,.tcard2,.rcard').forEach(c=>{c.style.display=(!q.trim()||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});}
+function toggleDetail(btn){const d=btn.nextElementSibling;d.classList.toggle('open');btn.textContent=d.classList.contains('open')?'收起 ↑':'展开详细版 ↓';}
+</script>
+</body>
+</html>
